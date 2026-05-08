@@ -1,0 +1,332 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+}
+
+.MainConatiner {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    height: 100vh;
+}
+
+.LeftConatiner {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    /* Parent must have a defined height for 'bottom' to exist */
+    height: 100vh;
+}
+
+.LeftConatinerTop {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 110px;
+    width: 70%;
+    padding-top: 190px;
+}
+
+.LeftConatinerTop h3 {
+    font-family: var(--lexend);
+    font-weight: var(--lexend-heading-font-weight);
+    font-size: 60px;
+    color: var(--white-color);
+    text-transform: uppercase;
+}
+
+.LeftConatinerTop h2 {
+    font-family: var(--lexend);
+    font-weight: 500;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: var(--white-color);
+}
+
+.line {
+    width: 65%;
+    height: 1px;
+    background-color: var(--white-color);
+    opacity: 60%;
+}
+
+.LeftConatinerBottom {
+    display: flex;
+    /* This makes this div 'grow' to fill all empty space */
+    flex: 1;
+    /* This pushes the image to the bottom of the stretched space */
+    align-items: flex-end;
+}
+
+.LeftConatinerBottom img {
+    width: 100%;
+    /* Keep height auto so it doesn't stretch/distort */
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+.MiddleConatiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white-color);
+    padding: 33.5px 34px;
+    border: none;
+    max-width: 466px;
+    gap: 30px;
+    flex-direction: column;
+    position: absolute;
+    top: 74%;
+    left: 38%;
+}
+
+.MiddleConatinerTop p {
+    font-family: var(--lato);
+    font-weight: var(--lato-bold-font-weight);
+    font-size: var(--lato-font-size);
+    color: var(--primary-color);
+    text-align: justify;
+}
+
+/* --- THE TRIGGER SECTION --- */
+.MiddleConatinerBottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    cursor: pointer;
+    /* Makes the whole row feel clickable */
+}
+
+.MiddleConatinerBottomLeft h5 {
+    font-family: var(--lexend);
+    font-weight: var(--lexend-heading-font-weight);
+    font-size: var(--lexend-heading-2-font-size);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    text-align: left;
+    margin: 0;
+    /* Preparation for smooth underline */
+    text-decoration: underline transparent;
+    text-underline-offset: 4px;
+    transition: text-decoration 0.3s ease;
+}
+
+.MiddleConatinerBottom:hover .MiddleConatinerBottomLeft h5 {
+    text-decoration: underline var(--primary-color);
+}
+
+.MiddleConatinerBottomRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white-color);
+    border: 1px solid var(--primary-color);
+    padding: 8px 9px;
+    transition: background-color 0.3s ease;
+}
+
+.MiddleConatinerBottomRight svg {
+    width: 13px;
+    height: 13px;
+    transform: rotate(-45deg);
+    /* Your initial anticlockwise state */
+    transition: transform 0.3s ease;
+}
+
+.MiddleConatinerBottom:hover .MiddleConatinerBottomRight svg {
+    transform: rotate(0deg);
+}
+
+.MiddleConatinerBottom:hover .MiddleConatinerBottomRight {
+    background-color: #f9f9f9;
+}
+
+.RightConatiner {
+    display: flex;
+    width: 50%;
+    /* This makes it match the height of the LeftConatiner */
+    height: 100vh;
+    /* This ensures the image starts from the top/left of its 50% section */
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.RightConatiner img {
+    width: 100%;
+    height: 100%;
+    /* Force it to fill the 100vh */
+    /* This is the secret: it 'crops' the image to fill the 
+       space instead of squishing it */
+    object-fit: cover;
+    /* Optional: if you want the 'focus' of the image to stay center */
+    object-position: center;
+}
+
+@media (min-width: 1130px) and (max-width: 1400px) {
+    .MiddleConatiner {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        background-color: var(--white-color);
+        padding: 33.5px 34px;
+        border: none;
+        max-width: 466px;
+        gap: 30px;
+        flex-direction: column;
+        position: absolute;
+        top: 74%;
+        left: 30%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1129px) {
+    .LeftConatinerTop {
+        flex-direction: column;
+        justify-content: left;
+        gap: 10px;
+        width: 80%;
+        padding-top: 100px;
+        padding-left: 60px;
+        display: flex;
+    }
+
+    .MiddleConatiner {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        background-color: var(--white-color);
+        padding: 33.5px 34px;
+        border: none;
+        max-width: 466px;
+        gap: 30px;
+        flex-direction: column;
+        position: absolute;
+        top: 74%;
+        left: 22%;
+    }
+
+    .LeftConatinerBottom img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--primary-color);
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .MainConatiner {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    /* --- TOP HALF (Typography + Bottom Image) --- */
+    .LeftConatiner {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 50%;
+        /* Strictly 50% of screen */
+        background-color: var(--primary-color);
+        justify-content: space-between;
+        /* Space between text and bottom image */
+    }
+
+    .LeftConatinerTop {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding-top: 120px;
+        /* Enough padding from top of phone */
+        padding-left: 24px;
+        /* Tighter side padding for mobile */
+        width: 90%;
+        /* More width than desktop */
+    }
+
+    .LeftConatinerTop h3 {
+        font-size: 32px;
+        /* Scaled down from 60px */
+        line-height: 1.1;
+    }
+
+    .LeftConatinerTop h2 {
+        font-size: 16px;
+        /* Scaled down from 22px */
+    }
+
+    .line {
+        width: 60%;
+        /* Shorter line for mobile */
+        margin-top: 5px;
+    }
+
+    .LeftConatinerBottom {
+        width: 100%;
+        height: 35%;
+        /* Image takes bottom portion of the top 50% */
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .LeftConatinerBottom img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* --- BOTTOM HALF (Full Image) --- */
+    .RightConatiner {
+        width: 100%;
+        height: 50%;
+    }
+
+    .RightConatiner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .MiddleConatiner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 88%;
+        max-width: 400px;
+        padding: 24px;
+        gap: 20px;
+        /* Tighter gap */
+        z-index: 5;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .MiddleConatinerTop p {
+        font-size: 14px;
+        /* Slightly smaller for mobile readability */
+        line-height: 1.4;
+    }
+}

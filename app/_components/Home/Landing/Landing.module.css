@@ -1,0 +1,158 @@
+.Main {
+  width: 100%;
+  height: 100vh;
+  padding-top: clamp(80px, calc(80px + (70 * ((100vw - 320px) / 1120))), 180px);
+
+  padding-bottom: clamp(30px,
+      calc(30px + (98 * ((100vw - 320px) / 1120))),
+      128px);
+
+  position: relative;
+  overflow: hidden;
+}
+
+.Video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  text-align: end;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+}
+
+.Overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.Marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.Marquee h2 {
+  display: inline-block;
+  font-size: var(--fs-120);
+  font-family: var(--lexend);
+  font-weight: 500;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  animation: marquee 18s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.BottomText {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.BottomText h4 {
+  font-size: var(--fs-22);
+  font-family: var(--lexend);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--white-color);
+}
+
+.BottomText p {
+  width: 40%;
+  font-size: var(--fs-15);
+  color: var(--white-color);
+  font-weight: var(--lato-font-weight);
+  font-family: var(--lato);
+}
+
+.Content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  padding-left: clamp(24px,
+      calc(24px + (102 * ((100vw - 320px) / 1120))),
+      125px);
+  padding-right: clamp(24px,
+      calc(24px + (102 * ((100vw - 320px) / 1120))),
+      125px);
+}
+
+.RightBottomText {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 35px;
+}
+
+.RightBottomText p {
+  font-size: var(--fs-15);
+  color: var(--white-color);
+  font-weight: var(--lato-font-weight);
+  font-family: var(--lato);
+}
+
+.Explore {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.Explore h4 {
+  color: var(--white-color);
+  font-weight: var(--lexend-heading-font-weight);
+  font-size: var(--fs-22);
+  font-family: var(--lexend);
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .Marquee h2 {
+    font-size: 64px;
+  }
+
+  .Explore h4 {
+    font-size: 20px;
+  }
+
+  .BottomText p {
+    width: 98%;
+    font-size: 14px;
+    text-align: justify;
+  }
+
+  .Content {
+    padding-left: 24px;
+    padding-bottom: 60px;
+  }
+
+  .Main {
+    padding-top: 150px;
+    padding-bottom: 30px;
+    height: 100svh;
+  }
+
+  .RightBottomText {
+    display: none;
+  }
+}

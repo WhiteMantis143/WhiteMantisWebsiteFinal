@@ -1,0 +1,58 @@
+.Main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0px clamp(24px, calc(24px + (101 * ((100vw - 320px) / 1120))), 125px);
+  background-color: var(--white-color);
+}
+.MainConatiner {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+.Left {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+}
+.Left h4 {
+  font-size: var(--fs-22);
+  font-family: var(--lexend);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--heads-color);
+  text-transform: uppercase;
+}
+
+.Right {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+}
+
+.Right p {
+  font-size: var(--fs-15);
+  font-family: var(--lato);
+  font-weight: var(--lato-font-weight);
+  color: var(--body-color);
+  line-height: 140%;
+}
+@media (max-width: 640px) {
+  .Main {
+    padding: 0px 24px;
+  }
+  .MainConatiner {
+    flex-direction: column;
+    gap: 30px;
+  }
+  /* .Left h4 {
+    font-size: 18px;
+  }
+  .Right p {
+    font-size: 15px;
+  } */
+}

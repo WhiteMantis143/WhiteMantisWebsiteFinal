@@ -1,0 +1,207 @@
+.Main {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  height: 100%;
+  padding-left: clamp(
+    40px,
+    calc(40px + (370 * ((100vw - 320px) / 1120))),
+    410px
+  );
+  padding-bottom: 100px;
+}
+
+.Sidebar {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  height: 100%;
+}
+
+.Top {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  /* gap: 15px; */
+}
+
+.UserName,
+.UserEmail {
+  display: flex;
+  justify-content: left;
+}
+
+.UserName h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+  text-transform: uppercase;
+}
+
+.UserEmail h5 {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #6e736a;
+}
+
+.Bottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+}
+
+.Profile,
+.Orders,
+.Subscription,
+.Wishlist,
+.Logout {
+  display: flex;
+  justify-content: left;
+  cursor: pointer;
+  align-items: center;
+  padding: 20.22px 10px 20px 16px;
+  width: clamp(100px, 30vw, 300px);
+  flex-direction: row;
+  gap: 8px;
+  border: 1px solid #2f362a4d;
+  transition: all 0.3s ease;
+  border-top: none;
+}
+
+.Profile {
+  border-top: 1px solid #2f362a4d;
+}
+
+.active {
+  background-color: #f1f2ef;
+}
+
+.active p {
+  color: #2f362a !important;
+  font-weight: 500 !important;
+}
+
+.active svg path {
+  fill: #2f362a !important;
+}
+
+.Bottom a {
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+
+.Profile p,
+.Orders p,
+.Subscription p,
+.Wishlist p,
+.Logout p {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #6e736a;
+  cursor: pointer;
+}
+
+.LogoutOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999999;
+}
+
+.LogoutPopup {
+  background: #ffffff;
+  width: 100%;
+  max-width: 546px;
+  padding: 32px 32px;
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LogoutPopup h2 {
+  font-family: var(--lexend);
+  font-size: 24px;
+  font-weight: 500;
+  color: #2f362a;
+  text-align: center;
+  align-items: center;
+  width: 75%;
+}
+
+.LogoutPopup p {
+  font-family: var(--lato);
+  font-size: 16px;
+  color: #6e736a;
+  margin-top: 10px;
+  text-align: center;
+  width: 65%;
+}
+
+.LogoutActions {
+  display: flex;
+  gap: 21px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.CancelBtn {
+  min-width: 200px;
+  padding: 14px 48px;
+  background: transparent;
+  border: 1px solid #6e736a;
+  color: #6e736a;
+  font-family: var(--lato);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.ConfirmBtn {
+  min-width: 200px;
+  padding: 14px 48px;
+  background: #6c7a5f;
+  border: none;
+  color: #ffffff;
+  font-family: var(--lato);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .Main {
+    display: none;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .Main {
+    padding-left: 40px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .Main {
+    padding-left: 120px;
+  }
+}
+
+@media (min-width: 1281px) and (max-width: 1440px) {
+  .Main {
+    padding-left: 120px;
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 1850px) {
+  .Main {
+    padding-left: 160px;
+  }
+}

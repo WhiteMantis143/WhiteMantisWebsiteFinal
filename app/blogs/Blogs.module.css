@@ -1,0 +1,494 @@
+.Main {
+  min-height: 100vh;
+  padding-bottom: 50px;
+  overflow-y: hidden;
+}
+
+.EmptyGridState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 24px;
+  /* padding: 80px 0 40px; */
+}
+
+.EmptyIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.EmptyBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 280px;
+}
+
+.EmptyText {
+  font-size: var(--lato-font-size);
+  font-weight: var(--lato-font-weight);
+  color: var(--heads-color);
+}
+
+.EmptySubText {
+  font-size: var(--lato-font-size);
+  font-weight: var(--lato-font-weight);
+  color: var(--body-color);
+  line-height: 1.6;
+}
+
+.ShopNow {
+  padding: 14px 42px;
+  border: 1px solid var(--line-color);
+  color: var(--primary-color);
+  font-family: var(--lato);
+  cursor: pointer;
+  font-weight: var(--lato-font-weight);
+  transition: opacity 0.3s ease;
+
+  font-size: var(--lato-font-size);
+  background-color: var(--white-color);
+}
+
+.ShopNow:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+  opacity: 1;
+}
+
+.HeroSection {
+  background-color: var(--primary-color);
+  position: relative;
+  width: 100%;
+  overflow-x: clip;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 24px 300px;
+  z-index: 10;
+}
+
+.HeroTitle {
+  color: var(--white-color);
+  font-weight: var(--lexend-heading-font-weight);
+  text-align: left;
+  text-transform: uppercase;
+  width: 90%;
+  padding-left: 70px;
+  padding-top: 110px;
+  font-size: var(--lexend-heading-1-font-size);
+}
+
+.EmblaViewport {
+  overflow: visible !important;
+  width: 100%;
+  position: relative;
+  z-index: 50;
+}
+
+.EmblaContainer {
+  display: flex;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.EmblaSlide {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 0;
+  padding-top: 10px;
+  pointer-events: auto;
+}
+
+.HeroCard {
+  background: var(--white-color);
+  width: 82%;
+  max-width: 1670px;
+  display: flex;
+  flex-direction: row;
+  padding: 40px;
+  gap: 58px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.HeroImageWrapper {
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+}
+
+.HeroImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.HeroContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.MetaRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+}
+
+.CategoryTag {
+  text-transform: capitalize;
+}
+
+.Divider {
+  width: 1px;
+  height: 12px;
+  background-color: var(--body-color);
+}
+
+.HeroBlogTitle {
+  font-family: var(--lexend);
+  font-size: var(--lexend-heading-2-font-size);
+  color: var(--heads-color);
+  text-transform: uppercase;
+  font-weight: var(--lexend-heading-font-weight);
+}
+
+.HeroExcerpt {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+  line-height: 1.6;
+  font-weight: var(--lato-font-weight);
+}
+
+.DateText {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--primary-color);
+}
+
+.ReadMoreBtn {
+  width: fit-content;
+  padding: 10px 24px;
+  border: 1px solid var(--line-color);
+  background: transparent;
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+}
+
+.ReadMoreBtn:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--line-color);
+}
+
+.HeroDots {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  /* pushes it to the bottom */
+  justify-content: flex-end;
+}
+
+.Dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #e2e4df;
+  cursor: pointer;
+}
+
+.DotActive {
+  background-color: var(--primary-color);
+}
+
+.GridSection {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 82%;
+  max-width: 1670px;
+  margin: 0 auto;
+  padding-top: 400px;
+  padding-bottom: 80px;
+}
+
+.HeroNoCard {
+  padding-bottom: 80px;
+}
+
+.NoHero {
+  padding-top: 60px;
+}
+
+.SectionHeader {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 40px;
+}
+
+.SectionTitle {
+  font-family: var(--lexend);
+  font-size: var(--lexend-heading-2-font-size);
+  font-weight: 600;
+  color: var(--heads-color);
+  text-transform: uppercase;
+}
+
+.Filters {
+  display: flex;
+  gap: 12px;
+}
+
+.FilterBtn {
+  padding: 8px 16px;
+  border: 1px solid var(--line-color);
+  background: var(--white-color);
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.FilterBtnActive {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--line-color);
+}
+
+.BlogGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 160px;
+  column-gap: 80px;
+  width: 100%;
+}
+
+.BlogCard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.CardImageWrapper {
+  aspect-ratio: 16 / 10;
+  position: relative;
+  overflow: hidden;
+  background-color: #f8f8f8;
+}
+
+.CardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.CardTitle {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--heads-color);
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.CardMetaBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.CardDate {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+}
+
+.ViewMoreWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.ViewMoreBtn {
+  padding: 12px 48px;
+  border: 1px solid var(--line-color);
+  background: transparent;
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.ViewMoreBtn:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.lowersec {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .HeroCard {
+    flex-direction: column;
+    padding: 24px;
+    top: 150px;
+  }
+
+  .BlogGrid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+    row-gap: 90px;
+  }
+}
+
+@media (max-width: 640px) {
+  .HeroTitle {
+    color: var(--white-color);
+    font-weight: var(--lexend-heading-font-weight);
+    font-family: var(--lexend);
+    text-align: left;
+    text-transform: uppercase;
+    width: 90%;
+    padding-left: 0px;
+    padding-top: 80px;
+    font-size: var(--lexend-heading-1-font-size);
+  }
+
+  .HeroSection {
+    padding: 40px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--primary-color);
+  }
+
+  .HeroCard {
+    position: relative;
+    z-index: 10;
+
+    margin: -120px auto 0;
+
+    width: 90%;
+    box-sizing: border-box;
+
+    background: var(--white-color);
+    padding: 16px;
+
+    left: 0;
+    right: 0;
+    transform: none;
+  }
+
+  .HeroContent {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 16px;
+    width: 100%;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .HeroContent h2 {
+    text-align: left;
+  }
+
+  .HeroDots {
+    display: flex;
+    gap: 6px;
+    margin-top: auto;
+    justify-content: center;
+  }
+
+  .Dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #e2e4df;
+    cursor: pointer;
+  }
+
+  .DotActive {
+    background-color: var(--primary-color);
+  }
+
+  .EmblaSlide {
+    position: relative;
+    flex: 0 0 100%;
+    min-width: 0;
+    padding-top: 0px;
+  }
+
+  /* .GridSection {
+    padding-top: 200px;
+  } */
+
+  .SectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .Filters {
+    flex-wrap: wrap;
+  }
+
+  .BlogGrid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .BlogCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .CardContent {
+    margin-top: 11px;
+  }
+
+  .CardContent h3 {
+    font-family: var(--lato);
+    font-weight: 700;
+    font-size: var(--lato-font-size);
+  }
+}

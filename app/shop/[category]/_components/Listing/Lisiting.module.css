@@ -1,0 +1,1612 @@
+.main {
+  display: flex;
+  justify-content: flex-start;
+  /* Corrected 'left' to 'flex-start' */
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--white-color);
+  padding: 0px 125px 150px 125px;
+  box-sizing: border-box;
+  /* Added to keep padding within 100% width */
+}
+
+.MainContainer {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  width: 100%;
+  gap: 88.5px;
+}
+
+.LeftConatiner {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 31px;
+  position: sticky;
+  top: 120px;
+  align-self: flex-start;
+  /* width: 100%; */
+}
+
+.LeftTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.RightConatiner {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 59px;
+  width: 100%;
+}
+
+.RightTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.RightTopLeft {
+  display: flex;
+  justify-content: left;
+  gap: 2px;
+  flex-direction: column;
+}
+
+.CatName,
+.CatCount {
+  display: flex;
+  justify-content: left;
+}
+
+.CatName h3 {
+  font-family: var(--lexend);
+  font-size: var(--lexend-heading-2-font-size);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--heads-color);
+  text-transform: uppercase;
+}
+
+.CatCount p {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--body-color);
+}
+
+.RightTopRight {
+  display: flex;
+  justify-content: right;
+  gap: 15px;
+  align-items: center;
+}
+
+.SortBy p {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lato-font-weight);
+  color: var(--heads-color);
+}
+
+.SortOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-direction: row;
+  padding: 18px 20px;
+  background-color: var(--white-color);
+  cursor: pointer;
+  border: 1px solid var(--body-color);
+}
+
+.SortOptions p {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lexend-heading-font-weight);
+  /* Using the 500 weight variable */
+  color: var(--body-color);
+}
+
+.RightBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 75px;
+}
+
+.ProductsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 75px;
+  column-gap: 40px;
+}
+
+.ProductCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 24px;
+  max-width: 401px;
+  transition: opacity 0.35s ease-in-out;
+}
+
+.Muted {
+  opacity: 0.7;
+  filter: grayscale(1);
+}
+
+.ProductTop {
+  display: flex;
+  justify-content: left;
+  cursor: pointer;
+  flex-direction: column;
+  position: relative;
+  max-width: 401px;
+  background-color: #f1f2ef;
+}
+
+.ProductImage {
+  width: 100%;
+  max-width: 401px;
+  aspect-ratio: 401 / 350;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+
+  overflow: hidden;
+  transition: border 0.3s ease;
+}
+
+.ProductImage img {
+  background-color: #f1f2ef4a;
+}
+
+.ProductImage img:hover {
+  transform: scale(1.1);
+  /* background-color: #f1f2ef; */
+}
+
+.FilterBox .FilterBox {
+  border: none;
+  padding: 0;
+}
+
+.FilterBox .FilterBox .AnimatedBox {
+  padding: 0;
+  margin-top: 0;
+}
+
+.FilterBox .FilterBox .FilterHeader {
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.FilterBox .FilterBox .FilterOptions {
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.ProductImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.35s ease-in-out;
+  will-change: transform;
+  padding: 45px 20px;
+}
+
+/* .ProductTop img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+} */
+.WishlistIcon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 5;
+  opacity: 1;
+  filter: none;
+}
+
+.ProductBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.ProductInfo {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ProductPrice {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.ProductPrice h4 {
+  font-family: var(--lexend);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lato-font-weight);
+  color: var(--heads-color);
+}
+
+.ProductPrice p {
+  font-family: var(--lato);
+  font-size: 11px;
+  /* Keeping specific size as it's much smaller than standard */
+  font-weight: var(--lato-font-weight);
+  color: var(--error-color);
+  text-decoration: line-through;
+}
+
+.Line {
+  width: 100%;
+  height: 0.5px;
+  background-color: var(--primary-color);
+}
+
+.ProductName {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ProductName h3 {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lato-font-weight);
+  color: var(--heads-color);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ProductName p {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lato-font-weight);
+  color: var(--body-color);
+  line-height: 1.4;
+  height: 2.8em;
+}
+
+.ProductActions {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  width: 100%;
+}
+
+.DesktopActions {
+  display: contents;
+}
+
+.MobileActions {
+  display: none;
+  width: 100%;
+}
+
+.Subscribe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  width: 100%;
+  background-color: var(--white-color);
+  cursor: pointer;
+  font-weight: var(--lexend-heading-font-weight);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+  font-family: var(--lato);
+  border: 0.75px solid var(--primary-color);
+}
+
+.LoadMore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoadMoreCta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 46.5px;
+  background-color: var(--white-color);
+  cursor: pointer;
+  font-weight: var(--lexend-heading-font-weight);
+  border: 1px solid var(--primary-color);
+  font-size: var(--lato-font-size);
+  color: var(--primary-color);
+  font-family: var(--lato);
+}
+
+.LoadMoreCta:hover {
+  background-color: var(--primary-color);
+  color: whitesmoke;
+  border: none;
+}
+
+.LeftBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+.One {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid var(--heads-color);
+}
+
+.leftCatName {
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftCatName h5 {
+  font-family: var(--lato);
+  font-size: var(--lexend-heading-2-font-size);
+  /* Mapping 18px to your heading-2 variable */
+  font-weight: var(--lexend-heading-font-weight);
+  /* Using the 500 weight variable */
+  color: var(--body-color);
+}
+
+.FilterBox {
+  border: 1px solid #c1c3c0;
+  padding: 20px;
+  min-width: 250px;
+  border-top: none;
+}
+
+.FilterBox:first-child {
+  border-top: 1px solid #c1c3c0;
+}
+
+.FilterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.FilterHeader h5 {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--body-color);
+}
+
+.FilterHeader span {
+  font-size: var(--lato-font-size);
+  font-family: var(--lato);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--body-color);
+}
+
+.FilterOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.FilterOptions label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+}
+
+.PriceBox {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.PriceInputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.PriceInputs input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--body-color);
+}
+
+.PriceInputs p {
+  font-size: 12px;
+  color: var(--body-color);
+  margin-top: 4px;
+}
+
+.AnimatedBox {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.open {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.SortWrapper {
+  position: relative;
+}
+
+@keyframes sortDropDownOpen {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+@keyframes sortDropDownClose {
+  0% {
+    clip-path: inset(0 0 0% 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+.SortDropdown {
+  position: absolute;
+  top: calc(100% - 1px);
+  right: 0;
+  width: 100%;
+  background-color: var(--white-color);
+  border: 1px solid var(--body-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 90;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.07),
+    0 10px 24px -2px rgba(0, 0, 0, 0.10);
+  animation: sortDropDownOpen 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.SortDropdown p {
+  padding: 14px 31px;
+  margin: 0;
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.SortDropdown p:hover {
+  background-color: #f1f2ef;
+  color: var(--heads-color);
+}
+
+.SortArrow {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.22s ease;
+}
+
+.SortArrowOpen {
+  transform: rotate(180deg);
+}
+
+.MobileFilterOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 50;
+}
+
+.MobileFilterDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 85%;
+  max-width: 340px;
+  background: var(--white-color);
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 60;
+  animation: slideIn 0.3s ease;
+}
+
+.MobileFilterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.MobileFilterHeader p {
+  font-family: var(--lato);
+  font-size: var(--lexend-heading-2-font-size);
+  font-weight: var(--lexend-heading-font-weight);
+}
+
+.MobileFilterHeader span {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.MobileFilterDrawer .LeftBottom {
+  max-width: 100%;
+}
+
+.MobileFilterDrawer .FilterBox {
+  min-width: unset;
+  width: 100%;
+}
+
+.MobileFilterBtn {
+  display: none;
+}
+
+.NoProducts {
+  font-family: var(--lato);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.NoProductsP {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.zeroButton {
+  padding: 14px 48px;
+  color: var(--primary-color);
+  border-radius: 0px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--white-color);
+  font-family: var(--lato);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.zeroButton:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.MobileFilters {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70vw;
+  height: 100vh;
+  background: var(--white-color);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 100px 16px 20px 16px;
+}
+
+.LoaderWrapper {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .FilterOptions input[type="checkbox"] {
+  /* Inherit global styles */
+
+.MobileFilterOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 900;
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: 0px 24px 80px 24px;
+  }
+
+  .MainContainer {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .LowStockBadge {
+    font-size: 10px !important;
+    top: 10px !important;
+    padding: 5px 10px !important;
+  }
+
+  .ProductImage {
+    aspect-ratio: 170 / 200;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ProductImage img {
+    width: 100%;
+    height: 100%;
+    padding: 26px 10px 20px 10px;
+  }
+
+  .ProductName h3 {
+    font-size: 14px;
+    line-height: 1.4;
+    height: 2.8em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ProductName p {
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .LeftConatiner {
+    display: none;
+  }
+
+  .ProductsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    row-gap: 61px;
+    column-gap: 10px;
+  }
+
+  .WishlistIcon {
+    right: 2px;
+  }
+
+  .ProductTop {
+    width: 100%;
+  }
+
+  .ProductActions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .DesktopActions {
+    display: none;
+  }
+
+  .MobileActions {
+    display: flex;
+  }
+
+  .MobileFilterBtn {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid var(--body-color);
+    padding: 11.5px 10px;
+    color: var(--body-color);
+    font-size: var(--lato-font-size);
+    max-width: 169px;
+    font-weight: var(--lato-font-weight);
+    font-family: var(--lato);
+    width: 100%;
+    gap: 5px;
+  }
+
+  .SortOptions {
+    padding: 11.5px 10px;
+    width: 100%;
+    max-width: 169px;
+    min-width: 169px;
+  }
+
+  .RightTop {
+    position: sticky;
+    top: 73px;
+    z-index: 30;
+    background: var(--white-color);
+    padding-bottom: 10px;
+  }
+
+  .RightTopRight {
+    display: flex;
+    z-index: 30;
+    width: 100%;
+    align-items: baseline;
+    justify-content: space-between;
+    background: var(--white-color);
+    padding-bottom: 10px;
+  }
+
+  .SortBy p {
+    display: none;
+  }
+
+  .RightTopLeft {
+    display: none;
+  }
+
+  /* grid cell fills its column fully — no leftover space on the right */
+  .ProductCard {
+    width: 100%;
+    max-width: 100%;
+    /* smooth transition when sibling cards blur in/out */
+    transition: filter 0.35s ease, opacity 0.35s ease;
+  }
+
+  /* sibling cards in the grid fade when another card is expanded */
+  .CardBlurred {
+    filter: blur(1px);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .ProductBottom {
+    transition: filter 0.35s ease;
+    gap: 10px;
+  }
+
+  /* price + title on the active card — slightly less blur than siblings so it reads but recedes */
+  .CardMiddleBlurred {
+    filter: blur(0.7px);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .RightConatiner {
+    gap: 32px;
+  }
+
+  .FilterBox {
+    min-width: 120px;
+  }
+
+  /* ── Mobile Buy Now expanding interaction ───────────────── */
+
+  .MobileBuyNowWrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    z-index: 11;
+    /* sits above the fixed tap-away backdrop (z-index: 10) */
+  }
+
+  /* frosted layer over the price/title area of the active card */
+  .MobileCardOverlay {
+    position: absolute;
+    bottom: 100%;
+    left: -16px;
+    right: -16px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    pointer-events: none;
+    transition: background 0.35s ease, backdrop-filter 0.35s ease;
+    z-index: 1;
+  }
+
+  .MobileBuyNowExpanded .MobileCardOverlay {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(2px);
+    /* light frost over title/price area */
+    -webkit-backdrop-filter: blur(2px);
+    pointer-events: auto;
+    /* tapping overlay collapses the card */
+  }
+
+  /* subscribe button hidden underneath, rises up on expand */
+  .MobileSubscribeRising {
+    width: 100%;
+    padding: 11px 24px;
+    background: white;
+    color: #6c7a5f;
+    border: 1.5px solid #6c7a5f;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: capitalize;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    /* behind the primary button until expanded */
+    transform: translateY(0%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.38s cubic-bezier(0.34, 1.3, 0.64, 1),
+      opacity 0.28s ease;
+  }
+
+  .MobileBuyNowExpanded .MobileSubscribeRising {
+    transform: translateY(calc(-100% - 8px));
+    /* rises above Add to Cart */
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* primary button — text morphs between Buy Now and Add to Cart */
+  .MobileBuyNowBtn {
+    width: 100%;
+    padding: 11px 24px;
+    background-color: #6c7a5f;
+    color: #ffffff;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: capitalize;
+    position: relative;
+    z-index: 2;
+    /* always on top of subscribe button */
+    transition: background-color 0.25s ease, letter-spacing 0.2s ease;
+  }
+
+  .MobileBuyNowExpanded .MobileBuyNowBtn {
+    background-color: #4a5940;
+    /* slightly deeper when active */
+    letter-spacing: 0.02em;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 940px) {
+  .main {
+    padding: 32px 24px 80px;
+  }
+
+  .MainContainer {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .LowStockBadge {
+    /* padding: 6px 6px;
+    top: 6px; */
+    /* display: none; */
+
+    font-size: 10px !important;
+    top: 10px !important;
+    padding: 5px 10px !important;
+  }
+
+  .ProductImage img {
+    width: 100%;
+    height: 100%;
+    padding: 26px 10px 20px 10px;
+  }
+
+  .LeftConatiner {
+    display: none;
+  }
+
+  .ProductsGrid {
+    gap: 24px;
+  }
+
+  .ProductTop {
+    width: 100%;
+  }
+
+  .ProductActions {
+    display: flex;
+    flex-direction: column;
+    /* Keeps the main area vertical */
+    width: 100%;
+  }
+
+  /* This specifically targets the container holding the two buttons */
+  .DesktopActions {
+    display: flex !important;
+    flex-direction: row !important;
+    /* Force side-by-side */
+    gap: 0 !important;
+    /* Remove the gap completely */
+    width: 100%;
+  }
+
+  .DesktopActions>* {
+    flex: 1;
+    /* Each button takes exactly 50% width */
+    border-radius: 0;
+    /* Optional: Makes them look like one solid bar */
+  }
+
+  .Subscribe,
+  .ProductActions button {
+    width: 100%;
+  }
+
+  .MobileFilterBtn {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    cursor: pointer;
+    border: 1px solid var(--body-color);
+    padding: 11.5px 10px;
+    color: var(--body-color);
+    font-size: 14px;
+    max-width: 169px;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .SortOptions {
+    padding: 11.5px 10px;
+    width: 100%;
+    max-width: 169px;
+    min-width: 169px;
+  }
+
+  .RightTop {
+    position: sticky;
+    top: 73px;
+    z-index: 30;
+    background: var(--white-color);
+    padding-bottom: 10px;
+  }
+
+  .RightTopRight {
+    display: flex;
+    z-index: 30;
+    width: 100%;
+    align-items: baseline;
+    justify-content: flex-start;
+    background: var(--white-color);
+  }
+
+  .RightTopLeft {
+    display: none;
+  }
+
+  .ProductCard {
+    max-width: 350px;
+  }
+}
+
+@media (min-width: 941px) and (max-width: 1440px) {
+  .main {
+    padding: 40px 60px 160px;
+  }
+
+  .LowStockBadge {
+    /* padding: 6px 6px;
+    top: 6px; */
+    /* display: none; */
+
+    font-size: 12px !important;
+    top: 10px !important;
+    padding: 5px 10px !important;
+  }
+
+  .MainContainer {
+    gap: 40px;
+  }
+
+  .LeftConatiner {
+    display: flex;
+  }
+
+  .ProductsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .MobileFilterBtn {
+    display: none;
+  }
+
+  .ProductCard {
+    max-width: 300px;
+  }
+
+  .ProductActions {
+    display: flex;
+    flex-direction: column;
+    /* Keeps the main area vertical */
+    width: 100%;
+  }
+
+  /* This specifically targets the container holding the two buttons */
+  .DesktopActions {
+    display: flex !important;
+    flex-direction: row !important;
+    /* Force side-by-side */
+    gap: 0 !important;
+    /* Remove the gap completely */
+    width: 100%;
+  }
+
+  .DesktopActions>* {
+    flex: 1;
+    /* Each button takes exactly 50% width */
+    border-radius: 0;
+    /* Optional: Makes them look like one solid bar */
+  }
+
+  .Subscribe {
+    display: flex;
+    width: 100%;
+    flex-shrink: 0;
+    min-height: 44px;
+  }
+}
+
+@media (min-width: 1441px) and (max-width: 1720px) {
+  .main {
+    padding: 0px 125px 250px;
+  }
+
+  .MainContainer {
+    gap: 88.5px;
+  }
+
+  .LeftConatiner {
+    display: flex;
+  }
+
+  .ProductsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .MobileFilterBtn {
+    display: none;
+  }
+
+  .ProductActions {
+    display: flex;
+    flex-direction: column;
+    /* Keeps the main area vertical */
+    width: 100%;
+  }
+
+  .DesktopActions {
+    display: flex !important;
+    flex-direction: row !important;
+    /* Force side-by-side */
+    gap: 0 !important;
+    /* Remove the gap completely */
+    width: 100%;
+  }
+
+  .DesktopActions>* {
+    flex: 1;
+    /* Each button takes exactly 50% width */
+    border-radius: 0;
+    /* Optional: Makes them look like one solid bar */
+  }
+
+  .Subscribe {
+    display: flex;
+    width: 100%;
+    flex-shrink: 0;
+    min-height: 44px;
+  }
+}
+
+/* Subscription Popup Styles */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 34px 40px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #555;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 6px;
+  transition: color 0.15s ease;
+}
+
+.closeBtn:hover {
+  color: #111;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0 0 25px;
+  font-family: var(--lexend);
+  /* line-height: 1.4; */
+  /* letter-spacing: 0.04em; */
+  padding-right: 32px;
+}
+
+/* ─── Row Layout ─── */
+
+.row {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.fieldHalf {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fieldFull {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  display: block;
+  font-size: 15px;
+  color: #1a1a1a;
+  font-family: var(--lato);
+  font-weight: 400;
+}
+
+/* ─── Custom Dropdown ─── */
+
+.dropdown {
+  position: relative;
+}
+
+.dropdownToggle {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1.5px solid #c8c8c8;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  font-family: var(--lato);
+  font-size: 14px;
+}
+
+.dropdownToggle:hover {
+  border-color: #9aaa8a;
+}
+
+.dropdownToggleOpen {
+  border-color: #6b7c5e;
+}
+
+.dropdownTextPlaceholder {
+  color: #a0a0a0;
+}
+
+.dropdownTextSelected {
+  color: #6e736a;
+}
+
+.chevron {
+  width: 10px;
+  height: 10px;
+  border-right: 1.5px solid #6e736a;
+  border-bottom: 1.5px solid #6e736a;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-top: -3px;
+}
+
+.chevronOpen {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 0px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1.5px solid #c8c8c8;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+  max-height: 180px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dropdownItem {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: var(--lato);
+  color: #6e736a;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.dropdownItem:hover {
+  background: #f2f5ef;
+}
+
+.dropdownItemActive {
+  background: #f8faf6;
+  color: #6b7c5e;
+  font-weight: 600;
+}
+
+/* ─── Quantity Control ─── */
+
+.quantityControl {
+  display: flex;
+  width: 100%;
+  border: 1.5px solid #c8c8c8;
+  overflow: hidden;
+}
+
+.qtyBtn {
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border: none;
+  font-size: 18px;
+  color: #6e736a;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qtyBtn:hover {
+  background: #f2f5ef;
+}
+
+.qtyBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: #fff;
+}
+
+.qtyValue {
+  flex: 1;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: #6e736a;
+  border-left: 1.5px solid #c8c8c8;
+  border-right: 1.5px solid #c8c8c8;
+  font-family: var(--lato);
+  font-weight: 400;
+}
+
+/* ─── Subscribe Button ─── */
+
+.subscribeBtn {
+  width: 100%;
+  padding: 18px;
+  background: #6b7c5e;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--lato);
+  transition:
+    background 0.18s ease,
+    transform 0.1s ease;
+}
+
+.subscribeBtn:hover {
+  background: #5a6a4e;
+}
+
+.subscribeBtn:active {
+  transform: scale(0.99);
+}
+
+.PopupClose:hover {
+  color: var(--heads-color);
+}
+
+@media (max-width: 640px) {
+  .overlay {
+    padding: 0 12px;
+  }
+
+  .dropdownToggle {
+    text-align: left;
+  }
+}
+
+@keyframes popupScale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.Popup h3 {
+  font-family: var(--lexend);
+  font-size: 20px;
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--heads-color);
+  margin-bottom: 40px;
+}
+
+.Popup>p {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--heads-color);
+  font-weight: var(--lato-font-weight);
+  margin-bottom: 12px;
+}
+
+.SubscriptionSection {
+  margin-bottom: 28px;
+}
+
+.SubscriptionSection h4 {
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--heads-color);
+  margin-bottom: 12px;
+}
+
+.PopupPrice {
+  font-size: var(--lato-font-size);
+  font-family: var(--lato);
+  font-weight: var(--lexend-heading-font-weight);
+  margin-bottom: 16px;
+  color: var(--heads-color);
+}
+
+.Discount {
+  font-size: 13px;
+  color: var(--primary-color);
+  margin-top: 4px;
+}
+
+.PopupActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.PopupCancel {
+  background: transparent;
+  border: none;
+
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+
+  cursor: pointer;
+}
+
+.PopupConfirm {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lexend-heading-font-weight);
+  /* Using your 500 weight variable */
+
+  cursor: pointer;
+}
+
+.FrequencyOptions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.FrequencyBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 16px;
+  border: 1px solid var(--line-color);
+  background: var(--white-color);
+
+  font-size: var(--lato-font-size);
+  font-family: var(--lato);
+  color: var(--heads-color);
+
+  cursor: pointer;
+}
+
+.FrequencyBtn:hover {
+  border-color: var(--primary-color);
+}
+
+.ActiveFrequency {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 16px;
+  border: 1.5px solid var(--primary-color);
+  background: var(--white-color);
+
+  font-size: var(--lato-font-size);
+  font-family: var(--lato);
+  color: var(--heads-color);
+}
+
+.FrequencyBtn::after,
+.ActiveFrequency::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--body-color);
+  background: var(--white-color);
+}
+
+.ActiveFrequency::after {
+  border-color: var(--primary-color);
+  background: radial-gradient(circle,
+      var(--primary-color) 0 3px,
+      transparent 4px);
+}
+
+.LowStockBadge {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 10px 20px;
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lato-font-weight);
+  z-index: 10;
+}
+
+.OutOfStockRow {
+  width: 100%;
+  display: flex;
+}
+
+.OutOfStockBtn {
+  width: 100%;
+  padding: 10px 24px;
+  background-color: var(--body-color);
+  color: var(--white-color);
+  border: none;
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lexend-heading-font-weight);
+  text-align: center;
+  cursor: not-allowed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,355 @@
+.Main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 0px clamp(24px, calc(24px + (101 * ((100vw - 320px) / 1120))), 125px);
+}
+
+.MainContainer {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 70px;
+  width: 100%;
+  align-items: center;
+  height: 100%;
+}
+
+/* ─── Image side — mirrors contact .LeftConatiner pattern ─── */
+.Left {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+}
+
+.Left img {
+  width: 100%;
+  /* ← was "auto", this is what contact uses */
+  height: 100%;
+  object-fit: cover;
+  max-width: 890px;
+  /* ← same cap as contact */
+  min-width: 890px;
+  /* ← same floor as contact */
+  max-height: 800px;
+  display: block;
+}
+
+/* ─── Form side — untouched ─── */
+.Right {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  width: 100%;
+  gap: clamp(24px, calc(24px + (8 * ((100vw - 320px) / 1120))), 32px);
+}
+
+.RightTop {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.RightTop h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+  text-transform: uppercase;
+}
+
+.RightTop p {
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #6e736a;
+  font-weight: 400;
+}
+
+.RightBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 23px;
+}
+
+.SubButton {
+  display: flex;
+  justify-content: right;
+}
+
+.SubmitButton {
+  background-color: #ffffff;
+  color: #6c7a5f;
+  font-family: var(--lexend);
+  font-size: 15px;
+  font-weight: 500;
+  /* text-transform: uppercase; */
+  border: 1px solid #6c7a5f;
+  padding: 13px 47px;
+  cursor: pointer;
+}
+.SubmitButton:hover {
+  background-color: #6c7a5f; /* Invert colors on hover */
+  color: #ffffff;
+}
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.FormGroup {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #2f362a;
+}
+
+.Form input {
+  border: none;
+  border-bottom: 1px solid #2f362a;
+  padding: 16px;
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #2f362a;
+}
+
+.SubmitWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.ResponseMessage {
+  margin-top: 12px;
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #197b5b;
+}
+
+.ResponseMessage[data-error="true"] {
+  color: crimson;
+}
+
+.Form textarea {
+  border: none;
+  padding: 16px;
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #2f362a;
+}
+
+.Form input::placeholder,
+.Form textarea::placeholder {
+  color: #9a9a9a;
+}
+
+.Form input:last-of-type {
+  border-bottom: 1px solid #2f362a;
+}
+
+.TwoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.TwoCol input {
+  border-right: 1px solid #2f362a;
+}
+
+.TwoCol input:last-child {
+  border-right: none;
+}
+
+.CheckboxBlock {
+  padding: 16px;
+  border-bottom: 1px solid #2f362a;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.CheckboxBlock p {
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #6e736a;
+  margin-bottom: 8px;
+}
+
+.CheckboxBlock label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #6e736a;
+}
+
+.Textarea {
+  resize: none;
+  border: none;
+  padding: 16px;
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #2f362a;
+}
+
+textarea::placeholder {
+  color: #9a9a9a;
+}
+
+@media (max-width: 640px) {
+  .Main {
+    padding: 0px 24px 0px 24px;
+  }
+
+  .MainContainer {
+    flex-direction: column;
+    gap: 32px;
+    justify-content: left;
+    align-items: baseline;
+    overflow: hidden;
+  }
+
+  .Left {
+    max-width: 100%;
+  }
+
+  .Left img {
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  .RightBottom .Form {
+    width: 100%;
+    /* max-width: 350px; */
+  }
+
+  .Form input {
+    padding: 12px;
+  }
+
+  .SubButton {
+    justify-content: center;
+  }
+
+  .TwoCol {
+    grid-template-columns: 1fr;
+  }
+
+  .TwoCol input {
+    border-right: none;
+    border-bottom: 1px solid #2f362a;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .MainContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: 40px;
+    min-height: 600px;
+  }
+
+  .Left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+
+  .Left img {
+    height: 100%;
+
+    width: 100%;
+    max-width: 420px;
+    min-width: 200px;
+    object-fit: cover;
+    object-position: center;
+    max-height: none;
+  }
+
+  .Right {
+    flex: 1;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .RightBottom .Form {
+    width: 100%;
+    /* max-width: 420px; */
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .Main {
+    /* Ensure the parent is the one handling the side padding */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .MainContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    /* Reduced gap to ensure both elements fit within 1025px */
+    gap: clamp(20px, 3vw, 40px);
+
+    min-height: 85vh;
+    width: 100%;
+    max-width: 1200px;
+    /* Limits the inner content width to keep it centered */
+    margin: 0 auto;
+    /* Centers the container if it's smaller than the screen */
+    overflow: visible;
+  }
+
+  .Left {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+    /* Ensure the container itself has the height you want */
+    height: 70vh;
+  }
+
+  .Left img {
+    width: 100%;
+    /* FIX: Set height to 100% so it stays at 70vh (from parent) */
+    height: 100%;
+
+    /* FIX: Remove aspect-ratio so the width can shrink without pulling the height down */
+    aspect-ratio: auto;
+
+    /* This ensures the image crops the sides instead of squishing */
+    object-fit: cover;
+
+    display: block;
+    min-width: 0;
+  }
+
+  .Right {
+    /* FIX: Ensure the form has its own space and doesn't vanish */
+    flex: 1;
+    min-width: 320px;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

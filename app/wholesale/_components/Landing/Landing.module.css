@@ -1,0 +1,204 @@
+.Main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100svh;
+  background-color: #6c7a5f;
+  overflow: hidden;
+}
+
+.MainContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.Left {
+  flex: 0 0 50%;
+  width: 50%;
+  max-width: 50%;
+
+  background: url("./1.png") no-repeat center / cover;
+}
+
+.Right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 60px;
+  padding-bottom: 0;
+  gap: 12px;
+  height: 100%;
+}
+.RightTop {
+  display: flex;
+  justify-content: left;
+}
+
+.RightTop h1 {
+  font-family: var(--lexend);
+  font-size: 60px;
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.RightBottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 20px;
+  width: 50%;
+}
+.RightBottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none; /* Removes default link underline */
+}
+
+.RightBottom svg g {
+  transform: rotate(-45deg);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.RightBottom:hover svg g {
+  transform: rotate(0deg);
+}
+
+.RightBottom h4 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.RightBottom:hover h4 {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.MarqueeWrapper {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.Marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 26s linear infinite;
+}
+
+.Marquee span {
+  font-family: var(--lexend);
+  font-size: var(--fs-120);
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  padding-right: 40px;
+  text-transform: uppercase;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .Main {
+    height: 100vh; /* Keep the full-screen feel */
+  }
+
+  .Left {
+    flex: 0 0 45%; 
+    max-width: 45%;
+  }
+
+  .Right {
+    flex: 0 0 55%;
+    max-width: 55%;
+    padding-left: 40px; /* Reduced from 60px */
+    padding-right: 20px;
+  }
+
+  .RightTop h1 {
+    /* Scale down the 60px headline */
+    font-size: 42px; 
+    line-height: 1.2;
+  }
+
+  .RightBottom {
+    width: 80%; /* Give the border-top more room than the 50% on desktop */
+  }
+}
+
+@media (max-width: 640px) {
+  .Main {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  
+    display: flex;
+    justify-content: flex-start; 
+    align-items: stretch;
+  }
+
+  .MainContainer {
+    flex-direction: column;
+    gap: 0;
+    /* Ensure the container doesn't have inherited padding */
+    padding: 0; 
+    margin: 0;
+  }
+
+  .Left {
+    width: 100%;
+    flex: 0 0 auto;
+    height: 50vh;
+    max-width: 100%;
+    
+    /* Ensures the background image touches the absolute edges */
+    background-position: top center; 
+    margin-top: 0; 
+  }
+  .RightBottom svg g{
+    transform: none;
+  }
+  /* --- Keeping the rest of your perfect logic --- */
+  .Right {
+    width: 100%;
+    flex: 0 0 auto;
+    padding: 80px 24px;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+
+  .RightTop h1 {
+    font-size: 32px;
+    line-height: 1.1;
+  }
+
+  .RightBottom {
+    width: 100%;
+    padding-top: 16px;
+  }
+
+  .RightBottom h4 {
+    font-size: 18px;
+  }
+}

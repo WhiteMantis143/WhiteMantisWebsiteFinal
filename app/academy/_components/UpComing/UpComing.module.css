@@ -1,0 +1,375 @@
+.main {
+  display: flex;
+  /* Change this from center to flex-start */
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  background-color: var(--white-color);
+  padding: 160px 125px;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+}
+
+.MainConatiner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* This ensures the Heading stays left while you can 
+     center other specific items if needed */
+  align-items: stretch;
+  gap: 60px;
+}
+
+.TopHeading {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.TopHeading h3 {
+  font-family: var(--lexend);
+  font-style: normal;
+  font-weight: var(--lexend-heading-font-weight);
+  font-size: var(--lexend-heading-2-font-size);
+  color: var(--heads-color);
+  margin: 0;
+}
+
+.WorkShopContainer {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.WorkShopContainerTop,
+.WorkShopContainerBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.WorkShopCard {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 450px;
+  flex: 1 1 calc(33.333% - 21.333px);
+  min-width: 260px;
+}
+
+@media (min-width: 1200px) {
+
+  .WorkShopContainerTop,
+  .WorkShopContainerBottom {
+    gap: 75px 160px;
+  }
+
+  .WorkShopCard {
+    flex: 0 0 calc((100% - 320px) / 3);
+    max-width: none;
+    min-width: 0;
+  }
+}
+
+.WorkShopCardTop {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.WorkShopImage {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 10px;
+}
+
+.WorkShopImage img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 450 / 275;
+}
+
+.WorkShopTimeLine {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.WorkShopTimeLineLeft,
+.WorkShopTimeLineRight {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.WorkShopTimeLineLeft svg,
+.WorkShopTimeLineRight svg {
+  width: 100%;
+  height: 100%;
+  max-width: 15px;
+  max-height: 16px;
+}
+
+.WorkShopTimeLineLeft p,
+.WorkShopTimeLineRight p {
+  font-family: var(--lato);
+  font-style: normal;
+  font-weight: var(--lato-font-weight);
+  white-space: nowrap;
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  opacity: 12%;
+  background-color: var(--heads-color);
+}
+
+.WorkShopCardBottom {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  /* Ensure it spans the container */
+  /* Add internal padding so content doesn't touch edges */
+}
+
+.WorkShopCardBottomTop {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  /* Prevents the H2 and Button from touching */
+  flex-wrap: wrap;
+  /* CRITICAL: Allows button to move below H2 if space runs out */
+}
+
+.WorkShopCardBottomTop h2 {
+  font-family: var(--lexend);
+  font-weight: var(--lexend-heading-font-weight);
+  font-size: var(--lexend-heading-2-font-size);
+  color: var(--body-color);
+  text-transform: uppercase;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Button {
+  padding: 12px 21px;
+  background-color: var(--primary-color);
+  cursor: pointer;
+  color: var(--white-color);
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  border: none;
+  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.WorkShopCardBottom p {
+  font-family: var(--lato);
+  font-style: normal;
+  font-weight: var(--lato-font-weight);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+}
+
+.PaginationContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.PaginationDots {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.PaginationDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--line-color);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.activeDot {
+  background-color: var(--primary-color);
+  transform: scale(1.2);
+}
+
+.ViewMoreButton {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--primary-color);
+  font-family: var(--lato);
+  font-weight: var(--lexend-heading-font-weight);
+  /* Using 500 weight variable */
+  font-size: var(--lato-font-size);
+}
+
+.NoWorkShopButton {
+  padding: 13.5px 33.5px;
+  margin-top: 20px;
+  color: var(--primary-color);
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.NoWorkShopButton:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.zeroPage {
+  width: 100%;
+  text-align: center;
+  padding: 60px;
+  fontFamily: var(--lato);
+  fontWeight: var(--lato-font-weight);
+  color: var(--heads-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+}
+
+@media (max-width: 768px) {
+  .PaginationContainer {
+    flex-direction: column-reverse;
+    gap: 24px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 90px 24px;
+  }
+
+  .ScrollWrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .WorkShopCardBottom {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .Left,
+  .RightTop>div,
+  .RightBottom>div,
+  .imageWrapper {
+    flex: 0 0 85%;
+    /* Don't grow, DON'T SHRINK, stay 85% width */
+    min-width: 85%;
+    /* Double insurance to prevent shrinking */
+    scroll-snap-align: center;
+  }
+
+  .image {
+    width: 100%;
+    height: 450px;
+    /* Give it a fixed height so it doesn't disappear */
+    object-fit: cover;
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 90px 24px;
+  }
+
+  .WorkShopCardBottomTop {
+    /* 1. Ensure it stays as a row to keep items side-by-side */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .WorkShopCardBottomTop h2 {
+    font-family: var(--lexend);
+    font-weight: var(--lexend-heading-font-weight);
+    font-size: var(--lexend-heading-2-font-size);
+    /* Or a custom mobile size if you prefer */
+    color: var(--body-color);
+    text-transform: uppercase;
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    /* Prevents long text from overflowing the container */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Limits title to 2 lines if it's too long */
+    -webkit-box-orient: vertical;
+  }
+
+  .Button {
+    padding: 10px 16px;
+    /* Slightly tighter padding for mobile */
+    background-color: var(--primary-color);
+    cursor: pointer;
+    color: var(--white-color);
+    font-family: var(--lato);
+    font-size: var(--lato-font-size);
+    border: none;
+
+    /* 3. Forces the button to stay its original size and not shrink */
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}

@@ -1,0 +1,591 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 998;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -30%;
+  width: 30%;
+  height: 100vh;
+  background: #ffffff;
+  z-index: 100000;
+  transition: right 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* Prevent whole sidebar from scrolling */
+}
+
+.open {
+  right: 0;
+}
+
+.Main {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+  height: 100vh;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 30px 24px 0px 40px;
+  /* Remove bottom padding here */
+}
+
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  height: 100%; /* Keeps the container locked to the sidebar height */
+  overflow: hidden;
+}
+
+.Top {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  /* Update these lines: */
+  flex: 1; /* Take up all available space */
+  overflow-y: auto; /* Enable scrolling */
+  min-height: 0; /* CRITICAL: Allows flex item to shrink smaller than content */
+  overscroll-behavior: contain;
+  padding-right: 12px;
+  border-bottom: 1px solid rgba(47, 54, 42, 0.3);
+}
+
+.TopOne {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.TopOneTop {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.TopOneLeft {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 8.12px;
+  align-items: center;
+}
+
+.TopOneLeft h4 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 400;
+  color: #2f362a;
+}
+
+.TopOneLeft p {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #6e736a;
+}
+
+.TopOneBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.TopOneRight svg {
+  cursor: pointer;
+}
+
+.Card {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-start;
+  /* Align to top like screenshot */
+}
+
+.CardLeft {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.ProdImage img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  background-color: #f8f8f8;
+}
+
+.ProdDetails {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.ProdDetails h5 {
+  font-family: var(--lato);
+  font-weight: 400;
+  font-size: 15px;
+  color: #6e736a;
+  line-height: 1.4;
+}
+
+.ProdDetails h4 {
+  font-family: var(--lato);
+  font-weight: 400;
+  font-size: 15px;
+  color: #6e736a;
+  margin-top: 20px;
+}
+
+.HighlightsContainer {
+  margin-top: 2px;
+}
+
+.HighlightsText {
+  font-family: var(--lato);
+  font-size: 13px;
+  color: var(--body-color);
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.ViewLessBtn {
+  font-family: var(--lato);
+  font-size: 13px;
+  color: #6e736a;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.FrequencyText {
+  font-family: var(--lato);
+  font-size: 13px;
+  color: #2f362a;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.CardRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.QuantitySelector {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d4d4d4;
+  height: 38px;
+}
+
+.qtyBtn {
+  width: 32px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  font-family: var(--lato);
+  font-weight: 700;
+  color: #6c7a5f;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qtyValue {
+  width: 38px;
+  height: 100%;
+  border-left: 1px solid #2f362a4d;
+  border-right: 1px solid #2f362a4d;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  justify-content: center;
+  font-size: 13px;
+  color: #6c7a5f;
+}
+
+.RemoveItem button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  color: #6e736a;
+  font-family: var(--lato);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.TopTwo {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.TopTwoTop {
+  display: flex;
+  justify-content: left;
+}
+
+.TopTwoTop h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+}
+
+.TopTwoBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+}
+
+.Bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 24px;
+  padding: 0px 0 34px 0;
+  background-color: #ffffff;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.03);
+  z-index: 10;
+}
+
+.BottomOne {
+  display: flex;
+  justify-content: left;
+}
+
+.BottomOne h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+}
+
+.BottomTwo {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.BottomDetails {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.BottomDetailsTop,
+.BottomDetailsBottom {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.BottomDetailsLeft,
+.BottomDetailsLeft {
+  display: flex;
+  justify-content: left;
+}
+
+.BottomDetailsLeft h5,
+.BottomDetailsLeft h5 {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #6e736a;
+}
+
+.BottomDetailsRight,
+.BottomDetailsRight {
+  display: flex;
+  justify-content: right;
+}
+
+.BottomDetailsRight h4,
+.BottomDetailsRight h4 {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #6e736a;
+  text-transform: uppercase;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #2f362a4d;
+}
+
+.PriceDetails {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.PriceDetailLeft {
+  display: flex;
+  justify-content: left;
+}
+
+.PriceDetailLeft h5 {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 700;
+  color: #6e736a;
+}
+
+.PriceDetailRight {
+  display: flex;
+  justify-content: right;
+}
+
+.PriceDetailRight h4 {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 700;
+  color: #6e736a;
+}
+
+.CheckOutCta {
+  width: 100%;
+  height: 48px;
+  border: none;
+  background-color: #6c7a5f;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: var(--lato);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    width: 100%;
+    right: -100%;
+    height: 100svh;
+    overflow: hidden;
+    /* Changed from overflow-y: auto */
+    /* z-index: 0; */
+    background-color: #ffffff;
+  }
+
+  /* .overlay{
+    z-index: 00;
+  } */
+
+  .open {
+    right: 0;
+  }
+
+  .Main {
+    padding: 30px 24px 0px 24px;
+    height: 100vh;
+  }
+
+  .Card {
+    justify-content: space-between;
+  }
+
+  .qtyValue {
+    font-size: 14px;
+  }
+
+  .CardLeft {
+    width: 100%;
+  }
+
+  .CardRight {
+    width: 100%;
+    /* align-items: flex-start; */
+  }
+
+  .QuantitySelector {
+    height: 36px;
+  }
+
+  .CouponInput {
+    height: 46px;
+  }
+
+  .Apply {
+    width: 100px;
+  }
+
+  .ProdImage img {
+    max-width: 75px;
+    max-height: 75px;
+  }
+
+  .CheckOutCta {
+    height: 46px;
+  }
+
+  .TopOneLeft h4,
+  .TopTwoTop h3,
+  .BottomOne h3 {
+    font-size: 20px;
+  }
+
+  .TopOneLeft p,
+  .BottomDetailsLeft h5,
+  .BottomDetailsRight h4,
+  .PriceDetailLeft h5,
+  .PriceDetailRight h4 {
+    font-size: 14px;
+  }
+
+  .ProdDetails h5,
+  .ProdDetails h4 {
+    font-size: 14px;
+    max-width: 147px;
+  }
+
+  .AvailableCouponsLeft p,
+  .AvailableCouponsRight p,
+  .CheckOutCta {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1200px) {
+  .sidebar {
+    width: 60%;
+    right: -60%;
+    height: 100svh;
+    overflow: hidden;
+    /* Changed from overflow-y: auto */
+  }
+
+  .open {
+    right: 0;
+  }
+
+  .Main {
+    padding: 30px 28px 0px 28px;
+    height: 100vh;
+  }
+
+  .Card {
+    justify-content: space-between;
+  }
+
+  .ProdImage img {
+    max-width: 90px;
+    max-height: 90px;
+  }
+
+  .Apply {
+    width: 110px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1640px) {
+  .sidebar {
+    width: 30%;
+    right: -30%;
+  }
+
+  .open {
+    right: 0;
+  }
+
+  .Main {
+    padding: 30px 36px 0px 36px;
+    height: 100vh;
+  }
+}
+
+@media (min-width: 1641px) and (max-width: 1890px) {
+  .sidebar {
+    width: 28%;
+    right: -28%;
+  }
+
+  .open {
+    right: 0;
+  }
+
+  .Main {
+    padding: 30px 40px 0px 40px;
+    height: 100vh;
+  }
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+.EmptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px;
+  gap: 8px;
+}
+
+.EmptyState h4 {
+  font-family: var(--lexend);
+  font-size: 20px;
+  font-weight: 400;
+  color: #2f362a;
+  margin: 0;
+}
+
+.EmptyState p {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #6e736a;
+  margin: 0;
+}
+
+.StartShopping {
+  margin-top: 24px;
+  padding: 12px 32px;
+  background: #ffffff;
+  border: 1px solid #6c7a5f;
+  color: #6c7a5f;
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.StartShopping:hover {
+  background: #6c7a5f;
+  color: #ffffff;
+}

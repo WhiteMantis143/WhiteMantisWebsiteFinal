@@ -1,0 +1,223 @@
+.Main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100svh;
+  background-color: var(--primary-color);
+  overflow: hidden;
+  /* Prevents accidental scrollbars */
+}
+
+.MainContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.Left {
+  width: 50%;
+  max-width: 50%;
+  background: url("./1.png") no-repeat center / cover;
+}
+
+/* --- RHS: FIXED 50% --- */
+.Right {
+  flex: 0 0 50%;
+  /* Strictly lock to 50% */
+  width: 50%;
+  max-width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 60px;
+  padding-bottom: 0;
+  gap: 26px;
+  box-sizing: border-box;
+}
+
+.RightTop {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 90%;
+}
+
+.RightTop h1 {
+  font-family: var(--lexend);
+  font-size: 60px;
+  font-weight: 500;
+  color: var(--white-color);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.RightBottom {
+  display: flex;
+  align-items: center;
+  /* Vertical alignment for text and icon */
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 20px;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.RightBottom h4 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+  transition: text-decoration 0.3s ease;
+}
+
+/* Hover effect to stay consistent with your other section */
+.RightBottom:hover h4 {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+.RightBottom svg path {
+    transform: rotate(-45deg);
+    /* Essential: ensures it rotates around the middle of the icon */
+    transform-origin: center; 
+    transition: transform 0.3s ease;
+}
+
+/* 2. When the parent container is hovered... */
+.RightBottom:hover svg path {
+    transform: rotate(0deg);
+}
+.MarqueeWrapper {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.Marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 26s linear infinite;
+}
+
+.Marquee span {
+  font-family: var(--lexend);
+  font-size: var(--fs-120);
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  padding-right: 40px;
+  text-transform: uppercase;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+/* --- TABLET: 641px to 1024px --- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .Main {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .Left {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+
+  .Right {
+    flex: 0 0 55%;
+    max-width: 55%;
+    padding-left: 40px;
+    /* Reduced from 60px */
+    gap: 24px;
+  }
+
+  .RightTop h1 {
+    font-size: 42px;
+    /* Scaled down from 60px */
+    line-height: 1.2;
+  }
+
+  .Marquee span {
+    font-size: 80px;
+    /* Scale marquee for tablet */
+  }
+}
+
+/* --- MOBILE: 640px and below --- */
+@media (max-width: 640px) {
+  .Main {
+    height: auto;
+    min-height: 95vh;
+    overflow-y: auto;
+    display: block;
+    /* Stack naturally */
+  }
+
+  .MainContainer {
+    flex-direction: column;
+    /* Stack Left on top of Right */
+    height: auto;
+  }
+
+  .Left {
+    width: 100%;
+    max-width: 100%;
+    height: 45vh;
+    /* Hero image takes top portion */
+    flex: 0 0 auto;
+    background-position: center;
+  }
+
+  .Right {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 auto;
+    padding: 100px 24px;
+    /* Mobile padding */
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .RightTop {
+    max-width: 100%;
+  }
+
+  .RightTop h1 {
+    font-size: 34px;
+    /* Big enough for impact, small enough for mobile */
+    line-height: 1.1;
+  }
+
+  .RightBottom h4 {
+    font-size: 18px;
+    /* Scaled from 22px */
+  }
+
+  /* Adjust Marquee for Mobile */
+  .MarqueeWrapper {
+    top: 40%;
+    /* Move it down slightly so it doesn't cover the face/image */
+  }
+
+  .Marquee span {
+    font-size: 60px;
+    /* Much smaller text for mobile marquee */
+    padding-right: 20px;
+  }
+}

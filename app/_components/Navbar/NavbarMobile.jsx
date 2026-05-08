@@ -1,0 +1,378 @@
+"use client";
+import React, { useState, useEffect, useRef } from "react"; // Added useRef here
+import styles from "./NavbarMobile.module.css";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+// import Logo from "./11.png";
+const Logo = "/White-mantis-animated-logo.gif";
+import { useCart } from "../../_context/CartContext";
+import { useSession } from "next-auth/react";
+import { useAuth } from "../../_context/AuthContext";
+// Removed duplicate useEffect import from here
+
+const NavbarMobile = ({ categories: initialCategories }) => {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+  const toggleBtnRef = useRef(null);
+  const navbarRef = useRef(null);
+  const [navbarHeight, setNavbarHeight] = useState(0);
+
+  useEffect(() => {
+    if (navbarRef.current) {
+      setNavbarHeight(navbarRef.current.offsetHeight);
+    }
+  }, []);
+  const [shopOpen, setShopOpen] = useState(true);
+  const [accountOpen, setAccountOpen] = useState(true);
+  const [showLogout, setShowLogout] = useState(false);
+  const { isCartOpen, openCart, closeCart, items } = useCart();
+  const { data: session, status } = useSession();
+
+  const [categories, setCategories] = useState(initialCategories || []);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  // Logic to close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        open &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !toggleBtnRef.current?.contains(event.target)
+      ) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
+
+  useEffect(() => {
+    if (initialCategories) {
+      setCategories(initialCategories);
+    }
+  }, [initialCategories]);
+
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      setShowLogout(false);
+      await logout();
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
+  return (
+    <>
+      {/* update the links here also dont't forgeet */}
+      <div className={styles.Navbar} ref={navbarRef}>
+        <button
+          ref={toggleBtnRef}
+          className={styles.IconBtn}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? (
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.6 16L0 14.4L6.4 8L0 1.6L1.6 0L8 6.4L14.4 0L16 1.6L9.6 8L16 14.4L14.4 16L8 9.6L1.6 16Z"
+                fill="#6C7A5F"
+              />
+            </svg>
+          ) : (
+            <svg
+              width="24"
+              height="16"
+              viewBox="0 0 24 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0H24V2.66667H0V0ZM0 6.66667H24V9.33333H0V6.66667ZM0 13.3333H24V16H0V13.3333Z"
+                fill="#6C7A5F"
+              />
+            </svg>
+          )}
+        </button>
+
+        <Link href="/">
+          <Image
+            src={Logo}
+            alt="White Mantis Logo"
+            width={145}
+            height={60}
+            unoptimized
+          />
+        </Link>
+
+        <button
+          className={`${styles.IconBtn} ${pathname === "/cart" ? styles.active : ""}`}
+          onClick={() => (isCartOpen ? closeCart() : openCart())}
+          style={{ cursor: "pointer" }}
+        >
+          <div className={styles.CartIconWrapper}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.8 12.8C13.2243 12.8 13.6313 12.9686 13.9314 13.2686C14.2314 13.5687 14.4 13.9757 14.4 14.4C14.4 14.8243 14.2314 15.2313 13.9314 15.5314C13.6313 15.8314 13.2243 16 12.8 16C12.3757 16 11.9687 15.8314 11.6686 15.5314C11.3686 15.2313 11.2 14.8243 11.2 14.4C11.2 13.512 11.912 12.8 12.8 12.8ZM0 0H2.616L3.368 1.6H15.2C15.4122 1.6 15.6157 1.68429 15.7657 1.83431C15.9157 1.98434 16 2.18783 16 2.4C16 2.536 15.96 2.672 15.904 2.8L13.04 7.976C12.768 8.464 12.24 8.8 11.64 8.8H5.68L4.96 10.104L4.936 10.2C4.936 10.253 4.95707 10.3039 4.99458 10.3414C5.03209 10.3789 5.08296 10.4 5.136 10.4H14.4V12H4.8C4.37565 12 3.96869 11.8314 3.66863 11.5314C3.36857 11.2313 3.2 10.8243 3.2 10.4C3.2 10.12 3.272 9.856 3.392 9.632L4.48 7.672L1.6 1.6H0V0ZM4.8 12.8C5.22435 12.8 5.63131 12.9686 5.93137 13.2686C6.23143 13.5687 6.4 13.9757 6.4 14.4C6.4 14.8243 6.23143 15.2313 5.93137 15.5314C5.63131 15.8314 5.22435 16 4.8 16C4.37565 16 3.96869 15.8314 3.66863 15.5314C3.36857 15.2313 3.2 14.8243 3.2 14.4C3.2 13.512 3.912 12.8 4.8 12.8ZM12 7.2L14.224 3.2H4.112L6 7.2H12Z"
+                fill="#6C7A5F"
+              />
+            </svg>
+
+            {Array.isArray(items) && items.length > 0 && (
+              <span className={styles.CartBadge}>{items.length}</span>
+            )}
+          </div>
+        </button>
+      </div>
+
+      {open && (
+        <div className={styles.MenuWrapper} style={{ top: navbarHeight }}>
+          <div className={styles.MenuContainer} ref={menuRef}>
+            {" "}
+            {/* Attached ref here */}
+            {/* <div className={styles.MenuHeader}>
+              <Link href="/" onClick={() => setOpen(false)}>
+                <Image
+                  src={Logo}
+                  alt="White Mantis Logo"
+                  width={145}
+                  height={60}
+                  unoptimized
+                />
+              </Link>
+
+              <button
+                className={styles.IconBtn}
+                onClick={() => {
+                  setOpen(false);
+                  openCart();
+                }}
+              ></button>
+            </div> */}
+            <div className={styles.MenuContent}>
+              <div className={styles.Section}>
+                <button
+                  className={styles.SectionHeader}
+                  onClick={() => setShopOpen(!shopOpen)}
+                >
+                  Shop
+                  <svg
+                    className={shopOpen ? styles.Rotate : ""}
+                    width="13"
+                    height="7"
+                    viewBox="0 0 13 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6.0625 6.75L12.1247 0H0.000322342L6.0625 6.75Z"
+                      fill="#2F362A"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  className={`${styles.DropdownWrapper} ${shopOpen ? styles.DropdownWrapperOpen : ""}`}
+                >
+                  <div className={styles.DropdownInner}>
+                    <div className={styles.Line}></div>
+                    <div className={styles.TwoCol}>
+                      <div className={styles.Columnvee}>
+                        {categories.map((category) => (
+                          <Link
+                            key={category.id}
+                            href={`/shop/${category.slug}`}
+                            onClick={() => setOpen(false)}
+                            className={styles.subLinks}
+                          >
+                            <p>{category.title}</p>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.Line}></div>
+              <Link
+                className={styles.SectionHeader}
+                href="/about-us"
+                onClick={() => setOpen(false)}
+              >
+                About Us
+              </Link>
+              <div className={styles.Line}></div>
+              <Link className={styles.SectionHeader} href="/academy">
+                Academy
+              </Link>
+              <div className={styles.Line}></div>
+              <Link
+                className={styles.SectionHeader}
+                href="/subscription"
+                onClick={() => setOpen(false)}
+              >
+                Subscription
+              </Link>
+              <div className={styles.Line}></div>
+              <Link
+                className={styles.SectionHeader}
+                href="/wholesale"
+                onClick={() => setOpen(false)}
+              >
+                Wholesale
+              </Link>
+              <div className={styles.Line}></div>
+              <Link
+                className={styles.SectionHeader}
+                href="/contact"
+                onClick={() => setOpen(false)}
+              >
+                Contact us
+              </Link>
+              <div className={styles.Line}></div>
+              <Link className={styles.SectionHeader} href="/blogs">
+                Blogs
+              </Link>
+              <div className={styles.Line}></div>
+
+              {session ? (
+                <div className={styles.Section}>
+                  <button
+                    className={styles.SectionHeader}
+                    onClick={() => setAccountOpen(!accountOpen)}
+                  >
+                    Account
+                    <svg
+                      className={accountOpen ? styles.Rotate : ""}
+                      width="13"
+                      height="7"
+                      viewBox="0 0 13 7"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.0625 6.75L12.1247 0H0.000322342L6.0625 6.75Z"
+                        fill="#2F362A"
+                      />
+                    </svg>
+                  </button>
+
+                  <div
+                    className={`${styles.DropdownWrapper} ${accountOpen ? styles.DropdownWrapperOpen : ""}`}
+                  >
+                    <div className={styles.DropdownInner}>
+                      <div className={styles.Line}></div>
+                      <div className={styles.Column}>
+                        <Link
+                          href="/account/profile"
+                          onClick={() => setOpen(false)}
+                          className={styles.subLinks}
+                        >
+                          Profile
+                        </Link>
+                        <Link
+                          href="/account/orders"
+                          onClick={() => setOpen(false)}
+                          className={styles.subLinks}
+                        >
+                          Orders
+                        </Link>
+                        <Link
+                          href="/account/subscription"
+                          onClick={() => setOpen(false)}
+                          className={styles.subLinks}
+                        >
+                          Manage Subscription
+                        </Link>
+                        <Link
+                          href="/account/wishlist"
+                          onClick={() => setOpen(false)}
+                          className={styles.subLinks}
+                        >
+                          Wishlist
+                        </Link>
+                        <Link
+                          href="/account/whitemantis-beans"
+                          onClick={() => setOpen(false)}
+                          className={styles.subLinks}
+                        >
+                          White Mantis Beans
+                        </Link>
+                        <button
+                          className={styles.LogoutLink}
+                          onClick={() => {
+                            setOpen(false);
+                            setShowLogout(true);
+                          }}
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  className={styles.SectionHeader}
+                  href="/auth"
+                  onClick={() => setOpen(false)}
+                >
+                  Login/SignUp
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+      {showLogout && (
+        <div
+          className={styles.LogoutOverlay}
+          onClick={() => setShowLogout(false)}
+        >
+          <div
+            className={styles.LogoutPopup}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2>ARE YOU SURE YOU WANT TO LOGOUT?</h2>
+            <p>
+              You can always sign back in to access your specialty coffee
+              profile.
+            </p>
+
+            <div className={styles.LogoutActions}>
+              <button
+                className={styles.CancelBtn}
+                onClick={() => setShowLogout(false)}
+              >
+                Cancel
+              </button>
+
+              <button className={styles.ConfirmBtn} onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default NavbarMobile;

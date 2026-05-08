@@ -1,0 +1,257 @@
+.Main {
+  width: 100%;
+  height: 100svh;
+  background-color: #ffffff;
+}
+
+.MainContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.LeftContainer {
+  width: 55%;
+  background: url("./1.png") no-repeat center / cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 125px;
+  padding-bottom: 124px;
+}
+
+.LeftContainer h4 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--white-color);
+  text-transform: uppercase;
+}
+
+.LeftContainer p {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  color: var(--white-color);
+  max-width: 460px;
+}
+
+.RightContainer {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.FormWrapper {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.LogoBox img {
+  width: 38px;
+  height: auto;
+}
+
+.Header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.Header h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--heads-color);
+}
+
+.Header p {
+  font-family: var(--lato);
+  font-size: var(--fs-14);
+  color: var(--body-color);
+}
+
+.Fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.errorMessage {
+  font-family: var(--lato);
+  font-size: var(--fs-13);
+  font-weight: var(--lato-font-weight);
+  color: var(--red-color);
+  padding: 8px 12px;
+  background-color: var(--white-color);
+  border-left: 3px solid var(--red-color);
+}
+
+.Fields input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid var(--line-color);
+  padding: 12px 14px;
+  font-family: var(--lato);
+  font-size: var(--fs-14);
+  color: var(--heads-color);
+}
+
+.Fields input::placeholder {
+  color: var(--body-color);
+}
+
+.Fields input:focus {
+  outline: none;
+  background-color: var(--background);
+  border-radius: 0 !important;
+  border: 1px solid #6C7A5F;
+}
+
+.PhoneRow {
+  display: flex;
+  gap: 8px;
+}
+
+.FlagBox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 0 10px;
+}
+
+.FlagBox img {
+  width: 20px;
+  height: auto;
+}
+
+.FlagBox span {
+  font-family: var(--lato);
+  font-size: var(--fs-14);
+  color: var(--heads-color);
+}
+
+.SelectWrapper {
+  position: relative;
+}
+
+.CustomSelectTrigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  cursor: pointer;
+  user-select: none;
+  padding: 12px 14px;
+  font-family: var(--lato);
+  font-size: var(--fs-14);
+  color: var(--body-color);
+  border: 1px solid var(--line-color);
+  background-color: var(--white-color);
+}
+
+.CustomSelectTrigger.hasValue {
+  color: var(--body-color);
+}
+
+.CustomOptionsList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--white-color);
+  border: 1px solid var(--line-color);
+  border-top: none;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.CustomOptionsList:hover {
+  background-color: #F1F2EF;
+  color: var(--heads-color);
+}
+
+.OptionItem {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: var(--fs-14);
+  color: var(--heads-color);
+  transition: background 0.2s;
+  background: var(--white-color);
+}
+
+.OptionItem:hover {
+  background-color: #F1F2EF;
+}
+
+.DropArrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.25s ease;
+  pointer-events: none;
+  z-index: 1001;
+  /* Ensure it stays above the custom select trigger but below the options if they overlap */
+}
+
+.Rotate {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.PrimaryBtn {
+  height: 44px;
+  background-color: var(--primary-color);
+  border: none;
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  font-weight: 500;
+  color: var(--white-color);
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+@media (max-width: 1024px) {
+  .MainContainer {
+    flex-direction: column;
+  }
+
+  .LeftContainer {
+    width: 100%;
+    height: 380px;
+    padding: 0;
+  }
+
+  .LeftContainer h4,
+  .LeftContainer p {
+    display: none;
+  }
+
+  .RightContainer {
+    width: 100%;
+    padding: 24px;
+    align-items: flex-start;
+  }
+
+  .FormWrapper {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .RightContainer {
+    padding-top: 120px;
+    padding-bottom: 50px;
+  }
+
+  .Main {
+    height: 120svh;
+  }
+}

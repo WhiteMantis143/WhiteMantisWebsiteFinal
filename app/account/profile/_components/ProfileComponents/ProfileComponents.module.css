@@ -1,0 +1,1056 @@
+.main {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  padding-left: clamp(24px,
+      calc(24px + (226 * ((100vw - 320px) / 1120))),
+      50px);
+  padding-bottom: 100px;
+  background-color: #ffffff;
+}
+
+.MainContainer {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  width: 100%;
+  gap: clamp(32px, calc(32px + (28 * ((100vw - 320px) / 1120))), 60px);
+  max-width: 501px;
+}
+
+.Top {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(24px, calc(24px + (16 * ((100vw - 320px) / 1120))), 40px);
+}
+
+.TopLeft {
+  display: flex;
+  justify-content: left;
+}
+
+.TopLeft img {
+  width: 100%;
+  height: 100%;
+  max-width: 230px;
+  max-height: 230px;
+  border-radius: 50%;
+}
+
+/* image */
+.TopRight {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.UploadPicButton,
+.RemovePicButton {
+  display: flex;
+  justify-content: left;
+}
+
+.pfbtn {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  width: 230px;
+  padding: 13px 2px;
+  border: none;
+  cursor: pointer;
+  background-color: #6c7a5f;
+}
+
+.pfrembtn {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 500;
+  color: #6e736a;
+  width: 230px;
+  padding: 13px 2px;
+  border: 1px solid #6c7a5f;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.Bottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 50px;
+}
+
+/* .Field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e2e4df;
+  padding: 14px 16px;
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #6e736a;
+}
+
+.Field input,
+.Field select {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: var(--lato);
+  font-size: 14px;
+  background: transparent;
+  color: #6e736a;
+}
+
+.Field input:enabled,
+.Field select:enabled {
+  color: #2f362a;
+}
+
+.Field input:disabled,
+.Field select:disabled {
+  color: #6e736a;
+  -webkit-text-fill-color: #6e736a;
+  opacity: 1;
+}
+
+.Field span {
+  cursor: pointer;
+  margin-left: 12px;
+  color: #6c7a5f;
+} */
+.Field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #6e736a;
+  padding: 14px 16px;
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #6e736a;
+  background-color: #fff;
+  position: relative;
+  /* Essential for the dropdown list */
+}
+
+.Field:focus-within {
+  border: 1px solid var(--heads-color);
+}
+
+
+
+
+
+.PhonePrefix {
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #6e736a;
+  white-space: nowrap;
+  margin-right: 6px;
+  user-select: none;
+}
+
+.Field input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+  color: #6e736a;
+}
+
+.Field input:enabled {
+  color: #2f362a;
+}
+
+
+/* .Field input:focus{
+  outline:none
+} */
+
+
+
+.floatField {
+  position: relative;
+  width: 100%;
+}
+
+.floatField input {
+  width: 100%;
+  padding: 19px 22px;
+}
+
+.floatField label {
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #6a6c73;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.floatField label span {
+  color: red;
+}
+
+/* Disappears when typing */
+.floatField input:not(:placeholder-shown) + label {
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+/* --- Custom Gender Dropdown --- */
+.CustomSelectTrigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+  border-color: #2f362a4d;
+  
+}
+
+.Arrow {
+  font-size: 10px;
+  transition: transform 0.2s ease;
+  color: #6c7a5f;
+}
+
+.Rotate {
+  transform: rotate(180deg);
+}
+
+.OptionItem {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6e736a;
+  transition: background 0.2s;
+}
+
+.OptionItem:hover {
+  background-color: #f8f9f7;
+  color: #2f362a;
+}
+
+.Row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+}
+
+.Popup .Row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+
+.Name1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.divide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: -1px;
+}
+
+.SelectContainer {
+  position: relative;
+  width: 100%;
+}
+
+.Field,
+.SelectContainer {
+  /* Whichever div wraps both the Trigger and the List */
+  position: relative;
+}
+
+.CustomOptionsList {
+  position: absolute;
+  top: calc(100% + 14px);
+  /* Moves it exactly below the Field padding */
+  left: -16px;
+  /* Counteracts the Field padding to align with border */
+  width: calc(100% + 32px);
+  /* Makes it flush with the outer Field border */
+  background: #ffffff;
+  border: 1px solid #e2e4df;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.OptionItem {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6e736a;
+  transition: background 0.2s;
+  background: #ffffff;
+}
+
+.OptionItem:hover {
+  background-color: #F1F2EF;
+  color: #2f362a;
+}
+
+.ErrorText {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: 5px;
+  font-family: var(--lato);
+  font-weight: 500;
+}
+
+/* .ActionRow {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.SaveBtn {
+  background-color: #6c7a5f;
+  color: #ffffff;
+  border: none;
+  padding: 12px 26px;
+  font-family: var(--lato);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.CancelBtn {
+  background-color: #ffffff;
+  color: #6c7a5f;
+  border: 1px solid #6c7a5f;
+  padding: 12px 26px;
+  font-family: var(--lato);
+  font-size: 14px;
+  cursor: pointer;
+} */
+
+.ActionRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.SaveBtn {
+  background: #6c7a5f;
+  color: #ffffff;
+  border: none;
+  padding: 12px 26px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.CancelBtn {
+  background: #ffffff;
+  color: #6c7a5f;
+  border: 1px solid #6c7a5f;
+  padding: 12px 26px;
+  cursor: pointer;
+}
+
+/* --- Misc --- */
+.VerifyBtn {
+  cursor: pointer;
+  margin-left: 12px;
+  color: #6c7a5f;
+  text-decoration: underline;
+}
+
+.ErrorText {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* --- Grid Rows --- */
+.Name1,
+.Row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  /* Adjust if you want a gap between first/last name */
+}
+
+.AddressSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.AddressText .Label {
+  color: #2f362a;
+  font-family: var(--lato);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.AddressText hr {
+  background-color: #2f362a4d;
+  height: 1px;
+  border: 1px;
+  opacity: 1;
+}
+
+.AddressText {
+  width: 100%;
+}
+
+.AddressText .Name {
+  color: #6e736a;
+  font-family: var(--lato);
+  font-weight: 400;
+  font-size: 15px;
+  width: 100%;
+}
+
+.AddressText .Head {
+  color: #2f362a;
+  font-family: var(--lato);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.AddressSection p {
+  font-family: var(--lato);
+  font-size: 15px;
+  margin: 0px;
+  font-weight: 400;
+  color: #2f362a;
+}
+
+.GuestNote {
+  font-family: var(--lato);
+  font-size: 15px;
+  margin-bottom: 40px;
+  font-weight: 400;
+  color: #2f362a;
+}
+
+.other {
+  font-family: var(--lato);
+  font-size: 15px;
+  margin: 0px;
+  font-weight: 400;
+  color: #2f362a;
+}
+
+.AddressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AddressHeader h4 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+}
+
+.AddressHeader button {
+  border: none;
+  background: #ffffff;
+  padding: 8px 10px;
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #6c7a5f;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.AddressCard {
+  border: 1px solid #2f362a4d;
+  padding: 16px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.AddressText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.AddressText hr {
+  border-color: rgba(47, 54, 42, 0.3);
+  width: 100%;
+}
+
+.AddressActions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* .other {
+  margin-top: 24px;
+} */
+
+.DeleteAccount {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.DeleteAccount h4 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+}
+
+.fixerOne,
+.fixerTwo {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.fixerOne p,
+.fixerTwo p {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 600;
+  color: #2f362a;
+}
+
+.DeleteAccount button {
+  width: fit-content;
+  padding: 12px 26px;
+  border: 1px solid #6c7a5f;
+  background: #ffffff;
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #6c7a5f;
+  cursor: pointer;
+}
+
+.DeleteAccount button:hover {
+  background-color: #6c7a5f;
+  color: #ffffff;
+}
+
+.PopupOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11000;
+  gap: 0;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.DeletePopupOverlay,
+.PopupOverlayDeleteAddress {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11000;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.Popup {
+  background: #ffffff;
+  width: 100%;
+  max-width: 564px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.NoAddressCard {
+  width: 100%;
+  /* text-align: center; */
+  padding: 10px 0;
+  /* border: 1px solid ; */
+  color: #6e736a;
+}
+
+.PopupDeleteAddress,
+.DeletePopup {
+  background: #ffffff;
+  width: 100%;
+  max-width: 450px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Popup h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+  margin-bottom: 28px;
+}
+
+.DeletePopup h3,
+.PopupDeleteAddress h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.Popup p {
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #6e736a;
+  margin: 0;
+}
+
+.Popup p[style*="color: red"] {
+  font-size: 12px;
+  line-height: 1.2;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  font-family: var(--lato);
+  display: block;
+}
+
+.Popup p[style*="margin-top"] {
+  margin-top: 6px !important;
+}
+
+.Popup>div+p[style*="color: red"] {
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+
+.DeletePopup p,
+.PopupDeleteAddress p {
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #6e736a;
+  text-align: center;
+  width: 90%;
+}
+
+.Popup input,
+.Popup select {
+  padding: 19px 22px;
+  border: 1px solid #6E736A;
+  font-family: var(--lato);
+  color: var(--heads-color);
+  opacity: 0.9;
+  font-size: 15px;
+  border-radius: 0px;
+}
+
+.Popup input:focus,
+.Popup select:focus {
+  border-radius: 0px;
+  outline: 0px solid var(--heads-color);
+  border: 1px solid var(--heads-color);
+}
+
+.Popup input::placeholder{
+  color: #C1C3C0;
+}
+
+.divide .floatField:nth-child(2) input {
+  /* your styles */
+  border-left: none;
+}
+
+.PopupActions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+  margin-top: 32px;
+}
+
+.DeletePopupActions,
+.PopupActionsDeleteAddress {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-top: 32px;
+  border-radius: 0px;
+}
+
+.PopupActions button {
+  padding: 13.5px 6px;
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 235px;
+}
+
+.DeletePopupActions button,
+.PopupActionsDeleteAddress button {
+  padding: 13px 48px;
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+
+  /* width: 235px; */
+}
+
+.PersonalInfoSection h4 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+}
+
+.PersonalInfoSection .AddressHeader {
+  margin-bottom: 24px;
+}
+
+.DeleteDanger,
+.Danger {
+  background: #6c7a5f;
+  color: #ffffff;
+  border: none;
+}
+
+.DeleteAddressSaveBtn {
+  background: #6c7a5f;
+  color: #ffffff;
+  border: none;
+}
+
+.DeleteAddressCancelBtn {
+  background: #ffffff;
+  color: #6c7a5f;
+  border: 1px solid #6c7a5f;
+}
+
+.PopupActions .Danger {
+  background: #6c7a5f;
+  color: #ffffff;
+  border: none;
+}
+
+.CheckRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #6e736a;
+  font-weight: 400;
+  padding-top: 32px;
+}
+
+/* ── Name (first + last) grid ────────────────────────────────── */
+.Name1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ── OTP overlay ─────────────────────────────────────────────── */
+.styleOTP {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11000;
+}
+
+.main1 {
+  position: relative;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  gap: 24px;
+  width: 564px;
+  align-items: center;
+  border: 1px solid #e2e4df;
+}
+
+.main11 {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+}
+
+.div1 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.div1 h2 {
+  font-family: var(--lexend);
+  color: #2f362a;
+  font-weight: 500;
+  font-size: 22px;
+}
+
+.div1 p {
+  font-family: var(--lato);
+  font-weight: 400;
+  font-size: 15px;
+  color: #6e736a;
+}
+
+.div2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+}
+
+.div2 .input {
+  border: 1px solid #2f362a4d;
+  width: 60px;
+  height: 60px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.div3 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.buttons {
+  padding: 13px 155px;
+  background-color: #6c7a5f;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-family: var(--lato);
+  font-size: 15px;
+}
+
+.txt p {
+  color: #6e736a;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: var(--lato);
+}
+
+.txt a {
+  color: rgba(47, 54, 42, 0.3);
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.NoAddressCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.NoAddressP {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.NoAddressP p {
+  color: var(--primary-color);
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .main {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+
+  .TopLeft img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .Top {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .TopRight {
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .pfbtn,
+  .pfrembtn {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .Row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+  }
+
+  .Row2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+  }
+
+  .Row2 input,
+  .Row2 select {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .divide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    width: 100%;
+  }
+
+  .divide input {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .Name1 {
+    grid-template-columns: 1fr;
+  }
+
+  .PersonalInfoSection h4 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .other {
+    margin-top: 0px;
+    font-size: 14px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .fixerOne p,
+  .fixerTwo p {
+    font-size: 14px;
+  }
+
+  .AddressHeader {
+    flex-direction: column;
+    gap: 0px;
+    justify-content: flex-start;
+    align-items: baseline;
+  }
+
+  .AddressHeader h4 {
+    font-size: 20px;
+  }
+
+  .DeleteAccount {
+    gap: 16px;
+  }
+
+  .DeleteAccount h4 {
+    font-size: 20px;
+  }
+
+  .DeleteAccount button {
+    font-size: 14px;
+  }
+
+  .main1 {
+    width: 90vw;
+    padding: 24px 16px;
+  }
+
+  .buttons {
+    padding: 13px 40px;
+  }
+
+  .DeletePopupOverlay {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1440px) {
+  .main {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 100px;
+  }
+
+  .TopLeft img {
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  .pfbtn,
+  .pfrembtn {
+    width: 100%;
+    padding: 10px 10px;
+    font-size: 14px;
+  }
+
+  .Row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+  }
+}

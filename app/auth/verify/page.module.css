@@ -1,0 +1,395 @@
+.Main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-right: clamp(24px,
+      calc(24px + (122 * ((100vw - 320px) / 1120))),
+      146px);
+
+  height: 100svh;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.MainCoantiner {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  gap: clamp(30px, calc(30px + (120 * ((100vw - 320px) / 1120))), 150px);
+}
+
+.LeftCoantiner {
+  display: flex;
+  justify-content: end;
+  background: url("./1.png") no-repeat;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: clamp(24px,
+      calc(24px + (101 * ((100vw - 320px) / 1120))),
+      125px);
+
+  object-position: cover;
+  object-position: center;
+  height: 960px;
+  background-size: cover;
+  width: 62.5%;
+  max-width: clamp(400px,
+      calc(400px + (800 * ((100vw - 320px) / 1120))),
+      1200px);
+
+  height: 100%;
+  padding-bottom: clamp(40px,
+      calc(40px + (84 * ((100vw - 320px) / 1120))),
+      124px);
+}
+
+.LeftCoantiner h4 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--white-color);
+  text-transform: uppercase;
+}
+
+.LeftCoantiner p {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  font-weight: var(--lato-font-weight);
+  color: var(--white-color);
+  max-width: 455px;
+}
+
+.RightCoantiner {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.RightTop {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: clamp(28px, calc(28px + (12 * ((100vw - 320px) / 1120))), 40px);
+}
+
+.RightTopOne {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* 1. Define the box size here */
+.RightTopOneTop {
+  width: 44px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* Keeps things clean */
+}
+
+/* 2. The image just follows the box */
+.RightTopOneTop img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Use 'contain' for icons/logos so they don't crop */
+  display: block;
+}
+
+.RightTopOneBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.RightTopOneBottomTop {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.RightTopOneBottomTop h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--heads-color);
+}
+
+.RightTopOneBottomTop p {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  font-weight: var(--lato-font-weight);
+  color: var(--body-color);
+  max-width: 405px;
+}
+
+.RightTopOneBottomBottom {
+  display: flex;
+  justify-content: left;
+}
+
+.inputemail {
+  width: 100%;
+  height: 48px;
+  max-width: 420px;
+  border: 1px solid #2f362a4d;
+  padding: 19px 20px;
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #6e736a;
+}
+
+.RightTopTwo {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.RightTopTwo p {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  font-weight: var(--lato-font-weight);
+  color: var(--body-color);
+}
+
+.Tnc {
+  text-decoration: underline;
+}
+
+.ctacontinue {
+  width: 100%;
+  max-width: 420px;
+  height: 44px;
+  background-color: var(--primary-color);
+  border: none;
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  font-weight: 500;
+  padding: 13px 20px;
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+.RightBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.RightBottomOne {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--line-color);
+}
+
+.textor p {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  font-weight: var(--lato-font-weight);
+  white-space: nowrap;
+  color: var(--body-color);
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  border: 1px solid var(--line-color);
+  background-color: var(--white-color);
+  padding: 16px 26px;
+  cursor: pointer;
+}
+
+.OtpTextRow {
+  display: flex;
+  align-items: end;
+  gap: 6px;
+}
+
+.OtpTextRow p {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  color: var(--body-color);
+  font-weight: var(--lato-font-weight);
+  white-space: nowrap;
+}
+
+.EmailText {
+  font-weight: 500;
+  color: var(--heads-color);
+  text-decoration: underline;
+}
+
+.OtpInputs {
+  display: flex;
+  gap: 12px;
+  margin-top:12px;
+}
+
+.OtpInputs input {
+  width: 56px;
+  height: 56px;
+  border: 1px solid #C1C3C0;
+  text-align: center;
+  font-family: var(--lexend);
+  font-size: 18px;
+}
+
+.OtpInputs input:focus{
+  outline: 1px solid var(--heads-color);
+  border-radius: none;
+}
+
+.ResendText {
+  font-size: 14px;
+  color: #6e736a;
+}
+
+.ResendText span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.errorMessage {
+  font-family: var(--lato);
+  font-size: 13px;
+  font-weight: var(--lato-font-weight);
+  color: var(--red-color);
+  padding: 8px 12px;
+  background-color: #FFEBEE;
+  border-left: 3px solid var(--red-color);
+  border-radius: 2px;
+  max-width: 420px;
+  margin-top: 8px;
+}
+
+.infoMessage {
+  font-family: var(--lato);
+  font-size: 13px;
+  font-weight: var(--lato-font-weight);
+  color: var(--green-color);
+  padding: 8px 12px;
+  background-color: var(--white-color);
+  border-left: 3px solid var(--green-color);
+  border-radius: 2px;
+  max-width: 420px;
+  margin-top: 8px;
+}
+
+@media (max-width: 1024px) {
+  .Main {
+    height: 100svh;
+    padding-right: 0px;
+  }
+
+  .MainCoantiner {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .LeftCoantiner {
+    width: 100% ;
+    max-width: 100%;
+    height: 400px;
+    background-position: center;
+  }
+
+  .LeftCoantiner p {
+    display: none;
+  }
+
+  .LeftCoantiner h4 {
+    display: none;
+  }
+
+  .RightCoantiner {
+    width: 100%;
+    gap: 80px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 100px;
+  }
+
+  .RightTop {
+    gap: 28px;
+  }
+
+  .RightTopOneBottomTop h3 {
+    font-size: 20px;
+  }
+
+  .inputemail {
+    max-width: 100%;
+  }
+
+  .ctacontinue {
+    max-width: 50%;
+  }
+
+  .RightTopOne {
+    gap: 22px;
+  }
+
+  .RightTopOneTop img {
+    max-width: 44px;
+    max-height: 48px;
+  }
+
+  .RightTopOneBottomTop {
+    gap: 4px;
+  }
+
+  .RightTopOneBottomTop p,
+  .RightTopTwo p,
+  .textor p {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .RightBottom {
+    gap: 32px;
+  }
+
+  .OtpInputs {
+    margin: 0px;
+
+  }
+
+  .errorMessage,
+  .infoMessage {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .LeftCoantiner {
+    max-width: 600px;
+    height: 100vh;
+  }
+
+  .RightCoantiner {
+    padding-top: 100px;
+  }
+}

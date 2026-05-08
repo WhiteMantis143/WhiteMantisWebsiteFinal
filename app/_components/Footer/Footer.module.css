@@ -1,0 +1,563 @@
+/* ============================================================
+   Footer.module.css
+
+   QUICK REFERENCE:
+   - Background color        → .Main (background-color)
+   - Page side padding       → --fp (custom property, change once)
+   - Gap between top columns → .NavColumns (gap)
+   - Middle section gap      → .MidRow (gap)
+   - Nav link size           → .NavCol p (font-size)
+   - Mid heading size        → .MidHeading (font-size)
+   ============================================================ */
+
+/* ── shared side padding ── */
+.Main {
+  /* 1. DEFINE FLUID VARIABLES 
+     Top: 128px | Sides: 126px | Bottom: 42px
+  */
+  --pt: clamp(40px, 8vw, 128px);
+  /* Fluid Top Padding */
+  --px: clamp(20px, 7vw, 126px);
+  /* Fluid Left/Right Padding */
+  --pb: clamp(24px, 4vw, 42px);
+  /* Fluid Bottom Padding */
+
+  /* 2. LAYOUT ENGINE */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* height: 100vh; */
+  box-sizing: border-box;
+
+  /* 3. APPLY FLUID SPACING (Top, Right, Bottom, Left) */
+  padding: var(--pt) var(--px) var(--pb) var(--px);
+
+  /* Gap between big sections */
+  gap: clamp(32px, 8vw, 125px);
+
+  /* 4. AESTHETICS */
+  background-color: #6c7a5f;
+  color: #ffffff;
+}
+
+/* all bare <p> tags inherit lato */
+.Main p {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* all <a> tags inherit color, no underline */
+.Main a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.Main a:hover {
+  text-decoration: underline;
+}
+
+
+/* ─────────────────────────────────────────
+   TOP ROW  —  brand info left, nav right
+───────────────────────────────────────── */
+.TopRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+/* ── Left: logo + name + address ── */
+.BrandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-shrink: 0;
+  /* max-width: 240px; */
+  width: 30%;
+}
+
+.LogoImage {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.BrandName {
+  font-family: var(--lexend);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+}
+
+.AddressBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+
+  /* THE FIX: Force it to take all available horizontal space */
+  width: 100%;
+  flex: 1 1 100%;
+}
+
+.AddressBlock p {
+  margin: 0;
+  width: 100%;
+  /* Ensures the long Dubai address doesn't squeeze */
+  white-space: normal;
+  line-height: 1.5;
+}
+
+.AddressLabel {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Phone + Email side by side */
+.ContactRow {
+  display: flex;
+  flex-direction: row;
+  /* Use a clamp for the gap so it doesn't break on small laptops */
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.ContactLabel {
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Ensures the individual Contact items don't shrink too much */
+.ContactRow>div {
+  flex: 0 1 auto;
+  min-width: fit-content;
+}
+
+/* ── Right: 4 nav columns ── */
+.NavColumns {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.LegalLinksMob {
+  display: none;
+}
+
+.NavCol {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.5vw, 20px);
+  min-width: 100px;
+}
+
+.NavCol p:hover {
+  text-decoration: underline;
+}
+
+/* Column headings: COMPANY, SHOP, etc. */
+.NavHeading {
+  font-family: var(--lexend);
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 4px 0;
+}
+
+/* Instagram external link arrow */
+.InstagramLink p {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+
+/* ─────────────────────────────────────────
+   MIDDLE ROW  —  3 equal columns
+   ↓ Change gap to adjust spacing between panels
+───────────────────────────────────────── */
+.MidRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  /* 1. THE OVERFLOW KILLER: Ensures padding/borders stay INSIDE the width */
+  box-sizing: border-box;
+
+  /* 2. FLUID WIDTH: Takes 92% but never exceeds the screen */
+  max-width: 100%;
+  margin: 0 auto;
+
+  /* 3. SMART GAP: Scales with screen, capped at 150px */
+  gap: clamp(20px, 8vw, 150px);
+
+  /* 4. PREVENT SIDEBAR LEAK: Stops children from pushing the container wide */
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────
+   COLUMN LOGIC
+───────────────────────────────────────── */
+.MidCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  /* Allows columns to shrink/grow equally */
+  flex: 1;
+  /* Prevents text from forcing a column to be wider than the others */
+  min-width: 0;
+}
+
+/* ─────────────────────────────────────────
+   TYPOGRAPHY
+───────────────────────────────────────── */
+.MidHeading {
+  font-family: var(--lexend);
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  word-wrap: break-word;
+}
+
+.AppButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.AppBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 190px;
+  height: 48px;
+  background: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.AppBtn:hover {
+  background-color: #ffffff;
+  color: #6c7a5f;
+}
+
+.AppBtn:hover .AppIcon {
+  filter: invert(48%) sepia(11%) saturate(1031%) hue-rotate(52deg) brightness(93%) contrast(83%);
+}
+
+.AppIcon {
+  flex-shrink: 0;
+  transition: filter 0.3s ease;
+}
+
+.AppBtnText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+
+.AppBtnSub {
+  font-family: var(--lato);
+  font-size: 11px;
+  /* Scaled down for standard app-button look */
+  color: inherit;
+  /* Inherits #6c7a5f on hover */
+}
+
+.AppBtnMain {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 600;
+  color: inherit;
+  /* Inherits #6c7a5f on hover */
+}
+
+/* ── Explore Rewards button ── */
+.RewardsBtn {
+  width: fit-content;
+  width: 190px;
+  height: 45px;
+  border: 1px solid #ffffff;
+  background: transparent;
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.RewardsBtn:hover {
+  background: #ffffff;
+  color: #6c7a5f;
+}
+
+/* ── Newsletter input + button ── */
+.NewsletterRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 100%;
+  /* Safety cap */
+  box-sizing: border-box;
+  align-items: stretch;
+}
+
+.NewsletterInput {
+  flex: 1;
+  /* Shorthand for grow, shrink, and basis */
+  width: 0;
+  /* THE TRICK: Forces flexbox to calculate width from 0 up */
+  min-width: 0;
+  /* Allows shrinking below default browser size */
+  padding: 10px 12px;
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  background: transparent;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.NewsletterInput::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.SubscribeBtn {
+  padding: 10px 20px;
+  border: 1px solid #ffffff;
+  border-left: none;
+  background: #ffffff;
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #6c7a5f;
+  cursor: pointer;
+  white-space: nowrap;
+  /* Added background-color and color to transition for smoothness */
+  transition: background-color 0.3s ease, color 0.3s ease, opacity 0.2s ease;
+}
+
+.SubscribeBtn:hover {
+  background-color: #6c7a5f;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-left: none;
+  opacity: 1;
+}
+
+.NewsletterSuccess {
+  font-family: var(--lato);
+  font-size: 13px;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.NewsletterError {
+  font-family: var(--lato);
+  font-size: 13px;
+  color: #ffcccc;
+}
+
+
+/* ─────────────────────────────────────────
+   BOTTOM BAR
+───────────────────────────────────────── */
+.BottomBar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.Divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.BottomRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.Copyright,
+.CraftedBy {
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.LegalLinks {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.LegalLinks p {
+  font-size: 14px;
+}
+
+.IM {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  .Main {
+    gap: 48px;
+  }
+
+  /* Stack brand + nav vertically */
+  .TopRow {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .BrandCol {
+    max-width: 100%;
+  }
+
+
+  /* Nav columns wrap into 2×2 grid on mobile */
+  .NavColumns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px;
+    row-gap: 60px;
+    justify-content: start;
+  }
+
+  /* Middle 3 cols → single column */
+  .MidRow {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .AppButtons {
+    flex-direction: row;
+  }
+
+  /* Bottom bar stacks on very small screens */
+  .BottomRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .LegalLinks {
+    gap: 20px;
+  }
+
+  .AddressBlock {
+    width: 300px;
+    margin-top: 24px;
+    /* Give it space from the heading above */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Force the <p> inside to use 100% of the screen */
+  .AddressBlock p {
+    width: 100%;
+    margin: 0;
+    line-height: 1.5;
+    font-size: 15px;
+    /* Adjust for mobile readability */
+  }
+
+  /* 2. Contact Row - Stack Phone and Email vertically */
+  .ContactRow {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Space between Phone and Email blocks */
+    width: 200px;
+    margin-top: 24px;
+  }
+
+  /* 3. Individual Contact Items - Ensure they don't shrink */
+  .ContactRow>div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .ContactLabel {
+    margin-bottom: 2px;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Ensure the link text (email/phone) wraps correctly if too long */
+  .ContactRow a p {
+    word-break: break-all;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .BottomRow {
+    display: flex;
+    flex-direction: row;
+    text-decoration: underline;
+  }
+
+  .LegalLinks {
+    display: none;
+  }
+
+  .LegalLinksMob {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .LegalLinksMob a {
+    color: inherit;
+  }
+
+  .LegalLinksMob p {
+    margin: 0;
+    /* Prevents default <p> margins from messing up your 50px gap */
+    font-size: 14px;
+    letter-spacing: 0.02em;
+  }
+}

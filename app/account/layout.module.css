@@ -1,0 +1,25 @@
+.shell {
+  display: flex;
+  padding-bottom: 100px;
+  padding-top: 150px;
+}
+
+.content {
+  flex: 1;
+  position: relative;
+}
+
+.sidebar {
+  position: sticky;
+  top: 150px;
+  align-self: flex-start;
+  height: fit-content;
+  z-index: 10;
+}
+
+@media (max-width: 640px) {
+  .shell {
+    padding-top: 110px;
+    padding-bottom: 20px
+  }
+}

@@ -1,0 +1,255 @@
+.MainConatiner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.Top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Top h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--heads-color);
+  text-transform: uppercase;
+}
+
+.formBox {
+  border: 1px solid #7a7a7a;
+}
+
+.formBox input,
+.formBox select,
+.formBox textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #7a7a7a;
+  padding: 18px 20px;
+  font-size: 15px;
+  font-family: var(--lato);
+  color: #6c7a5fb2;
+  font-weight: 400;
+  outline: none;
+}
+
+.formBox input::placeholder,
+.formBox textarea::placeholder,
+.formBox select {
+  color: #9aa08f;
+}
+
+/* nation wants to know  ^|^ */
+.row {
+  display: flex;
+}
+
+.row input {
+  width: 50%;
+}
+
+.row input:first-child {
+  border-right: 1px solid #7a7a7a;
+}
+
+.selectWrap::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid #9aa08f;
+  pointer-events: none;
+}
+
+.formBox select {
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.formBox textarea {
+  height: 160px;
+  resize: none;
+  border-bottom: none;
+}
+
+.Bottom {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  background-color: var(--white-color);
+  color: #7a7a7a;
+  padding: 13.5px 35px;
+  border: 1px solid;
+  font-size: var(--fs-16);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.formBox select {
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* .formBox select:focus {
+  background-color: #f7f8f5;
+  border-bottom-color: #2f362a;
+} */
+
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap.open::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.open::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Arrow */
+.selectWrap::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid #9aa08f;
+  pointer-events: none;
+
+  transition: transform 0.25s ease;
+}
+
+.CustomSelectTrigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+  padding: 18px 20px;
+  font-size: 15px;
+  font-family: var(--lato);
+  color: #9aa08f;
+  border-bottom: 1px solid #7a7a7a;
+}
+
+.CustomSelectTrigger.hasValue {
+  color: #6c7a5fb2;
+}
+
+.CustomOptionsList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #7a7a7a;
+  border-top: none;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.OptionItem {
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #6c7a5fb2;
+  transition: background 0.2s;
+  background: #ffffff;
+}
+
+.OptionItem:hover {
+  background-color: #f8f9f7;
+  color: #2f362a;
+}
+
+@media (max-width: 768px) {
+  .MainConatiner {
+    gap: 20px;
+  }
+
+  .Top h3 {
+    font-size: 18px;
+  }
+
+  .Top a img {
+    width: 24px;
+  }
+
+  .formBox input,
+  .formBox select,
+  .formBox textarea {
+    padding: 14px 12px;
+    font-size: 15px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .row input {
+    width: 100%;
+    border-right: none;
+  }
+
+  .formBox textarea {
+    height: 120px;
+  }
+
+  .selectWrap::after {
+    right: 12px;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Top h3 {
+    font-size: 16px;
+  }
+
+  .formBox input,
+  .formBox select,
+  .formBox textarea {
+    padding: 12px 10px;
+    font-size: 14px;
+  }
+
+  .formBox textarea {
+    height: 100px;
+  }
+
+  .btn {
+    padding: 10px 22px;
+    font-size: 14px;
+  }
+}

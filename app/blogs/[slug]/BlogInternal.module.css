@@ -1,0 +1,605 @@
+/* ============================================================
+   BlogInternal.module.css
+   
+   QUICK REFERENCE — things you'll likely want to tweak:
+   - Page left/right margin        → .Header, .ImageRow, .ContentWrapper (padding/margin-left)
+   - Image size                    → .FeaturedImageWrapper (width, height)
+   - Sidebar width                 → .RelatedSection (width)
+   - Article max width             → .ContentWrapper (max-width)
+   - Card thumbnail size           → .CardImageWrapper (width, height)
+   - Number of cards clamped lines → .CardTitle (-webkit-line-clamp)
+   ============================================================ */
+
+
+/* ─────────────────────────────────────────
+   PAGE WRAPPER
+   background + top padding to clear navbar
+───────────────────────────────────────── */
+.Main {
+  max-width: 100%;
+  margin: 0 auto;
+  padding-top: 50px;
+  /* clear fixed navbar height */
+  display: flex;
+  flex-direction: column;
+  background-color: #fdfdfb;
+}
+
+
+/* ─────────────────────────────────────────
+   SHOP NOW BUTTON (utility, used elsewhere)
+───────────────────────────────────────── */
+.ShopNow {
+  padding: 12px 32px;
+  background-color: var(--heads-color);
+  color: var(--white-color);
+  border: none;
+  font-family: var(--lexend);
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  text-transform: uppercase;
+  font-size: var(--lato-font-size);
+  letter-spacing: 1px;
+}
+
+.ShopNow:hover {
+  opacity: 0.9;
+}
+
+.Breadcrumb {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 126px;
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+  margin-top: 60px;
+}
+
+.Breadcrumb::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 126px;
+  /* start after space */
+  right: 126px;
+  /* end before space */
+  height: 1px;
+  background-color: var(--line-color);
+}
+
+.Breadcrumb a {
+  color: var(--body-color);
+  text-decoration: none;
+}
+
+.Breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* Last crumb (current page) is not a link — slightly muted */
+.Breadcrumb span:last-child {
+  color: var(--body-color);
+  opacity: 0.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  /* ← clamp long titles */
+}
+
+/* ─────────────────────────────────────────
+   HEADER  (title + date)
+   
+   ↓ Change padding-left to shift the left edge
+   ↓ Change padding-bottom to control gap before image
+───────────────────────────────────────── */
+.Header {
+  /* padding-top: 50px; */
+  /* padding-bottom: 50px; */
+  /* gap between date and image */
+  padding-left: 126px;
+  /* ← LEFT EDGE — keep in sync with .ImageRow and .ContentWrapper */
+  padding-right: 126px;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 250px;
+}
+
+/* Blog title inside header */
+.Header h1 {
+  font-family: var(--lexend);
+  font-weight: var(--lexend-heading-font-weight);
+  font-size: var(--lexend-heading-1-font-size);
+  color: #6c7a5f;
+  text-align: left;
+}
+
+/* Date below the title */
+.HeaderDate {
+  font-family: var(--lexend);
+  font-weight: var(--lexend-heading-font-weight);
+  font-size: var(--lexend-heading-2-font-size);
+  text-transform: uppercase;
+  display: block;
+  color: #6c7a5f;
+  text-align: left;
+}
+
+/* .Title used in the not-found fallback */
+.Title {
+  font-family: var(--lexend);
+  font-weight: var(--lexend-heading-font-weight);
+  font-size: var(--lexend-heading-1-font-size);
+  color: var(--white-color);
+  line-height: 1.2;
+  max-width: 65%;
+  text-transform: uppercase;
+}
+
+/* .Date is only used in the not-found fallback */
+.Date {
+  font-family: "Lexend", var(--lexend), sans-serif;
+  font-weight: var(--lexend-heading-font-weight);
+  font-size: var(--lexend-heading-2-font-size);
+  color: var(--white-color);
+  text-transform: uppercase;
+  font-style: normal;
+}
+
+
+/* ─────────────────────────────────────────
+   IMAGE ROW  (featured image + sidebar)
+   
+   ↓ Change padding-left to shift the left edge
+   ↓ Change gap to control space between image and sidebar
+───────────────────────────────────────── */
+.ImageRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: clamp(24px, 4vw, 48px);
+  /* Fluid gap */
+  padding-left: 126px;
+  /* Matches Header/Content */
+  width: 95%;
+  /* Increased from 85% to give both elements more room */
+  margin: 0 auto 0 0;
+}
+
+
+/* ─────────────────────────────────────────
+   FEATURED IMAGE
+   
+   ↓ Change width to resize the image (currently 80% of the row)
+   ↓ Change height to make it taller or shorter
+───────────────────────────────────────── */
+.FeaturedImageWrapper {
+  position: relative;
+  /* Use flex-grow: 1 to let it fill space, but limit its base size */
+  flex: 1 1 60%;
+  height: 450px;
+  overflow: hidden;
+  z-index: 10;
+
+}
+
+
+/* ─────────────────────────────────────────
+   LOADER
+───────────────────────────────────────── */
+.LoaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+
+/* ─────────────────────────────────────────
+   SIDEBAR — "Explore More Blogs"
+   
+   ↓ Change width to make the sidebar wider or narrower
+     (it takes whatever space remains after the image)
+───────────────────────────────────────── */
+.RelatedSection {
+
+  flex: 0 0 clamp(320px, 30%, 480px);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* "EXPLORE MORE BLOGS" heading */
+.SectionTitle {
+  font-family: var(--lexend);
+  font-weight: var(--lexend-heading-font-weight);
+  font-size: var(--lexend-heading-2-font-size);
+  color: var(--heads-color);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+
+/* ─────────────────────────────────────────
+   SIDEBAR CARD LIST
+───────────────────────────────────────── */
+.BlogGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding-right: clamp(0px, 4vw, 100px);
+}
+
+.BlogCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* Better visual center for small thumbs */
+  gap: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.BlogCard:hover {
+  opacity: 0.95;
+  transform: translateX(4px);
+}
+
+
+.CardImageWrapper {
+  position: relative;
+  width: 120px;
+  /* align-self: stretch; */
+  height: 115px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.CardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+  /* Critical for text truncation */
+}
+
+.CardFooter {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.ReadTime {
+  font-family: var(--lato);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--body-color);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+}
+
+.CardTitle {
+  font-family: var(--lato);
+  font-weight: 700;
+  font-size: var(--lato-font-size);
+  color: var(--heads-color);
+  line-height: 1.3;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.DateText {
+  font-family: var(--lato);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--body-color);
+  margin-top: 2px;
+  opacity: 0.7;
+}
+
+.Separator {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+  margin: 4px 0;
+  opacity: 0.5;
+}
+
+.ViewMoreBtn {
+  display: inline-block;
+  width: fit-content;
+  padding: 10px 28px;
+  border: 1px solid var(--line-color);
+  background: transparent;
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.ViewMoreBtn:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border-color: var(--primary-color);
+}
+
+/* ─────────────────────────────────────────
+   ARTICLE CONTENT  (RichText rendered below image)
+   
+   ↓ Change margin-left to align left edge with header/image
+   ↓ Change max-width to control readable line length
+───────────────────────────────────────── */
+.ContentWrapper {
+  margin-top: 48px;
+  /* ← GAP between image row and article */
+  margin-bottom: 80px;
+  margin-left: 126px;
+  /* ← LEFT EDGE — keep in sync with .Header and .ImageRow */
+  max-width: 750px;
+  /* ← MAX WIDTH of the article text column */
+}
+
+
+/* ─────────────────────────────────────────
+   READ MORE BUTTON (not-found fallback only)
+───────────────────────────────────────── */
+.ReadMoreBtn {
+  width: fit-content;
+  background: transparent;
+  font-family: var(--lato);
+  font-weight: 500;
+  font-size: var(--lato-font-size);
+  color: var(--body-color);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  text-decoration: none;
+}
+
+.ReadMoreBtn:hover {
+  text-decoration: underline;
+
+}
+
+.ReadMoreBtn svg {
+  transform: rotate(-45deg);
+  transition: transform 0.3s ease;
+  margin-left: 2px;
+}
+
+.ReadMoreBtn:hover svg {
+  transform: rotate(-90deg);
+}
+
+.RelatedSectionMobile {
+  display: none;
+}
+
+.minute {
+  font-size: 14px;
+  font-family: var(--lato);
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE  (≤ 768px)
+   Stack everything vertically, image goes full width,
+   sidebar becomes a horizontal scroll row of cards
+═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  .Header {
+    padding: 40px 20px 40px 20px;
+    gap: 12px;
+    min-height: unset;
+  }
+
+  .Main {
+    padding-top: 74px;
+  }
+
+  .Title {
+    font-size: 28px;
+    max-width: 90%;
+  }
+
+  .Header h1 {
+    font-family: var(--lexend);
+    font-weight: var(--lexend-heading-font-weight);
+    font-size: var(--lexend-heading-1-font-size);
+  }
+
+  .Date {
+    font-family: "Lexend", var(--lexend), sans-serif;
+    font-weight: var(--lexend-heading-font-weight);
+    font-size: 20px;
+    color: var(--white-color);
+    text-transform: uppercase;
+    font-style: normal;
+    display: block;
+  }
+
+  /* Stack image above sidebar */
+  .ImageRow {
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 32px;
+  }
+
+  /* Full width on mobile */
+  .FeaturedImageWrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    flex-shrink: unset;
+  }
+
+  /* Sidebar full width below image */
+  .RelatedSection {
+    width: 100%;
+    flex: unset;
+    gap: 20px;
+    display: none;
+  }
+
+  .SectionTitle {
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  /* Cards become a horizontal snap-scroll row on mobile */
+  .BlogGrid {
+    flex-direction: row;
+    gap: 0px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .BlogGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .BlogCard {
+    flex: 0 0 100%;
+    flex-direction: column;
+    scroll-snap-align: center;
+    width: 100%;
+
+  }
+
+  .CardImageWrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    flex-shrink: unset;
+    margin-bottom: 12px;
+  }
+
+  .CardContent {
+
+    gap: 0px;
+  }
+
+  /* Article full width on mobile */
+  .ContentWrapper {
+    margin: 32px 20px 60px 20px;
+    max-width: 100%;
+  }
+
+  .ViewMoreBtn {
+    align-self: flex-start;
+  }
+
+
+  /* full mobile */
+  .RelatedSectionMobile {
+    width: 100%;
+    flex: unset;
+    gap: 20px;
+    display: block;
+  }
+
+  .SectionTitleMobile {
+    font-size: var(--lexend-heading-2-font-size);
+    color: var(--primary-color);
+    padding-left: 20px;
+    font-family: var(--lexend);
+  }
+
+  .BlogGridMobile {
+    display: flex;
+    /* MUST be flex */
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* Prevents cards from jumping to next line */
+    gap: 16px;
+    /* Space between cards */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 10px 20px 20px 20px;
+    /* Side padding allows first/last card to breathe */
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .BlogGridMobile::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 2. Fix the Card size for the scroller */
+  .BlogGridMobile .BlogCard {
+    flex: 0 0 80%;
+    /* Forces card to be 80% wide, creating the scroll */
+    min-width: 260px;
+    align-items: flex-start;
+    scroll-snap-align: center;
+    flex-direction: column;
+    /* Stack image on top of text */
+    display: flex;
+    gap: 0px;
+  }
+
+  /* 3. Fix the Image wrapper for the scroller */
+  .BlogGridMobile .CardImageWrapper {
+    width: 100%;
+    height: 180px;
+    /* Fixed height for the thumbnail in the scroller */
+    flex-shrink: 0;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  /* 4. Fix the Content area */
+  .BlogGridMobile .CardContent {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .Breadcrumb {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 26px;
+    font-family: var(--lato);
+    font-size: var(--lato-font-size);
+    color: var(--body-color);
+    margin-top: 0px;
+  }
+
+  .Breadcrumb::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 26px;
+    /* start after space */
+    right: 26px;
+    /* end before space */
+    height: 1px;
+    background-color: var(--line-color);
+  }
+}

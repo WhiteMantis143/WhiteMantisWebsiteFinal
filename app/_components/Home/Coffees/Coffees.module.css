@@ -1,0 +1,377 @@
+.Main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0px clamp(0px, calc(24px + (-24 * ((100vw - 320px) / 1120))), 24px)
+    0px clamp(24px, calc(24px + (101 * ((100vw - 320px) / 1120))), 125px);
+  /* padding: clamp(80px, calc(80px + (80 * ((100vw - 320px) / 1120))), 160px)
+    clamp(0px, calc(24px + (-24 * ((100vw - 320px) / 1120))), 24px)
+    clamp(80px, calc(80px + (80 * ((100vw - 320px) / 1120))), 160px)
+    clamp(24px, calc(24px + (101 * ((100vw - 320px) / 1120))), 125px); */
+
+  background-color: #ffffff;
+}
+
+.MainContainer {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: clamp(44px, calc(44px + (63 * ((100vw - 320px) / 1120))), 107px);
+
+  flex-direction: row;
+}
+
+.Left {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  height: 100%;
+  gap: clamp(24px, calc(24px + (97 * ((100vw - 320px) / 1120))), 121px);
+}
+
+.LeftTop {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 12px;
+  /* max-width: 307px; */
+}
+
+.LeftTop h3 {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: var(--lexend-heading-font-weight);
+  color: var(--heads-color);
+  text-transform: uppercase;
+}
+
+.LeftTop p {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  color: var(--body-color);
+  font-weight: var(--lato-font-weight);
+}
+
+.LeftBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.LeftBottom svg {
+  width: 100%;
+  max-width: 46px;
+  cursor: pointer;
+  height: 100%;
+  max-height: 46px;
+}
+
+.Right {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 40px;
+  padding-right: 40px;
+}
+
+.Card {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.NameAndPriceContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.NameAndPriceContainer .price {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  color: var(--heads-color);
+  font-weight: var(--lato-font-weight);
+}
+
+.Card:hover img {
+  /* cursor: pointer; */
+  /* border: 1px solid #2f362a; */
+  transform: scale(1.05);
+}
+
+.ProductImage {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 8/7;
+  background-color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  padding: 50px 80px;
+  background-color: #F1F2EF;
+}
+
+.ProductImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.2s ease-in-out;
+}
+
+.CardTop {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  position: relative;
+}
+
+.LinkSvg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.CardBottom {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.CardBottom h3 {
+  font-size: var(--fs-15);
+  font-family: var(--lato);
+  color: var(--heads-color);
+  font-weight: var(--lato-font-weight);
+}
+
+.CardBottom p {
+  font-size: var(--fs-15);
+  font-family: var(--lato);
+  color: var(--body-color);
+  font-weight: var(--lato-font-weight);
+}
+
+.Embla {
+  overflow: hidden;
+}
+
+.EmblaContainer {
+  display: flex;
+  gap: 40px;
+}
+
+.EmblaSlide {
+  flex: 0 0 auto;
+  width: 31%;
+}
+
+.MobileArrows {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .Main {
+    padding: 0px 24px;
+  }
+
+  .MainContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 44px;
+  }
+
+  .Left {
+    gap: 24px;
+  }
+
+  .LeftTop {
+    max-width: 100%;
+  }
+
+  .LeftBottom {
+    display: none;
+  }
+
+  .MobileArrows {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .MobileArrows svg {
+    max-width: 25px;
+    max-height: 25px;
+    cursor: pointer;
+  }
+
+  .Right {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .Embla {
+    width: 100%;
+  }
+
+  .EmblaContainer {
+    gap: 24px;
+  }
+
+  .EmblaSlide {
+    flex: 0 0 85%;
+  }
+
+  .ProdImge img {
+    max-width: 100%;
+    max-height: none;
+  }
+
+  .LeftBottom svg {
+    max-width: 25px;
+    max-height: 25px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 940px) {
+  .Main {
+    padding-left: 40px;
+    padding-right: 40px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .MainContainer {
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+    gap: 0px;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .Left {
+    width: 260px;
+    z-index: 10; /* Keep text on top just in case */
+    background: white; /* Ensures cards don't show 'under' the text */
+  }
+
+  .Right {
+    width: 100%;
+    min-width: 0;
+
+    position: relative;
+  }
+
+  .Embla {
+    overflow: hidden;
+
+    margin-right: -100px;
+    padding-right: 100px;
+  }
+
+  .EmblaContainer {
+    display: flex;
+    gap: 32px;
+
+    padding-right: 120px;
+  }
+
+  .EmblaSlide {
+    flex: 0 0 280px;
+    width: 280px;
+  }
+
+  .ProductImage {
+    /* FLUID FIX: Be 100% of the parent, but never larger than 320px */
+    width: 100%;
+    /* max-width: 320px; */
+    /* height: 300px; */
+    padding: 30px 40px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white-color);
+    overflow: visible;
+    flex: 0 0 auto;
+  }
+
+  .ProductImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.18));
+  }
+
+  .Card {
+    width: 100%;
+    max-width: 320px;
+    min-width: 170px;
+    box-sizing: border-box;
+  }
+
+  .LinkSvg {
+    right: 0px;
+    top: 0px;
+    position: absolute;
+  }
+
+  .LinkSvg svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (min-width: 941px) and (max-width: 1440px) {
+  .EmblaSlide,
+  .CarouselItem,
+  .Right {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .ProductImage {
+    aspect-ratio: 8/7;
+    width: auto;
+    box-sizing: border-box !important;
+    padding: 40px 60px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #f8f8f8;
+
+    overflow: visible;
+    flex: 0 1 auto !important;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .ProductImage img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+    filter: drop-shadow(12px 12px 20px rgba(0, 0, 0, 0.2));
+  }
+
+  .LinkSvg {
+    right: 15px;
+    top: 15px;
+    position: absolute;
+    z-index: 10;
+  }
+}
