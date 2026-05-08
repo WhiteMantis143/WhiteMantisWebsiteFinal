@@ -93,6 +93,8 @@
   align-items: center;
   justify-content: space-between;
   min-height: 32px;
+  cursor: pointer;
+  width: 100%;
 }
 
 .question {

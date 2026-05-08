@@ -7,6 +7,14 @@ import one from "./1.png";
 import axiosClient from "@/lib/axios";
 
 const Enquires = () => {
+  const MAX_LENGTHS = {
+  businessName: 60,
+  contactName: 40,
+  location: 120,
+  branch: 50,
+  website: 150,
+  message: 500,
+};
   const [formData, setFormData] = useState({
     businessName: "",
     contactName: "",
@@ -23,10 +31,50 @@ const Enquires = () => {
   const [responseMessage, setResponseMessage] = useState("");
   const [responseError, setResponseError] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  // phone validation (numbers only)
+if (name === "phone") {
+
+  // allow only numbers and one "+" at start
+  const cleanedValue = value.replace(/[^\d+]/g, "");
+
+  // prevent multiple "+"
+  if (
+    cleanedValue.indexOf("+") > 0 ||
+    (cleanedValue.match(/\+/g) || []).length > 1
+  ) {
+    return;
+  }
+
+  if (cleanedValue.length <= 15) {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: cleanedValue,
+    }));
+  }
+
+  return;
+}
+
+  // character limit validation
+  if (MAX_LENGTHS[name]) {
+    if (value.length <= MAX_LENGTHS[name]) {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+
+    return;
+  }
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
 
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
@@ -59,7 +107,26 @@ const Enquires = () => {
       setResponseMessage("Please fill in all required fields.");
       return;
     }
+// email validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+if (!emailRegex.test(formData.email)) {
+  setResponseError(true);
+  setResponseMessage("Please enter a valid email address.");
+  return;
+}
+
+// phone validation
+if (
+  formData.phone.replace(/\D/g, "").length < 10,
+  formData.phone.replace(/\D/g, "").length > 14
+) {
+  setResponseError(true);
+  setResponseMessage(
+    "Phone number must be between 10 and 14 digits."
+  );
+  return;
+}
     setLoading(true);
 
     try {
@@ -148,6 +215,7 @@ const Enquires = () => {
                   type="text"
                   name="businessName"
                   placeholder="Business Name*"
+                  maxLength={60}
                   value={formData.businessName}
                   onChange={handleChange}
                   suppressHydrationWarning
@@ -158,6 +226,7 @@ const Enquires = () => {
                   <input
                     type="text"
                     name="contactName"
+                    maxLength={40}
                     placeholder="Contact Name*"
                     value={formData.contactName}
                     onChange={handleChange}
@@ -180,7 +249,9 @@ const Enquires = () => {
                   name="phone"
                   placeholder="Phone number*"
                   value={formData.phone}
+                  inputMode="numeric"
                   onChange={handleChange}
+                  maxLength={15}
                   suppressHydrationWarning
                   required
                 />
@@ -190,6 +261,7 @@ const Enquires = () => {
                   placeholder="Business location*"
                   value={formData.location}
                   onChange={handleChange}
+                  maxLength={120}
                   suppressHydrationWarning
                   required
                 />
@@ -198,6 +270,7 @@ const Enquires = () => {
                   name="branch"
                   placeholder="Branch (if any)"
                   value={formData.branch}
+                  maxLength={50}
                   onChange={handleChange}
                   suppressHydrationWarning
                 />
@@ -207,6 +280,7 @@ const Enquires = () => {
                   placeholder="Website/Instagram"
                   value={formData.website}
                   onChange={handleChange}
+                  maxLength={150}
                 />
 
                 <div className={styles.CheckboxBlock}>
@@ -266,6 +340,7 @@ const Enquires = () => {
                   placeholder="Tell us a bit more about your business and how can we help you."
                   rows={4}
                   className={styles.Textarea}
+                  maxLength={500}
                   value={formData.message}
                   onChange={handleChange}
                 />

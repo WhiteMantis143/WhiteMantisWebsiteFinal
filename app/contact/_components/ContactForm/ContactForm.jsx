@@ -6,10 +6,14 @@ import Image from "next/image";
 import one from "./1.png";
 import whatsappIcon from "./Whatsapp-icon.svg";
 import Link from "next/link";
-import { validateEmail, validateUAEPhone } from "@/utils/validatorFunctions";
+import { validateUAEPhone } from "@/utils/validatorFunctions";
 import axiosClient from "@/lib/axios";
 
 const ContactForm = () => {
+  const MAX_LENGTHS = {
+  fullName: 50,
+  message: 500,
+};
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -19,6 +23,40 @@ const ContactForm = () => {
   const [responseMessage, setResponseMessage] = useState("");
   const [responseError, setResponseError] = useState(false);
   const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const handleFullNameChange = (e) => {
+  const value = e.target.value;
+
+  if (value.length <= MAX_LENGTHS.fullName) {
+    setFullName(value);
+  }
+};
+
+const handleMessageChange = (e) => {
+  const value = e.target.value;
+
+  if (value.length <= MAX_LENGTHS.message) {
+    setMessage(value);
+  }
+};
+
+const handlePhoneChange = (e) => {
+  const value = e.target.value;
+
+  // allow only numbers and one "+" at start
+  const cleanedValue = value.replace(/[^\d+]/g, "");
+
+  // prevent multiple "+"
+  if (
+    cleanedValue.indexOf("+") > 0 ||
+    (cleanedValue.match(/\+/g) || []).length > 1
+  ) {
+    return;
+  }
+
+  if (cleanedValue.length <= 15) {
+    setPhone(cleanedValue);
+  }
+};
   const enquiryRef = useRef(null);
 
   // --- Click Outside logic for Dropdown ---
@@ -70,13 +108,15 @@ const ContactForm = () => {
       return;
     }
 
-    if (validateEmail(email.trim())) {
-      setResponseError(true);
-      setResponseMessage("Please enter a valid email address.");
-      return;
-    }
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (validateUAEPhone(phone.trim())) {
+if (!emailRegex.test(email.trim())) {
+  setResponseError(true);
+  setResponseMessage("Please enter a valid email address.");
+  return;
+}
+
+    if (!validateUAEPhone(phone.trim())) {
       setResponseError(true);
       setResponseMessage("Please enter a valid UAE phone number.");
       return;
@@ -156,7 +196,8 @@ const ContactForm = () => {
                   type="text"
                   placeholder="Full Name"
                   value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
+                  maxLength={50}
+                  onChange={handleFullNameChange}
                 />
 
                 <div className={testStyles.row}>
@@ -170,7 +211,9 @@ const ContactForm = () => {
                     type="text"
                     placeholder="Phone"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={handlePhoneChange}
+                    inputMode="numeric"
+maxLength={15}
                   />
                 </div>
 
@@ -209,7 +252,8 @@ const ContactForm = () => {
                 <textarea
                   placeholder="Write your message here."
                   value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                   onChange={handleMessageChange}
+  maxLength={500}
                 />
               </div>
 

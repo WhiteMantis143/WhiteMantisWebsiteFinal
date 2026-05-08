@@ -120,21 +120,18 @@ export default function FaqSection() {
                   </div>
 
                   <div className={styles.content}>
-                    <div className={styles.top}>
-                      <button
-                        className={styles.question}
-                        onClick={() => toggle(i)}
-                      >
-                        <span className={styles.qtext}>{item.q}</span>
-                      </button>
+                 <div
+  className={styles.top}
+  onClick={() => toggle(i)}
+>
+  <div className={styles.question}>
+    <span className={styles.qtext}>{item.q}</span>
+  </div>
 
-                      <button
-                        className={styles.iconBtn}
-                        onClick={() => toggle(i)}
-                      >
-                        {isOpen ? <MinusIcon /> : <PlusIcon />}
-                      </button>
-                    </div>
+  <div className={styles.iconBtn}>
+    {isOpen ? <MinusIcon /> : <PlusIcon />}
+  </div>
+</div>
 
                     <div
                       className={`${styles.answer} ${isOpen ? styles.open : ""}`}
