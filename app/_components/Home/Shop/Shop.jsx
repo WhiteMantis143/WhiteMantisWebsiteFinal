@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Shop.module.css";
 import Image from "next/image";
-import one from "./11new.jpg"
-import two from "./22new.jpg";
+import one from "./11.png"
+import two from "./22.png";
 import three from "./3.png";
 import Link from "next/link";
 
