@@ -264,6 +264,7 @@ heading .olive .heading {
   gap: 24px; /* Adds nice spacing between image, text, and button */
   width: 100%;
   text-align: center;
+  margin-top: 50px;
 }
 
 .zeroStateP {
@@ -284,6 +285,7 @@ heading .olive .heading {
 }
 
 .zeroStateButton {
+  margin-top: 8px;
   background-color: var(--white);
   border: 1px solid var(--primary-color);
   padding: 14px 34px;

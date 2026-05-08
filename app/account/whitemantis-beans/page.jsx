@@ -139,7 +139,7 @@ const WhiteMantisBeans = () => {
                                     src={beansZero}
                                     alt="No products"
                                     width={170}
-                                    height={190}
+                                    height={170}
                                 />
 
 

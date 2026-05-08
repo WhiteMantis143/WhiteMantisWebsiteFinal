@@ -4,7 +4,7 @@ import Image from "next/image";
 import AddToCart from "@/app/_components/AddToCart";
 import Wishlist from "@/app/_components/Whishlist";
 import BuyNowPopup from "./BuyNowPopup/BuyNowPopup";
-import prodZero from "./BuyNowPopup/prodZero.png";
+import prodZero from "./BuyNowPopup/prodZero.gif";
 const ProductGrid = ({
   filteredProducts,
   visibleCount,
@@ -120,9 +120,9 @@ const ProductGrid = ({
         {filteredProducts.length === 0 ? (
           /* --- ZERO STATE OUTSIDE GRID --- */
           <div className={styles.NoProducts}>
-            <Image src={prodZero} alt="No products" width={140} height={150} />
+            <Image src={prodZero} alt="No products" width={150} height={150} />
             <div className={styles.NoProductsP}>
-              <p style={{ color: "black" }}>Nothing brewing here</p>
+              <p style={{ color: "black", fontFamily: "var(--lexend)" }}>Nothing brewing here</p>
               <p>Refine or clear filters to explore available selections.</p>
             </div>
             <button className={styles.zeroButton} onClick={resetFilters}>

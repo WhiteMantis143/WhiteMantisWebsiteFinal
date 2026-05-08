@@ -334,9 +334,9 @@ export default function OrdersPage() {
         ) : (
           <div
             className={styles.EmptyOrdersState}
-            style={{ marginTop: "10px" }}
+            style={{ marginTop: "50px" }}
           >
-            <Image src={orderZero} alt="No products" width={160} height={210} unoptimized={true}/>
+            <Image src={orderZero} alt="No products" width={200} height={225} unoptimized={true}/>
             {debouncedSearch ||
             (filters.status && filters.status !== "All") ||
             filters.time ? (

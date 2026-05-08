@@ -103,7 +103,16 @@ function CreateProfileContent() {
   return (
     <div className={styles.Main}>
       <div className={styles.MainContainer}>
-        <div className={styles.LeftContainer}>
+       <div className={styles.LeftContainer}>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className={styles.BgVideo}
+          >
+            <source src="/videos/loginVid.mp4" type="video/mp4" />
+          </video>
           <h4>PURE CRAFT. UNCOMPROMISING QUALITY.</h4>
           <p>
             Dedicated to the master transformation of green coffee into

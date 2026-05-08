@@ -75,7 +75,11 @@ const NavbarMobile = ({ categories: initialCategories }) => {
         <button
           ref={toggleBtnRef}
           className={styles.IconBtn}
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            const next = !open;
+            setOpen(next);
+            if (next) closeCart();
+          }}
         >
           {open ? (
             <svg

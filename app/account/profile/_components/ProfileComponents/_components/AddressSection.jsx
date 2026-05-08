@@ -92,7 +92,7 @@ const AddressSection = ({ addresses, onAddNew, onEdit, onDeleteRequest }) => {
             src={AddressZero}
             alt="No products"
             width={200}
-            height={190 }
+            height={205}
           />
           <div className={styles.NoAddressP}>
             <p style={{color:"black",marginTop:"10px"}}>No Saved Addresses yet</p>

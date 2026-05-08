@@ -1,15 +1,22 @@
 "use client";
 import React from "react";
+import Image from "next/image"; // 1. Import the Next.js Image component
 import styles from "./Landing.module.css";
+import bgImage from "./AboutUs.png"
 
 const Landing = () => {
   return (
     <>
       <div className={styles.Main}>
-        <video className={styles.Video} autoPlay muted loop playsInline
-        >
-          <source src="/videos/yuviabout.mp4" type="video/mp4" />
-        </video>
+        <Image
+          src={bgImage}
+          alt="Landing Background"
+          placeholder="blur" // Optional: adds a blurred loading effect
+          quality={100}
+          fill // Makes the image fill the parent container
+          className={styles.BackgroundImage}
+          priority // Tells Next.js to load this image immediately (LCP)
+        />
 
         <div className={styles.Overlay}>
           <div className={styles.Content}>

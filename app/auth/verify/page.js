@@ -163,7 +163,16 @@ function Otp() {
   return (
     <div className={styles.Main}>
       <div className={styles.MainCoantiner}>
-        <div className={styles.LeftCoantiner}>
+<div className={styles.LeftCoantiner}>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className={styles.BgVideo}
+          >
+            <source src="/videos/loginVid.mp4" type="video/mp4" />
+          </video>
           <h4>Pure Craft. Uncompromising Quality.</h4>
           <p>
             Dedicated to the master transformation of green coffee into

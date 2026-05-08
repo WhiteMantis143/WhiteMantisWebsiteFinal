@@ -56,8 +56,9 @@
 }
 
 .orderMiddle {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
   padding: 30px 66.5px 0px 66.5px;
   border-top: 1px solid rgba(47, 54, 42, 0.3);
 }

@@ -43,7 +43,8 @@
   width: 100%;
   flex: 1;
   min-height: 0;
-  height: 100%; /* Keeps the container locked to the sidebar height */
+  height: 100%;
+  /* Keeps the container locked to the sidebar height */
   overflow: hidden;
 }
 
@@ -52,9 +53,12 @@
   flex-direction: column;
   gap: 32px;
   /* Update these lines: */
-  flex: 1; /* Take up all available space */
-  overflow-y: auto; /* Enable scrolling */
-  min-height: 0; /* CRITICAL: Allows flex item to shrink smaller than content */
+  flex: 1;
+  /* Take up all available space */
+  overflow-y: auto;
+  /* Enable scrolling */
+  min-height: 0;
+  /* CRITICAL: Allows flex item to shrink smaller than content */
   overscroll-behavior: contain;
   padding-right: 12px;
   border-bottom: 1px solid rgba(47, 54, 42, 0.3);
@@ -404,7 +408,7 @@
   }
 
   .Main {
-    padding: 30px 24px 0px 24px;
+    padding: 50px 24px 0px 24px;
     height: 100vh;
   }
 
@@ -554,6 +558,8 @@
   text-align: center;
   padding: 80px 20px;
   gap: 8px;
+  position: relative;
+  top: 130px;
 }
 
 .EmptyState h4 {

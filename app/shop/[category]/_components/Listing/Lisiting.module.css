@@ -593,8 +593,10 @@
   font-family: var(--lato);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 32px;
   align-items: center;
+  position: relative;
+  top: 75px;
 }
 
 .NoProductsP {

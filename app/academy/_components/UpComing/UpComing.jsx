@@ -292,7 +292,7 @@ const UpComing = () => {
                   width={190}
                   height={180}
                 />
-                <p style={{marginTop:"20px"}}> No Upcoming Courses available </p>
+                <p style={{marginTop:"8px"}}> No Upcoming Courses available </p>
                 
                 <p
                   style={{

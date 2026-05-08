@@ -247,7 +247,7 @@
 
 .NoWorkShopButton {
   padding: 13.5px 33.5px;
-  margin-top: 20px;
+  margin-top: 32px;
   color: var(--primary-color);
   font-family: var(--lato);
   font-size: var(--lato-font-size);
@@ -266,8 +266,8 @@
   width: 100%;
   text-align: center;
   padding: 60px;
-  fontFamily: var(--lato);
-  fontWeight: var(--lato-font-weight);
+  font-family: var(--lato);
+  font-weight: var(--lato-font-weight);
   color: var(--heads-color);
   display: flex;
   flex-direction: column;

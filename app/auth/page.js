@@ -206,11 +206,22 @@ function AuthPageContent() {
       <div className={styles.Main}>
         <div className={styles.MainCoantiner}>
           <div className={styles.LeftCoantiner}>
-            <h4>Pure Craft. Uncompromising Quality.</h4>
-            <p>
-              Dedicated to the master transformation of green coffee into
-              world-class specialty beans for you
-            </p>
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className={styles.BgVideo}
+            >
+              <source src="/videos/loginVid.mp4" type="video/mp4" />
+            </video>
+            <div className="styles.text1">
+              <h4>Pure Craft. Uncompromising Quality.</h4>
+              <p>
+                Dedicated to the master transformation of green coffee into
+                world-class specialty beans for you
+              </p>
+            </div>
           </div>
           <div className={styles.RightCoantiner}>
             <form onSubmit={handleContinue} className={styles.RightTop}>

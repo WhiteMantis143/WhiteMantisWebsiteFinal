@@ -140,6 +140,7 @@
   font-family: var(--lato);
   font-size: 14px;
   color: #2f362a;
+  outline:none;
 }
 
 .Form input::placeholder,

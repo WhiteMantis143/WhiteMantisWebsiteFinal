@@ -25,26 +25,31 @@
 .LeftCoantiner {
   display: flex;
   justify-content: end;
-  background: url("./1.png") no-repeat;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
   gap: 4px;
   padding-left: clamp(24px,
       calc(24px + (101 * ((100vw - 320px) / 1120))),
       125px);
-
-  object-position: cover;
-  object-position: center;
-  height: 960px;
-  background-size: cover;
   width: 62.5%;
   max-width: clamp(400px,
       calc(400px + (800 * ((100vw - 320px) / 1120))),
       1200px);
-
   height: 100%;
   padding-bottom: clamp(40px,
       calc(40px + (84 * ((100vw - 320px) / 1120))),
       124px);
+}
+
+.BgVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
 .LeftCoantiner h4 {
@@ -53,6 +58,8 @@
   font-weight: var(--lexend-heading-font-weight);
   color: var(--white-color);
   text-transform: uppercase;
+  position: relative;
+  z-index: 1;
 }
 
 .LeftCoantiner p {
@@ -61,6 +68,8 @@
   font-weight: var(--lato-font-weight);
   color: var(--white-color);
   max-width: 455px;
+  position: relative;
+  z-index: 1;
 }
 
 .RightCoantiner {
