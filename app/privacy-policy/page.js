@@ -1,5 +1,22 @@
 import styles from "./PrivacyPolicy.module.css";
 
+export const metadata = {
+  title: "Privacy Policy | White Mantis",
+  description: "Read the White Mantis Roastery privacy policy. Learn how we collect, use, and protect your personal data when you use our website, app, and services.",
+  openGraph: {
+    title: "Privacy Policy | White Mantis",
+    description: "Read the White Mantis Roastery privacy policy. Learn how we collect, use, and protect your personal data when you use our website, app, and services.",
+    images: [{ url: "/social-thumbnail.png", width: 1200, height: 630, alt: "White Mantis Privacy Policy" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | White Mantis",
+    description: "Read the White Mantis Roastery privacy policy. Learn how we collect, use, and protect your personal data when you use our website, app, and services.",
+    images: ["/social-thumbnail.png"],
+  },
+};
+
 const PrivacyPolicy = () => {
   return (
     <div className={styles.mainPage}>

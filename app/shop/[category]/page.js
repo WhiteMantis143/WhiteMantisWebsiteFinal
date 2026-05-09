@@ -1,3 +1,28 @@
+export async function generateMetadata({ params }) {
+  const { category } = await params;
+  const formattedTitle = category
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  return {
+    title: `${formattedTitle} | White Mantis`,
+    description: `Shop ${formattedTitle} from White Mantis — premium specialty coffee products roasted in Dubai, delivered across the UAE.`,
+    openGraph: {
+      title: `${formattedTitle} | White Mantis`,
+      description: `Shop ${formattedTitle} from White Mantis — premium specialty coffee products roasted in Dubai, delivered across the UAE.`,
+      images: [{ url: "/social-thumbnail.png", width: 1200, height: 630, alt: `White Mantis ${formattedTitle}` }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${formattedTitle} | White Mantis`,
+      description: `Shop ${formattedTitle} from White Mantis — premium specialty coffee products roasted in Dubai, delivered across the UAE.`,
+      images: ["/social-thumbnail.png"],
+    },
+  };
+}
+
 import { notFound } from "next/navigation";
 import Listing from "./_components/Listing/Listing";
 import NavigationStrip from "./_components/NavigationStrip/NavigationStrip";

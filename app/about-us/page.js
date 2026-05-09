@@ -1,4 +1,21 @@
 import styles from "./About.module.css";
+
+export const metadata = {
+  title: "About Us | White Mantis",
+  description: "Discover the story behind White Mantis Roastery — a specialty coffee roastery born in Dubai, built on craft, community, and an unwavering passion for exceptional coffee.",
+  openGraph: {
+    title: "About Us | White Mantis",
+    description: "Discover the story behind White Mantis Roastery — a specialty coffee roastery born in Dubai, built on craft, community, and an unwavering passion for exceptional coffee.",
+    images: [{ url: "/social-thumbnail.png", width: 1200, height: 630, alt: "About White Mantis Roastery" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | White Mantis",
+    description: "Discover the story behind White Mantis Roastery — a specialty coffee roastery born in Dubai, built on craft, community, and an unwavering passion for exceptional coffee.",
+    images: ["/social-thumbnail.png"],
+  },
+};
 import Landing from "./_components/Landing/Landing";
 import OurPhilosophy from "./_components/OurPhilosophy/OurPhilosophy";
 import Recognitions from "./_components/Recognitions/Recognitions";

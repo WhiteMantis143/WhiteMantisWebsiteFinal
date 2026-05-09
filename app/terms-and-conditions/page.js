@@ -1,5 +1,22 @@
 import styles from "./terms.module.css";
 
+export const metadata = {
+  title: "Terms & Conditions | White Mantis",
+  description: "Review the terms and conditions that govern your use of White Mantis Roastery's website, mobile application, and digital services.",
+  openGraph: {
+    title: "Terms & Conditions | White Mantis",
+    description: "Review the terms and conditions that govern your use of White Mantis Roastery's website, mobile application, and digital services.",
+    images: [{ url: "/social-thumbnail.png", width: 1200, height: 630, alt: "White Mantis Terms & Conditions" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms & Conditions | White Mantis",
+    description: "Review the terms and conditions that govern your use of White Mantis Roastery's website, mobile application, and digital services.",
+    images: ["/social-thumbnail.png"],
+  },
+};
+
 const TermsAndConditions = () => {
   return (
     <div className={styles.mainPage}>
