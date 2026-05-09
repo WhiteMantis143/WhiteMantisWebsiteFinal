@@ -126,16 +126,22 @@ const ProductMain = ({ product }) => {
           ScrollTrigger.create({
             trigger: containerRef.current,
             start: () => `center center-=${10}`,
-            end: () => `+=${window.innerHeight / 2}`,
+            end: () => `+=${window.innerHeight * 2}`,
             pin: true,
             pinSpacing: true,
+            anticipatePin: 1,
             // markers: true,
             onEnter: () => {
               tl.progress(1).reverse();
             },
-            // onEnterBack: () => {
-            //   tl.progress(0).play();
-            // },
+            onEnterBack: () => {
+              // Re-entering from below (scroll up past end): ensure details are visible
+              tl.progress(0);
+            },
+            onLeave: () => {
+              // Past section going down: snap to final state if animation didn't finish
+              tl.progress(0);
+            },
             onLeaveBack: () => {
               tl.progress(0).play();
             },

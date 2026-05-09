@@ -513,23 +513,39 @@
   .DetailsRight .detailItem:nth-child(3) {
     transform: none;
   }
-  .DetailsLeft,
-  .DetailsRight {
+  .DetailsLeft {
     width: 100%;
     align-items: center;
     text-align: center;
     gap: 32px;
   }
+   .DetailsRight {
+     width: 100%;
+    align-items:flex-end;
+    text-align: end;
+    gap: 32px;
+    align-self: flex-end;
+    justify-content: right;
+    display: flex;
+   }
 
-  .DetailsLeft div,
-  .DetailsRight div {
+  .DetailsLeft div {
     align-items: center;
+  }
+
+  .DetailsRight .detailItem {
+    align-items: flex-end;
   }
 
   .detailDesc,
   .detailTitle {
     width: 100%;
     text-align: left;
+  }
+
+  .DetailsRight .detailTitle,
+  .DetailsRight .detailDesc {
+    text-align: right;
   }
   .DetailsCenter {
     display: none;
