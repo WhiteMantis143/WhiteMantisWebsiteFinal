@@ -28,7 +28,7 @@ export const metadata = {
   title: "White Mantis — Specialty Coffee Roastery, Dubai",
   description: "White Mantis is a specialty coffee roastery based in Dubai, crafting premium coffee beans, drips, capsules, and subscriptions for coffee lovers across the UAE.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon_.ico",
   },
   openGraph: {
     title: "White Mantis — Specialty Coffee Roastery, Dubai",
