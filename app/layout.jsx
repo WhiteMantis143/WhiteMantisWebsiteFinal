@@ -25,27 +25,27 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL("https://www.whitemantis.ae"),
-  title: "White Mantis — Specialty Coffee Roastery, Dubai",
+  title: "White Mantis | Specialty Coffee Roastery, Dubai",
   description: "White Mantis is a specialty coffee roastery based in Dubai, crafting premium coffee beans, drips, capsules, and subscriptions for coffee lovers across the UAE.",
   icons: {
     icon: "/favicon_.ico",
   },
   openGraph: {
-    title: "White Mantis — Specialty Coffee Roastery, Dubai",
+    title: "White Mantis | Specialty Coffee Roastery, Dubai",
     description: "White Mantis is a specialty coffee roastery based in Dubai, crafting premium coffee beans, drips, capsules, and subscriptions for coffee lovers across the UAE.",
     images: [
       {
         url: "/social-thumbnail.png",
         width: 1200,
         height: 630,
-        alt: "White Mantis — Specialty Coffee Roastery, Dubai",
+        alt: "White Mantis | Specialty Coffee Roastery, Dubai",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "White Mantis — Specialty Coffee Roastery, Dubai",
+    title: "White Mantis | Specialty Coffee Roastery, Dubai",
     description: "White Mantis is a specialty coffee roastery based in Dubai, crafting premium coffee beans, drips, capsules, and subscriptions for coffee lovers across the UAE.",
     images: ["/social-thumbnail.png"],
   },
