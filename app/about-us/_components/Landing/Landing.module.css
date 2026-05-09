@@ -64,7 +64,9 @@
   flex-direction: column;
   gap: 12px;
 }
-
+.mobBackgroundImage{
+  display: none;
+}
 .BottomText h4 {
   font-size: var(--fs-22);
   color: var(--white-color);
@@ -149,9 +151,15 @@
   .Content {
     padding-left: 24px;
   }
+  .BackgroundImage{
+    display: none;
+  }
   .Main {
     padding-top: 47px;
     padding-bottom: 30px;
     height: 88vh;
+  }
+  .mobBackgroundImage{
+    display: block;
   }
 }

@@ -50,7 +50,7 @@ export default async function ShopCategoryPage({ params }) {
 
   return (
     <>
-      <Landing />
+      <Landing category={category} />
       {/* <NavigationStrip /> */}
       <Listing />
     </>

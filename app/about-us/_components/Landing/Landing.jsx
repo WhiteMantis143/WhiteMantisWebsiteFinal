@@ -2,7 +2,8 @@
 import React from "react";
 import Image from "next/image"; // 1. Import the Next.js Image component
 import styles from "./Landing.module.css";
-import bgImage from "./AboutUs.png"
+import bgImage from "./AboutUs.webp"
+import mob from './AboutUsMob.png'
 
 const Landing = () => {
   return (
@@ -15,6 +16,15 @@ const Landing = () => {
           quality={100}
           fill // Makes the image fill the parent container
           className={styles.BackgroundImage}
+          priority // Tells Next.js to load this image immediately (LCP)
+        />
+         <Image
+          src={mob}
+          alt="Landing Background"
+          placeholder="blur" // Optional: adds a blurred loading effect
+          quality={100}
+          fill // Makes the image fill the parent container
+          className={styles.mobBackgroundImage}
           priority // Tells Next.js to load this image immediately (LCP)
         />
 
