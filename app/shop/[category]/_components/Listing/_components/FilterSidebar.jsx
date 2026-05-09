@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 const FilterSidebar = ({
   subCategoriesData,
@@ -7,46 +7,41 @@ const FilterSidebar = ({
   styles,
 }) => {
 
-  // ── Top-level open state: only one top-level open at a time ──
   const [openMenus, setOpenMenus] = useState({});
-
-  // ── Nested open state: only one nested open at a time ──
   const [openNested, setOpenNested] = useState({});
+
+  // Refs to measure exact content height for smooth animation
+  const topRefs = useRef({});
+  const nestedRefs = useRef({});
 
   const toggleMenu = (id, isNested = false) => {
     if (isNested) {
-      // close other nested siblings, leave top-level untouched
       setOpenNested((prev) => ({ [id]: !prev[id] }));
     } else {
-      // close other top-level siblings + reset all nested
       setOpenMenus((prev) => ({ [id]: !prev[id] }));
       setOpenNested({});
     }
   };
 
-  // Helper to count selected items under a parent
+  // Returns inline maxHeight for the AnimatedBox — exact scrollHeight when open, 0 when closed
+  const getMaxHeight = (id, isOpen, refsMap) => {
+    if (!isOpen) return "0px";
+    const el = refsMap.current[id];
+    return el ? el.scrollHeight + "px" : "500px";
+  };
+
   const getSelectedCountForParent = (item) => {
     let count = 0;
     const stack = [item];
-
     while (stack.length > 0) {
       const current = stack.pop();
-
-      if (selectedSubCatIds.includes(current.id)) {
-        count++;
-      }
-      if (current.level2 && Array.isArray(current.level2)) {
-        stack.push(...current.level2);
-      }
-      if (current.level3 && Array.isArray(current.level3)) {
-        stack.push(...current.level3);
-      }
+      if (selectedSubCatIds.includes(current.id)) count++;
+      if (current.level2 && Array.isArray(current.level2)) stack.push(...current.level2);
+      if (current.level3 && Array.isArray(current.level3)) stack.push(...current.level3);
     }
-
     return count;
   };
 
-  // Recursive renderer for nested children — uses openNested state
   function renderCategoriesRecursive(levels) {
     if (!levels || !Array.isArray(levels) || levels.length === 0) return null;
 
@@ -64,14 +59,14 @@ const FilterSidebar = ({
           >
             <div
               className={styles.FilterHeader}
-              onClick={() => toggleMenu(item.id, true)}  // ← nested = true
+              onClick={() => toggleMenu(item.id, true)}
             >
               <h5 style={{ fontSize: "14px", color: "#6e736a" }}>
                 {item.name}{" "}
                 {getSelectedCountForParent(item) > 0 &&
                   `(${getSelectedCountForParent(item)})`}
               </h5>
-              {openNested[item.id] ? (  // ← uses openNested
+              {openNested[item.id] ? (
                 <span style={{ fontSize: "12px" }}>
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M-0.000177827 8.48503L3.77106 4.7138L-0.000178165 0.942561L0.942631 -0.000248161L4.71387 3.77099L8.4851 -0.000248161L9.42791 0.942561L5.65668 4.7138L9.42791 8.48503L8.4851 9.42784L4.71387 5.65661L0.942631 9.42784L-0.000177827 8.48503Z" fill="#6E736A" />
@@ -87,7 +82,9 @@ const FilterSidebar = ({
             </div>
 
             <div
-              className={`${styles.AnimatedBox} ${openNested[item.id] ? styles.open : ""}`}  // ← uses openNested
+              ref={(el) => { nestedRefs.current[item.id] = el; }}
+              className={`${styles.AnimatedBox} ${openNested[item.id] ? styles.open : ""}`}
+              style={{ maxHeight: getMaxHeight(item.id, openNested[item.id], nestedRefs) }}
             >
               <div
                 className={styles.FilterOptions}
@@ -100,7 +97,6 @@ const FilterSidebar = ({
         );
       }
 
-      // Leaf node — plain checkbox
       return (
         <label key={item.id}>
           <input
@@ -128,12 +124,12 @@ const FilterSidebar = ({
           <div key={item.id} className={styles.FilterBox}>
             <div
               className={styles.FilterHeader}
-              onClick={() => toggleMenu(item.id)}  // ← top-level, isNested defaults to false
+              onClick={() => toggleMenu(item.id)}
             >
               <h5>
                 {item.name} {selectedCount > 0 && `(${selectedCount})`}
               </h5>
-              {openMenus[item.id] ? (  // ← uses openMenus
+              {openMenus[item.id] ? (
                 <span>
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M-0.000177827 8.48503L3.77106 4.7138L-0.000178165 0.942561L0.942631 -0.000248161L4.71387 3.77099L8.4851 -0.000248161L9.42791 0.942561L5.65668 4.7138L9.42791 8.48503L8.4851 9.42784L4.71387 5.65661L0.942631 9.42784L-0.000177827 8.48503Z" fill="#6E736A" />
@@ -149,7 +145,9 @@ const FilterSidebar = ({
             </div>
 
             <div
-              className={`${styles.AnimatedBox} ${openMenus[item.id] ? styles.open : ""}`}  // ← uses openMenus
+              ref={(el) => { topRefs.current[item.id] = el; }}
+              className={`${styles.AnimatedBox} ${openMenus[item.id] ? styles.open : ""}`}
+              style={{ maxHeight: getMaxHeight(item.id, openMenus[item.id], topRefs) }}
             >
               <div className={styles.FilterOptions}>
                 {children.length > 0 ? (
