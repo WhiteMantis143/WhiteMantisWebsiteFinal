@@ -121,20 +121,30 @@ const Footer = ({ categories }) => {
           <h3 className={styles.MidHeading}>Your Complete Coffee Experience.</h3>
           <p>Order ahead at our cafés, earn rewards, manage subscriptions, and explore new releases all in one seamless experience.</p>
           <div className={styles.AppButtons}>
-            <button className={styles.AppBtn}>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.whitemantis.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.AppBtn}
+            >
               <Image src={google} alt="Google Play" width={24} height={24} className={styles.AppIcon} />
               <div className={styles.AppBtnText}>
                 <span className={styles.AppBtnSub}>Get it on</span>
                 <span className={styles.AppBtnMain}>Google Play</span>
               </div>
-            </button>
-            <button className={styles.AppBtn}>
+            </a>
+            <a
+              href="https://apps.apple.com/us/app/whitemantis/id6760647986"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.AppBtn}
+            >
               <Image src={apple} alt="App Store" width={24} height={24} className={styles.AppIcon} />
               <div className={styles.AppBtnText}>
                 <span className={styles.AppBtnSub}>Download on the</span>
                 <span className={styles.AppBtnMain}>App Store</span>
               </div>
-            </button>
+            </a>
           </div>
         </div>
 

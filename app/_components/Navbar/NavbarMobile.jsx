@@ -223,7 +223,7 @@ const NavbarMobile = ({ categories: initialCategories }) => {
                 About Us
               </Link>
               <div className={styles.Line}></div>
-              <Link className={styles.SectionHeader} href="/academy">
+              <Link className={styles.SectionHeader} href="/academy" onClick={() => setOpen(false)}>
                 Academy
               </Link>
               <div className={styles.Line}></div>
@@ -251,7 +251,7 @@ const NavbarMobile = ({ categories: initialCategories }) => {
                 Contact us
               </Link>
               <div className={styles.Line}></div>
-              <Link className={styles.SectionHeader} href="/blogs">
+              <Link className={styles.SectionHeader} href="/blogs" onClick={() => setOpen(false)}>
                 Blogs
               </Link>
               <div className={styles.Line}></div>
