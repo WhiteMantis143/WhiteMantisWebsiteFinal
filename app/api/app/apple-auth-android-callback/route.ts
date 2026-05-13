@@ -11,9 +11,14 @@ const APPLE_ANDROID_REDIRECT_URI = process.env.APPLE_ANDROID_REDIRECT_URI || ''
 function formatPrivateKey(raw: string): string {
   if (!raw || raw.trim() === '') throw new Error('APPLE_PRIVATE_KEY env var is not set')
 
-  // Strip PEM headers/footers, then keep ONLY valid base64 characters
-  // This handles all storage formats: \n escaped, \\n double-escaped, actual newlines, backslashes, etc.
-  const b64 = raw
+  // Step 1: convert literal \n (backslash+n) to real newlines FIRST
+  // so the letter 'n' from \n separators doesn't get treated as base64
+  const withRealNewlines = raw
+    .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '')
+
+  // Step 2: strip PEM headers/footers and keep ONLY valid base64 characters
+  const b64 = withRealNewlines
     .replace(/-----[A-Z\s]+-----/g, '')
     .replace(/[^A-Za-z0-9+/=]/g, '')
 
@@ -24,6 +29,7 @@ function formatPrivateKey(raw: string): string {
   const lines = (b64.match(/.{1,64}/g) || []).join('\n')
   return `-----BEGIN PRIVATE KEY-----\n${lines}\n-----END PRIVATE KEY-----\n`
 }
+
 
 
 async function generateClientSecret(): Promise<string> {
