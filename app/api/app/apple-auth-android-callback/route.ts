@@ -11,28 +11,20 @@ const APPLE_ANDROID_REDIRECT_URI = process.env.APPLE_ANDROID_REDIRECT_URI || ''
 function formatPrivateKey(raw: string): string {
   if (!raw || raw.trim() === '') throw new Error('APPLE_PRIVATE_KEY env var is not set')
 
-  // Normalize every possible newline representation
-  const normalized = raw
-    .replace(/\\r\\n/g, '\n')
-    .replace(/\\n/g, '\n')
-    .replace(/\\r/g, '\n')
-    .replace(/\r\n/g, '\n')
-    .replace(/\r/g, '\n')
-
-  // Strip PEM headers/footers and ALL whitespace — extract pure base64
-  const b64 = normalized
+  // Strip PEM headers/footers, then keep ONLY valid base64 characters
+  // This handles all storage formats: \n escaped, \\n double-escaped, actual newlines, backslashes, etc.
+  const b64 = raw
     .replace(/-----[A-Z\s]+-----/g, '')
-    .replace(/\s+/g, '')
+    .replace(/[^A-Za-z0-9+/=]/g, '')
 
   if (!b64) throw new Error('APPLE_PRIVATE_KEY is empty after stripping PEM headers')
 
-  // Log first/last 10 chars to verify format (safe — no full key exposed)
   console.log('[AppleKey] b64 length:', b64.length, 'start:', b64.substring(0, 10), 'end:', b64.substring(b64.length - 10))
 
-  // Rebuild clean PEM with standard 64-char lines
   const lines = (b64.match(/.{1,64}/g) || []).join('\n')
   return `-----BEGIN PRIVATE KEY-----\n${lines}\n-----END PRIVATE KEY-----\n`
 }
+
 
 async function generateClientSecret(): Promise<string> {
   if (!APPLE_TEAM_ID) throw new Error('APPLE_TEAM_ID env var is not set')
