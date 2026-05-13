@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const ANDROID_PACKAGE = 'com.whitemantis.app'
 
-function htmlPage(intentUri: string, isError: boolean): NextResponse {
+function htmlPage(intentUri: string, isError: boolean, debugFields?: string): NextResponse {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +17,7 @@ function htmlPage(intentUri: string, isError: boolean): NextResponse {
     p{color:#666;font-size:15px;margin-bottom:32px;line-height:1.5}
     a.btn{display:block;padding:16px;background:#6C7A5F;color:#fff;text-decoration:none;border-radius:10px;font-size:17px;font-weight:600;letter-spacing:.3px}
     a.btn:active{opacity:.85}
+    .debug{margin-top:16px;font-size:11px;color:#999;word-break:break-all;text-align:left}
   </style>
 </head>
 <body>
@@ -24,6 +25,7 @@ function htmlPage(intentUri: string, isError: boolean): NextResponse {
     <h2>${isError ? 'Sign-in failed' : 'Signed in!'}</h2>
     <p>${isError ? 'Something went wrong. Please try again.' : 'Tap below to return to the app.'}</p>
     <a class="btn" href="${intentUri}">${isError ? 'Go back to App' : 'Open App'}</a>
+    ${debugFields ? `<div class="debug">Fields received: ${debugFields}</div>` : ''}
   </div>
 </body>
 </html>`
@@ -36,12 +38,22 @@ function htmlPage(intentUri: string, isError: boolean): NextResponse {
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData()
+
+    // Collect field NAMES only (no values) for debug display
+    const fieldNames: string[] = []
+    formData.forEach((_value, key) => { fieldNames.push(key) })
+    const debugFields = fieldNames.join(', ')
+
+    // Apple sends id_token with implicit flow, code with code flow
     const idToken = formData.get('id_token') as string | null
+    const code = formData.get('code') as string | null
     const userJson = formData.get('user') as string | null
 
-    if (!idToken) {
+    const tokenToUse = idToken || code
+
+    if (!tokenToUse) {
       const errorIntent = `intent://apple-auth?error=missing_token#Intent;scheme=${ANDROID_PACKAGE};package=${ANDROID_PACKAGE};end;`
-      return htmlPage(errorIntent, true)
+      return htmlPage(errorIntent, true, debugFields)
     }
 
     let firstName = '', lastName = ''
@@ -53,11 +65,13 @@ export async function POST(req: NextRequest) {
       } catch {}
     }
 
-    const params = new URLSearchParams({ token: idToken, firstName, lastName })
+    // Pass token type so the app knows what it received
+    const tokenType = idToken ? 'id_token' : 'code'
+    const params = new URLSearchParams({ token: tokenToUse, tokenType, firstName, lastName })
     const intentUri = `intent://apple-auth?${params}#Intent;scheme=${ANDROID_PACKAGE};package=${ANDROID_PACKAGE};end;`
     return htmlPage(intentUri, false)
   } catch {
     const errorIntent = `intent://apple-auth?error=server_error#Intent;scheme=${ANDROID_PACKAGE};package=${ANDROID_PACKAGE};end;`
-    return htmlPage(errorIntent, true)
+    return htmlPage(errorIntent, true, 'exception')
   }
 }
