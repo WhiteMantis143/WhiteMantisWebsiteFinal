@@ -11,16 +11,27 @@ const APPLE_ANDROID_REDIRECT_URI = process.env.APPLE_ANDROID_REDIRECT_URI || ''
 function formatPrivateKey(raw: string): string {
   if (!raw || raw.trim() === '') throw new Error('APPLE_PRIVATE_KEY env var is not set')
 
-  let key = raw
+  // Normalize every possible newline representation
+  const normalized = raw
+    .replace(/\\r\\n/g, '\n')
     .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '\n')
     .replace(/\r\n/g, '\n')
-    .replace(/\r/g, '')
-    .trim()
+    .replace(/\r/g, '\n')
 
-  if (key.startsWith('-----BEGIN PRIVATE KEY-----')) return key
+  // Strip PEM headers/footers and ALL whitespace — extract pure base64
+  const b64 = normalized
+    .replace(/-----[A-Z\s]+-----/g, '')
+    .replace(/\s+/g, '')
 
-  const b64lines = key.replace(/\s/g, '').match(/.{1,64}/g)?.join('\n') || ''
-  return `-----BEGIN PRIVATE KEY-----\n${b64lines}\n-----END PRIVATE KEY-----`
+  if (!b64) throw new Error('APPLE_PRIVATE_KEY is empty after stripping PEM headers')
+
+  // Log first/last 10 chars to verify format (safe — no full key exposed)
+  console.log('[AppleKey] b64 length:', b64.length, 'start:', b64.substring(0, 10), 'end:', b64.substring(b64.length - 10))
+
+  // Rebuild clean PEM with standard 64-char lines
+  const lines = (b64.match(/.{1,64}/g) || []).join('\n')
+  return `-----BEGIN PRIVATE KEY-----\n${lines}\n-----END PRIVATE KEY-----\n`
 }
 
 async function generateClientSecret(): Promise<string> {
@@ -28,7 +39,9 @@ async function generateClientSecret(): Promise<string> {
   if (!APPLE_KEY_ID) throw new Error('APPLE_KEY_ID env var is not set')
   if (!APPLE_ID) throw new Error('APPLE_ID env var is not set')
 
-  const pk = await jose.importPKCS8(formatPrivateKey(APPLE_PRIVATE_KEY), 'ES256')
+  const formattedKey = formatPrivateKey(APPLE_PRIVATE_KEY)
+  const pk = await jose.importPKCS8(formattedKey, 'ES256')
+
   return new jose.SignJWT({})
     .setProtectedHeader({ alg: 'ES256', kid: APPLE_KEY_ID })
     .setIssuer(APPLE_TEAM_ID)
