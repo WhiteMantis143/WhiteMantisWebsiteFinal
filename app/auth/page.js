@@ -218,36 +218,20 @@ function AuthPageContent() {
       });
 
       const response = await window.AppleID.auth.signIn();
-      console.log("[Apple] SDK raw response:", JSON.stringify(response));
-
       const idToken = response?.authorization?.id_token;
       const firstName = response?.user?.name?.firstName || "";
       const lastName = response?.user?.name?.lastName || "";
-
-      console.log("[Apple] id_token present:", !!idToken);
-      console.log("[Apple] id_token first 80 chars:", idToken?.substring(0, 80));
-      console.log("[Apple] firstName:", firstName, "| lastName:", lastName);
 
       if (!idToken) {
         setError("Apple sign-in failed. Please try again.");
         return;
       }
 
-      const requestPayload = { identityToken: idToken, givenName: firstName, familyName: lastName };
-      console.log("[Apple] POSTing to:", (axiosClient.defaults.baseURL || "") + "/api/app/apple-auth");
-      console.log("[Apple] Request body keys:", Object.keys(requestPayload));
-
-      let res;
-      try {
-        res = await axiosClient.post("/api/app/apple-auth", requestPayload);
-        console.log("[Apple] Backend status:", res.status);
-        console.log("[Apple] Backend response:", JSON.stringify(res.data));
-      } catch (backendErr) {
-        console.error("[Apple] Backend error status:", backendErr?.response?.status);
-        console.error("[Apple] Backend error data:", JSON.stringify(backendErr?.response?.data));
-        console.error("[Apple] Backend error headers:", JSON.stringify(backendErr?.response?.headers));
-        throw backendErr;
-      }
+      const res = await axiosClient.post("/api/app/apple-auth", {
+        appleToken: idToken,
+        givenName: firstName,
+        familyName: lastName,
+      });
       const resData = res.data;
 
       if (!resData.token) {
