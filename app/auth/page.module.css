@@ -252,11 +252,11 @@
     align-items: center;
     align-self: center;
     flex-direction: row;
-    gap: 15px;
+    /* gap: 15px;
     font-size: var(--fs-15);
     font-family: var(--lato);
     font-weight: var(--lato-font-weight);
-    color: var(--heads-color);
+    color: var(--heads-color); */
 }
 .text1{
     position: relative;

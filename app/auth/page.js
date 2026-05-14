@@ -17,6 +17,7 @@ function AuthPageContent() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [appleLoading, setAppleLoading] = useState(false);
 
   // Detect Google OAuth callback from the URL immediately (before session loads)
   const isFromGoogle = searchParams.get("from") === "google";
@@ -96,6 +97,16 @@ function AuthPageContent() {
       }
     }
   }, [status, session, isFromGoogle, searchParams, router]);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js";
+    script.async = true;
+    document.head.appendChild(script);
+    return () => {
+      if (document.head.contains(script)) document.head.removeChild(script);
+    };
+  }, []);
 
   // When this page is the OAuth callback target, never show the auth form.
   // Show a plain "Signing you in…" screen while the useEffect above redirects.
@@ -195,11 +206,69 @@ function AuthPageContent() {
     });
   }
 
-  // function handleAppleSignIn() {
-  //   signIn("apple", {
-  //     callbackUrl: "/auth?from=apple",
-  //   });
-  // }
+  async function handleAppleSignIn() {
+    setError("");
+    setAppleLoading(true);
+    try {
+      window.AppleID.auth.init({
+        clientId: process.env.NEXT_PUBLIC_APPLE_CLIENT_ID,
+        scope: "name email",
+        redirectURI: process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI,
+        usePopup: true,
+      });
+
+      const response = await window.AppleID.auth.signIn();
+      const idToken = response?.authorization?.id_token;
+      const firstName = response?.user?.name?.firstName || "";
+      const lastName = response?.user?.name?.lastName || "";
+
+      if (!idToken) {
+        setError("Apple sign-in failed. Please try again.");
+        return;
+      }
+
+      const res = await axiosClient.post("/api/app/apple-auth", {
+        identityToken: idToken,
+        givenName: firstName,
+        familyName: lastName,
+      });
+      const resData = res.data;
+
+      if (!resData.token) {
+        setError(resData.message || "Apple sign-in failed. Please try again.");
+        return;
+      }
+
+      Cookies.set("paylaod-token", resData.token, { expires: 7 });
+      setAuthToken(resData.token);
+
+      const result = await signIn("otp", {
+        user: JSON.stringify(resData.user || {}),
+        token: resData.token,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError("Apple sign-in failed. Please try again.");
+        return;
+      }
+
+      const redirectParam = searchParams.get("redirect") || "/";
+      if (resData.isNewUser || resData.needsContactEmail) {
+        router.push(`/auth/create-profile?redirect=${encodeURIComponent(redirectParam)}`);
+      } else {
+        router.push(redirectParam);
+      }
+    } catch (err) {
+      const cancelErrors = ["popup_closed_by_user", "user_trigger_new_signin_flow"];
+      if (cancelErrors.includes(err?.error)) return;
+      setError(
+        err?.response?.data?.message || err?.message || "Apple sign-in failed. Please try again."
+      );
+    } finally {
+      setAppleLoading(false);
+    }
+  }
 
   return (
     <>
@@ -318,18 +387,17 @@ function AuthPageContent() {
                       </clipPath>
                     </defs>
                   </svg>
-                  <p>Sign in with Google</p>
+                  
                 </button>
-                {/* Apple Sign-In button commented out
                 <button
                   onClick={handleAppleSignIn}
-                  disabled={loading}
+                  disabled={loading || appleLoading}
                   className={styles.googleButton}
                   style={{
                     background: "transparent",
                     border: "none",
-                    cursor: loading ? "not-allowed" : "pointer",
-                    opacity: loading ? 0.6 : 1,
+                    cursor: loading || appleLoading ? "not-allowed" : "pointer",
+                    opacity: loading || appleLoading ? 0.6 : 1,
                     padding: 0,
                   }}
                   aria-label="Sign in with Apple"
@@ -346,9 +414,8 @@ function AuthPageContent() {
                       fill="#2F362A"
                     />
                   </svg>
-                  <p>Sign in with Apple</p>
+                
                 </button>
-                */}
               </div>
             </div>
           </div>
