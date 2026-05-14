@@ -19,6 +19,7 @@ const WhyUs = () => {
               <div className={styles.ImageContainer}>
                 <Image src={one} alt="Quality Assurance" />
               </div>
+              
               <div className={styles.TextContainer}>
                 <h3>Tailored Business Solutions </h3>
                 <p>

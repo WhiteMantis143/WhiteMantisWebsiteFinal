@@ -189,13 +189,60 @@
     max-height: 288px;
   }
 }
-@media (min-width: 921px) and (max-width: 1800px) {
+/* 921–1199px: keep existing wrap behavior, no card width change */
+@media (min-width: 921px) and (max-width: 1199px) {
   .Botttom {
-  display: flex;
-  justify-content: left;
-  flex-wrap: wrap;
-  gap: 20px;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 }
+
+/* 1200–1499px: force 2 cards per row */
+@media (min-width: 1200px) and (max-width: 1499px) {
+  .Botttom {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .Botttom > a {
+    flex: 0 0 calc((100% - 20px) / 2);
+    max-width: calc((100% - 20px) / 2);
+  }
+  .One {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .OneBottom img {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* 1500–1820px: force 3 cards per row */
+@media (min-width: 1500px) and (max-width: 1820px) {
+  .Botttom {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .Botttom > a {
+    flex: 0 0 calc((100% - 40px) / 3);
+    max-width: calc((100% - 40px) / 3);
+  }
+  .One {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .OneBottom img {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 @media (min-width: 641px) and (max-width: 920px) {
   .MainConatiner {

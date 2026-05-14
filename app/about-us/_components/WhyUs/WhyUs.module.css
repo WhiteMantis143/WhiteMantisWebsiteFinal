@@ -44,8 +44,6 @@
   width: 100%;
   max-width: 416px;
   min-height: 410px;
-  max-height: 410px;
-  height: 100%;
   padding: 6px 6px 63px 6px;
   border: 1px solid var(--line-color);
 }
@@ -55,7 +53,8 @@
   justify-content: flex-start;
   overflow: hidden;
   max-width: 405px;
-  max-height: 195px;
+  height: 195px;
+  flex-shrink: 0;
   width: 100%;
 }
 
