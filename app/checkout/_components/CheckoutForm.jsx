@@ -65,6 +65,7 @@ export default function CheckoutForm({
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
+  const [isExpressAvailable, setIsExpressAvailable] = useState(false);
 
   // ── Email state lives HERE (inside Elements boundary) ───────────────────────
   const [email, setEmail] = useState(session?.user?.email || "");
@@ -76,6 +77,199 @@ export default function CheckoutForm({
   // ── Helper: clear a single error field ─────────────────────────────────────
   const clearError = (key) =>
     setValidationErrors((prev) => ({ ...prev, [key]: "" }));
+
+  // ── Helper: map wallet state string to our emirate key ──────────────────────
+  const mapStateToEmirate = (state) => {
+    if (!state) return "dubai";
+    const s = state.toLowerCase().replace(/[\s-]+/g, "_");
+    const map = {
+      dubai: "dubai",
+      abu_dhabi: "abu_dhabi",
+      sharjah: "sharjah",
+      ajman: "ajman",
+      fujairah: "fujairah",
+      ras_al_khaimah: "ras_al_khaimah",
+      umm_al_quwain: "umm_al_quwain",
+    };
+    return map[s] || "dubai";
+  };
+
+  // ── Express Checkout Handler (Apple Pay / Google Pay one-tap buttons) ────────
+  const handleExpressCheckoutConfirm = async (event) => {
+    if (!stripe || !elements) return;
+    setIsProcessing(true);
+
+    try {
+      // Required by Stripe for deferred-mode ExpressCheckoutElement
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        toast.error(submitError.message || "Payment validation failed");
+        setIsProcessing(false);
+        return;
+      }
+
+      const walletBilling = event.billingDetails || {};
+      const walletNameParts = (walletBilling.name || "").split(" ");
+
+      const deliveryOption = delivery === "ship" ? "delivery" : "pickup";
+
+      // Resolve shipping address: saved address → filled form → wallet billing fallback
+      let shipAddr;
+      if (deliveryOption === "delivery") {
+        if (status === "authenticated" && selectedAddressId) {
+          const saved = savedAddresses.find((a) => a.id === selectedAddressId);
+          if (saved) shipAddr = formatCheckoutAddress(saved);
+        }
+        if (!shipAddr && shippingForm.address) {
+          shipAddr = formatCheckoutAddress(shippingForm);
+        }
+        if (!shipAddr) {
+          const walletShip = event.shippingAddress || walletBilling;
+          shipAddr = {
+            addressFirstName: walletNameParts[0] || "",
+            addressLastName: walletNameParts.slice(1).join(" ") || "",
+            addressLine1: walletShip?.address?.line1 || "",
+            addressLine2: walletShip?.address?.line2 || "",
+            city: walletShip?.address?.city || "",
+            emirates: mapStateToEmirate(walletShip?.address?.state || walletShip?.address?.city),
+            phoneNumber: walletBilling.phone || "",
+            addressCountry: "United Arab Emirates",
+          };
+        }
+      } else {
+        shipAddr = {
+          addressFirstName: "",
+          addressLastName: "",
+          addressLine1: "Pickup",
+          addressLine2: "",
+          city: "",
+          emirates: "dubai",
+          phoneNumber: "",
+          addressCountry: "United Arab Emirates",
+        };
+      }
+
+      // Billing address: same-as-shipping → filled billing form → wallet billing fallback
+      let billAddr;
+      if (useShippingAsBilling && deliveryOption === "delivery") {
+        billAddr = { ...shipAddr };
+      } else if (billingForm.address) {
+        billAddr = formatCheckoutAddress(billingForm);
+      } else {
+        billAddr = {
+          addressFirstName: walletNameParts[0] || "",
+          addressLastName: walletNameParts.slice(1).join(" ") || "",
+          addressLine1: walletBilling?.address?.line1 || "",
+          addressLine2: walletBilling?.address?.line2 || "",
+          city: walletBilling?.address?.city || "",
+          emirates: mapStateToEmirate(walletBilling?.address?.state),
+          phoneNumber: walletBilling.phone || "",
+          addressCountry: "United Arab Emirates",
+        };
+      }
+
+      const emailAddr = walletBilling.email || email || session?.user?.email || "";
+
+      let url = "";
+      let payload = {};
+
+      if (checkoutMode === "subscription") {
+        url = "/api/checkout/subscription";
+        payload = buildSubscriptionPayload({
+          delivery: deliveryOption,
+          shippingAddress: shipAddr,
+          billingAddress: billAddr,
+          shippingAddressAsBillingAddress: useShippingAsBilling && deliveryOption === "delivery",
+          email: emailAddr,
+          product: {
+            productId: product[0].id,
+            variantId: variationId || "",
+            subscriptionId: subscriptionId,
+            quantity: product[0].quantity,
+            bagAmountID: bagAmountId || "",
+          },
+          useWTCoins: !!isBeansApplied,
+          productHighlights: product[0].productHighlights || [],
+        });
+      } else {
+        url = "/api/checkout/one-time";
+        payload = buildOneTimePayload({
+          delivery: deliveryOption,
+          shippingAddress: shipAddr,
+          billingAddress: billAddr,
+          shippingAddressAsBillingAddress: useShippingAsBilling && deliveryOption === "delivery",
+          email: emailAddr,
+          products: product.map((p) => ({
+            productId: p.product || p.id,
+            variantId: p.vId || "",
+            quantity: p.quantity,
+            productHighlights: p.productHighlights || [],
+          })),
+          useWTCoins: !!isBeansApplied,
+          appliedCouponCode: appliedCoupon?.code || "",
+        });
+      }
+
+      const response = await axiosClient.post(url, payload);
+      const data = response.data;
+
+      if (!data.success) throw new Error(data.message || data.error || "Checkout failed");
+
+      sessionStorage.setItem("checkout_success", "1");
+
+      const secret = data.clientSecret || data.client_secret;
+      if (!secret) throw new Error("No payment secret returned from server");
+
+      if (checkoutMode === "subscription") {
+        const { error, paymentIntent } = await stripe.confirmPayment({
+          elements,
+          clientSecret: secret,
+          confirmParams: {
+            return_url: `${window.location.origin}${buildSuccessUrl(checkoutMode, data)}`,
+          },
+          redirect: "if_required",
+        });
+
+        if (error) {
+          toast.error(error.message || "Payment confirmation failed");
+          setIsProcessing(false);
+          return;
+        }
+
+        if (paymentIntent?.status === "succeeded") {
+          const orderId =
+            data.dbSubscriptionId || data.wpSubscriptionId || data.id || data._id || data.subscriptionId || data.doc?.id;
+          if (orderId) {
+            try {
+              await axiosClient.patch(`/api/web-subscription/${orderId}`, { paymentStatus: "completed" });
+            } catch (patchErr) {
+              console.warn("⚠️ Subscription PATCH error (non-fatal):", patchErr);
+            }
+          }
+          router.push(buildSuccessUrl(checkoutMode, data));
+        }
+      } else {
+        const { error } = await stripe.confirmPayment({
+          elements,
+          clientSecret: secret,
+          confirmParams: {
+            return_url: `${window.location.origin}${buildSuccessUrl(checkoutMode, data)}`,
+          },
+        });
+
+        if (error) {
+          toast.error(error.message || "Payment confirmation failed");
+          setIsProcessing(false);
+        }
+      }
+    } catch (e) {
+      console.error(e);
+      const resData = e?.response?.data;
+      const backendMsg = resData?.message || resData?.error || resData?.errors?.[0]?.message;
+      toast.error(backendMsg || e.message || "An error occurred");
+      setIsProcessing(false);
+    }
+  };
 
   // ── Payment Handler ─────────────────────────────────────────────────────────
   const handlePayment = async () => {
@@ -326,13 +520,25 @@ export default function CheckoutForm({
       <div className={styles.MainConatiner}>
         {/* ── Left Column ── */}
         <div className={styles.Left}>
-          {/* ExpressCheckoutSection temporarily removed */}
-
-          <div className={styles.One}>
+          <div className={styles.One} style={!isExpressAvailable ? { display: "none" } : {}}>
             <p style={{ fontWeight: "400" }}>EXPRESS CHECKOUT</p>
 
             <div className={styles.ExpressContainer}>
-              <ExpressCheckoutElement />
+              <ExpressCheckoutElement
+                onConfirm={handleExpressCheckoutConfirm}
+                onClick={({ resolve }) =>
+                  resolve({ emailRequired: true, phoneNumberRequired: true })
+                }
+                onReady={({ availablePaymentMethods }) => {
+                  if (
+                    availablePaymentMethods &&
+                    Object.values(availablePaymentMethods).some(Boolean)
+                  ) {
+                    setIsExpressAvailable(true);
+                  }
+                }}
+                onLoadError={() => setIsExpressAvailable(false)}
+              />
             </div>
           </div>
 

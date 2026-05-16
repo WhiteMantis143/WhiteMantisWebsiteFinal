@@ -389,11 +389,13 @@ function CheckoutContent() {
 
   const stripeOptions = {
     appearance: { theme: "stripe" },
-    paymentMethodCreation: "manual",
     mode: checkoutMode === "subscription" ? "subscription" : "payment",
     amount: stripeAmount, // Pass in fils
     currency: "aed",
-    ...(status === "authenticated" && { setup_future_usage: "off_session" }),
+    // Match backend: one-time PIs for authenticated users are created with setup_future_usage: off_session
+    ...(status === "authenticated" && checkoutMode !== "subscription" && {
+      setup_future_usage: "off_session",
+    }),
   };
 
   console.log("stripeOptions", stripeOptions);
