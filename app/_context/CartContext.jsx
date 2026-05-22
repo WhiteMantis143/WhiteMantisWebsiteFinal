@@ -1,11 +1,12 @@
 "use client";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import {
   getCart,
   addItemToCart,
   removeItemFromCart,
   updateItemQuantity,
+  clearCart,
 } from "@/utils/guestCartUtils";
 import axiosClient from "@/lib/axios";
 import { setAuthToken, registerTokenRefreshCallback } from "@/lib/authToken";
@@ -37,6 +38,9 @@ export function CartProvider({ children }) {
   const [appliedCoupon, setAppliedCoupon] = useState(null);
 
   const { data: session, status, update } = useSession();
+
+  // Tracks the previous session status to detect the guest → authenticated transition
+  const prevStatusRef = useRef("loading");
 
 
   useEffect(() => {
@@ -203,7 +207,17 @@ export function CartProvider({ children }) {
 
   useEffect(() => {
     if (status === "loading") return;
-    fetchCart();
+
+    const wasNotAuthenticated = prevStatusRef.current !== "authenticated";
+    const isNowAuthenticated = status === "authenticated";
+    prevStatusRef.current = status;
+
+    if (wasNotAuthenticated && isNowAuthenticated) {
+      // Login just happened — sync guest cart to backend first, then fetch
+      mergeGuestCartOnLogin().then(() => fetchCart());
+    } else {
+      fetchCart();
+    }
   }, [session, status]);
 
   // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -231,6 +245,34 @@ export function CartProvider({ children }) {
   };
 
   // ─── Fetch ───────────────────────────────────────────────────────────────────
+
+  // Called once on login transition: pushes each guest localStorage item to the
+  // backend cart, then clears localStorage. Errors per-item are swallowed so a
+  // single out-of-stock or unavailable product never blocks the rest of the merge.
+  const mergeGuestCartOnLogin = async () => {
+    const guestCart = getCart();
+    const guestItems = guestCart.items || [];
+    if (guestItems.length === 0) return;
+
+    for (const item of guestItems) {
+      try {
+        await axiosClient.post("/api/website/cart", {
+          product: item.product,
+          quantity: item.quantity,
+          vId: item.vId || "",
+          productHighlights: item.productHighlights || [],
+        });
+      } catch (e) {
+        console.error(
+          "Guest cart merge: skipped item",
+          item.product,
+          e?.response?.data || e.message,
+        );
+      }
+    }
+
+    clearCart();
+  };
 
   const fetchCart = async () => {
     setLoading(true);
@@ -266,10 +308,8 @@ export function CartProvider({ children }) {
         // Match including highlights for more accuracy
         const added = (data.items || []).find(
           (i) =>
-            String(i.product) === String(product) &&
-            (i.vId || "") === (vId || "") &&
-            JSON.stringify(i.productHighlights || []) ===
-            JSON.stringify(productHighlights),
+            String(i.product?.id ?? i.product) === String(product) &&
+            (i.vId || "") === (vId || ""),
         );
         if (added) {
           addToCartToast({ ...added, quantity }, openCart);
