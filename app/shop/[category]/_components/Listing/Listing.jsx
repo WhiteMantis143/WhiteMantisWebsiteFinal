@@ -81,6 +81,8 @@ const Lisiting = () => {
           "stockQuantity",
           "productHighlights",
           "bagAmountOptions",
+          "isLatest",
+          "isBestseller",
         ];
         const productSelectQuery = productFields
           .map((f) => `select[${f}]=true`)

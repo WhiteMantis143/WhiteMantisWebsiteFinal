@@ -235,10 +235,78 @@
 
 .ProductPrice {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   flex-direction: row;
-  gap: 8px;
   align-items: center;
+}
+
+.PriceGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.ProductBadges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 5;
+}
+
+.NewArrivalBadge {
+  width: 88px;
+  height: 23px;
+  background-color: #6c7a5f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.NewArrivalBadge span {
+  font-family: var(--lato);
+  font-weight: 400;
+  font-size: 12px;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.BestsellerBadge {
+  width: 77px;
+  height: 23px;
+  background-color: #d0892f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.77px;
+}
+
+.BestsellerBadge span {
+  font-family: var(--lato);
+  font-weight: 400;
+  font-size: 12px;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.LowStockIndicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.LowStockIndicator span {
+  font-family: var(--lato);
+  font-weight: 400;
+  font-size: 15px;
+  color: #d0892f;
+  white-space: nowrap;
+  line-height: 1;
 }
 
 .ProductPrice h4 {
@@ -669,10 +737,23 @@
     gap: 24px;
   }
 
-  .LowStockBadge {
-    font-size: 10px !important;
-    top: 10px !important;
-    padding: 5px 10px !important;
+  .LowStockIndicator span {
+    font-size: 11px;
+  }
+
+  .LowStockIndicator svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .ProductBadges {
+    top: 8px;
+    left: 8px;
+  }
+
+  .NewArrivalBadge {
+    gap: 1px;
   }
 
   .ProductImage {
@@ -926,14 +1007,14 @@
     gap: 32px;
   }
 
-  .LowStockBadge {
-    /* padding: 6px 6px;
-    top: 6px; */
-    /* display: none; */
+  .LowStockIndicator span {
+    font-size: 12px;
+  }
 
-    font-size: 10px !important;
-    top: 10px !important;
-    padding: 5px 10px !important;
+  .LowStockIndicator svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
   }
 
   .ProductImage img {
@@ -1033,16 +1114,6 @@
 @media (min-width: 941px) and (max-width: 1440px) {
   .main {
     padding: 40px 60px 160px;
-  }
-
-  .LowStockBadge {
-    /* padding: 6px 6px;
-    top: 6px; */
-    /* display: none; */
-
-    font-size: 12px !important;
-    top: 10px !important;
-    padding: 5px 10px !important;
   }
 
   .MainContainer {
@@ -1576,18 +1647,6 @@
       transparent 4px);
 }
 
-.LowStockBadge {
-  position: absolute;
-  top: 15px;
-  left: 0;
-  background-color: var(--primary-color);
-  color: var(--white-color);
-  padding: 10px 20px;
-  font-family: var(--lato);
-  font-size: var(--lato-font-size);
-  font-weight: var(--lato-font-weight);
-  z-index: 10;
-}
 
 .OutOfStockRow {
   width: 100%;
