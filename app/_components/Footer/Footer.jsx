@@ -93,7 +93,7 @@ const Footer = ({ categories }) => {
 
           <div className={styles.NavCol}>
             <h4 className={styles.NavHeading}>Support</h4>
-            <Link href="/careers"><p>Careers</p></Link>
+        
             <Link href="/contact"><p>Contact Us</p></Link>
             <a
               href="https://www.instagram.com/whitemantis.ae"
