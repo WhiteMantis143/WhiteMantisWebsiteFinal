@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"c:\\\\Users\\\\veerendranadh koppul\\\\Downloads\\\\whitemantis-frontend-main\\\\whitemantis-frontend-main\\\\\" --Name | head -30)",
+      "Read(//c/Users/veerendranadh koppul/Downloads/whitemantis-frontend-main/**)"
+    ]
+  }
+}

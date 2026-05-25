@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 const FilterSidebar = ({
   subCategoriesData,
@@ -10,10 +10,6 @@ const FilterSidebar = ({
   const [openMenus, setOpenMenus] = useState({});
   const [openNested, setOpenNested] = useState({});
 
-  // Refs to measure exact content height for smooth animation
-  const topRefs = useRef({});
-  const nestedRefs = useRef({});
-
   const toggleMenu = (id, isNested = false) => {
     if (isNested) {
       setOpenNested((prev) => ({ [id]: !prev[id] }));
@@ -21,13 +17,6 @@ const FilterSidebar = ({
       setOpenMenus((prev) => ({ [id]: !prev[id] }));
       setOpenNested({});
     }
-  };
-
-  // Returns inline maxHeight for the AnimatedBox — exact scrollHeight when open, 0 when closed
-  const getMaxHeight = (id, isOpen, refsMap) => {
-    if (!isOpen) return "0px";
-    const el = refsMap.current[id];
-    return el ? el.scrollHeight + "px" : "500px";
   };
 
   const getSelectedCountForParent = (item) => {
@@ -82,9 +71,7 @@ const FilterSidebar = ({
             </div>
 
             <div
-              ref={(el) => { nestedRefs.current[item.id] = el; }}
               className={`${styles.AnimatedBox} ${openNested[item.id] ? styles.open : ""}`}
-              style={{ maxHeight: getMaxHeight(item.id, openNested[item.id], nestedRefs) }}
             >
               <div
                 className={styles.FilterOptions}
@@ -145,9 +132,7 @@ const FilterSidebar = ({
             </div>
 
             <div
-              ref={(el) => { topRefs.current[item.id] = el; }}
               className={`${styles.AnimatedBox} ${openMenus[item.id] ? styles.open : ""}`}
-              style={{ maxHeight: getMaxHeight(item.id, openMenus[item.id], topRefs) }}
             >
               <div className={styles.FilterOptions}>
                 {children.length > 0 ? (

@@ -44,7 +44,7 @@ const Footer = ({ categories }) => {
           <div className={styles.ContactRow}>
             <div>
               <p className={styles.ContactLabel}>Phone</p>
-              <Link href="tel:+97158 9535337"><p>05 8953 5337</p></Link>
+              <Link href="tel:+971501261243"><p>050 126 1243</p></Link>
             </div>
             <div>
               <p className={styles.ContactLabel}>Email</p>

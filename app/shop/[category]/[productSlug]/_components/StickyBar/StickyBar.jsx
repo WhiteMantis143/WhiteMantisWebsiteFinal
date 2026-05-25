@@ -210,7 +210,7 @@ const StickyBar = ({ product }) => {
                 <span>{String(qty).padStart(2, "0")}</span>
                 <button
                   onClick={() => {
-                    const maxAllowed = Math.min(5, stockQuantity - currentCartQty);
+                    const maxAllowed = Math.min(10, stockQuantity - currentCartQty);
                     if (qty < maxAllowed) {
                       setQty((q) => q + 1);
                       setQtyError("");
@@ -221,7 +221,7 @@ const StickyBar = ({ product }) => {
                     }
                   }}
                   disabled={
-                    qty >= 5 || qty + currentCartQty >= stockQuantity || isOutOfStock
+                    qty >= 10 || qty + currentCartQty >= stockQuantity || isOutOfStock
                   }
                 >
                   +
@@ -250,9 +250,17 @@ const StickyBar = ({ product }) => {
 
                 <div className={`${styles.WeightMenuWrapper} ${showWeightMenu ? styles.Open : ""}`}>
                   <div className={styles.WeightMenuContent}>
-                    {product?.variants?.map((v) => (
-                      <button key={v.id} className={styles.WeightMenuItem} onClick={() => {/* logic */ }}>
-                        {v.variantName}g
+                    {sortedVariants.map((v) => (
+                      <button
+                        key={v.id}
+                        className={`${styles.WeightMenuItem} ${!v.variantInStock ? styles.WeightMenuItemOos : ""}`}
+                        onClick={() => {
+                          setSelectedWeight(v);
+                          setShowWeightMenu(false);
+                        }}
+                      >
+                        <span>{v.variantName}g</span>
+                        {!v.variantInStock && <span className={styles.OosLabel}>Out of stock</span>}
                       </button>
                     ))}
                   </div>

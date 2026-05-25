@@ -95,7 +95,7 @@ export default function AddToCartPopup({
   )?.quantity || 0;
 
   const increment = () => {
-    const maxAllowed = Math.min(5, stockQuantity - currentCartQty);
+    const maxAllowed = Math.min(10, stockQuantity - currentCartQty);
     if (quantity < maxAllowed) {
       setQuantity((q) => q + 1);
       setQtyError("");
@@ -202,7 +202,7 @@ export default function AddToCartPopup({
               <button
                 className={styles.qtyBtn}
                 onClick={increment}
-                disabled={quantity >= 5 || quantity + currentCartQty >= stockQuantity}
+                disabled={quantity >= 10 || quantity + currentCartQty >= stockQuantity}
               >
                 &#x2B;
               </button>

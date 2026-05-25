@@ -36,7 +36,7 @@ const Landing = () => {
                   <p>Call Us</p>
                 </div>
                 <div className={styles.FirstBottom}>
-                  <Link href="tel:+9715589535337">+971 - 05 8953 5337</Link>
+                  <Link href="tel:+971501261243">+971 - 050 126 1243</Link>
                 </div>
               </div>
               <div className={styles.line}></div>
