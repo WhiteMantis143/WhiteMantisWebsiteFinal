@@ -94,7 +94,7 @@ export default async function RootLayout({ children }) {
           <CouponModal />
           <NewsLetter />
           <a
-            href="https://wa.me/971589535337"
+            href="https://wa.me/971501261243"
             target="_blank"
             rel="noopener noreferrer"
             className="WhatsAppFloat"
