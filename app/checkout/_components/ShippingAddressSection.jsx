@@ -598,7 +598,7 @@ export default function ShippingAddressSection({
             <div>
               <h5>White Mantis Roastery - Al Quoz</h5>
               <p>Warehouse #2 – Al Quoz Industrial Area 4, Dubai</p>
-              <span>10:00 AM – 7:00 PM</span>
+              <span>09:00 AM – 5:00 PM</span>
             </div>
           </div>
         </div>
