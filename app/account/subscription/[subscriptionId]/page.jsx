@@ -158,7 +158,7 @@ export default function SubscriptionDetailPage({ params }) {
               </p>
               <p>
                 <span>Price per delivery:</span> AED{" "}
-                {(data.financials?.subtotal / 100).toFixed(2)}{" "}
+                {Number(data.financials?.total || 0).toFixed(2)}{" "}
               </p>
               <p>
                 <span>
@@ -343,7 +343,7 @@ export default function SubscriptionDetailPage({ params }) {
 
                 {/* Amount: Fixed to 2 decimals */}
                 <span data-label="Total">
-                  AED {(transaction.financials?.subtotal / 100).toFixed(2)}
+                  AED {Number(transaction.financials?.total || 0).toFixed(2)}
                 </span>
               </div>
             ))
