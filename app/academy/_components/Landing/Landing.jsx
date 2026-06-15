@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Landing.module.css";
 import Image from "next/image";
 import one from "./1.png";
-import two from "./cropped.png";
+import two from "./11.jpeg";
 
 const Landing = () => {
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Community.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import one from "./1.png";
+import one from "./1.jpg";
 
 const Community = () => {
   return (

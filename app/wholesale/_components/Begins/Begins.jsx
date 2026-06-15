@@ -5,16 +5,17 @@ import useEmblaCarousel from "embla-carousel-react";
 import { usePathname } from "next/navigation";
 import styles from "./Begins.module.css";
 import Image from "next/image";
-import one from "./1.png";
-import two from "./2.png";
-import three from "./3.png";
+import one from "./11.jpeg";
+import two from "./12.jpeg";
+import three from "./13.jpeg";
+import four from './14.jpeg'
 
 const slides = [
-  { id: 1, src: one, label: "Hambella Estate, Ethiopia" },
-  { id: 2, src: two, label: "Santa Leticia Estate, El Salvador" },
-  { id: 3, src: three, label: "Geisha Village, Ethiopia" },
-  { id: 4, src: one, label: "Aalamin — Central Sumatra, Indonesia" },
-  { id: 5, src: two, label: "Thogarihunkal Estate, India" },
+  { id: 1, src: one, label: "Brazil, Santa Lucia" },
+  { id: 2, src: two, label: "Ethiopia, Guji Hambela " },
+  { id: 3, src: three, label: "El Porvenir, El Salvador" },
+  { id: 4, src: four, label: "Sumatera, Indonesia" },
+ 
 ];
 
 export default function Begins() {
