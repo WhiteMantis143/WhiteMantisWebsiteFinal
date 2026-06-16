@@ -4,7 +4,7 @@ import Image from "next/image";
 import one from "./1.webp";
 import two from "./2.webp";
 import three from "./3.webp";
-import four from "./4.webp";
+import four from "./4.png";
 
 const highlightsData = [
   {
