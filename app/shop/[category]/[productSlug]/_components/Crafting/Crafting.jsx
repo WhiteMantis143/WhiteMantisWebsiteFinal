@@ -2,7 +2,7 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
 import styles from "./Crafting.module.css";
 import Image from "next/image";
-import image from "./1.jpg";
+import image from "./11.png";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 
