@@ -392,6 +392,7 @@ function CheckoutContent() {
     mode: checkoutMode === "subscription" ? "subscription" : "payment",
     amount: stripeAmount, // Pass in fils
     currency: "aed",
+    payment_method_types: ["card", "apple_pay", "google_pay"],
   };
 
   console.log("stripeOptions", stripeOptions);
