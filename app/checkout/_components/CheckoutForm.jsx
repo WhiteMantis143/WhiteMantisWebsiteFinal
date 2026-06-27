@@ -525,7 +525,7 @@ export default function CheckoutForm({
 
             <div className={styles.ExpressContainer}>
               <ExpressCheckoutElement
-                paymentMethods={{ applePay: "always", googlePay: "always" }}
+                options={{ paymentMethods: { applePay: "always", googlePay: "always" } }}
                 onConfirm={handleExpressCheckoutConfirm}
                 onClick={({ resolve }) =>
                   resolve({ emailRequired: true, phoneNumberRequired: true })
