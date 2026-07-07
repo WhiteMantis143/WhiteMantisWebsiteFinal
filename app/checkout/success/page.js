@@ -118,8 +118,6 @@ function SuccessContent() {
   const order =
     type === "subscription" ? data.subscription || data : data.order || data;
 
-  console.log(order);
-
   const formatAddress = (addr) => {
     if (!addr) return "N/A";
     // Handle both WC and Payload fields
@@ -148,7 +146,6 @@ function SuccessContent() {
 
   // Both orders and subscriptions use line_items (WC) or products (Payload)
   const rawItems = order.line_items || order.products || order.items || [];
-  console.log(rawItems);
   const items = rawItems.map((item) => ({
     id: item.id || item.productId,
     name:

@@ -384,19 +384,8 @@ export default function CheckoutForm({
         });
       }
 
-      console.log(payload, "payload");
-
       const response = await axiosClient.post(url, payload);
       const data = response.data;
-
-      if (checkoutMode === "subscription") {
-        console.log(
-          "🧾 [SUB] FULL backend response:",
-          JSON.stringify(data, null, 2),
-        );
-      }
-
-      console.log(response, "response");
 
       if (!data.success)
         throw new Error(data.message || data.error || "Checkout failed");
@@ -432,8 +421,6 @@ export default function CheckoutForm({
           }
         }
 
-        console.log(secret, "secret");
-
         if (checkoutMode === "subscription") {
           // Subscription Flow: Use redirect: 'if_required' and manual PATCH synchronization
           const { error, paymentIntent } = await stripe.confirmPayment({
@@ -458,21 +445,11 @@ export default function CheckoutForm({
           if (paymentIntent && paymentIntent.status === "succeeded") {
             const orderId =
               data.dbSubscriptionId || data.wpSubscriptionId || data.id || data._id || data.subscriptionId || data.doc?.id;
-            console.log(
-              "✅ Subscription payment confirmed:",
-              paymentIntent.id,
-              paymentIntent.status,
-            );
-
             if (orderId) {
               try {
                 await axiosClient.patch(`/api/web-subscription/${orderId}`, {
                   paymentStatus: "completed",
                 });
-                console.log(
-                  "✅ Subscription paymentStatus → completed, orderId:",
-                  orderId,
-                );
               } catch (patchErr) {
                 console.warn(
                   "⚠️ Subscription paymentStatus PATCH error (non-fatal):",
@@ -509,7 +486,6 @@ export default function CheckoutForm({
       const backendMsg =
         resData?.message || resData?.error || resData?.errors?.[0]?.message;
       toast.error(backendMsg || e.message || "An error occurred");
-      console.log(e.response?.data);
       setIsProcessing(false);
     }
   };

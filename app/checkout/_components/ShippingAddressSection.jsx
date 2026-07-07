@@ -30,8 +30,6 @@ export default function ShippingAddressSection({
   setValidationErrors,
   session,
 }) {
-  console.log(savedAddresses);
-
   const [openMenuId, setOpenMenuId] = useState(null);
   const [addressDeletePopup, setAddressDeletePopup] = useState(false);
   const [addressFormPopup, setAddressFormPopup] = useState(false);

@@ -394,8 +394,6 @@ function CheckoutContent() {
     currency: "aed",
   };
 
-  console.log("stripeOptions", stripeOptions);
-
   return (
     <Elements
       stripe={stripePromise}
