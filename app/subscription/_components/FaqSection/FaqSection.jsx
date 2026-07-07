@@ -15,6 +15,8 @@ import styles from "./FaqSection.module.css";
 //     q: "Can I pause or cancel my subscription?",
 //     a: "You can cancel your subscription at any time through your account without any additional charges. Pause or skip options are not available.",
 //   },
+
+
 //   {
 //     q: "Can I change my coffee preferences after subscribing?",
 //     a: "No, once your subscription is created, preferences such as coffee type, grind size, or quantity cannot be changed.",
