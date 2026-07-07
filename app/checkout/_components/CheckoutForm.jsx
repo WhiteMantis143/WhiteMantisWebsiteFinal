@@ -421,6 +421,8 @@ export default function CheckoutForm({
           }
         }
 
+        
+
         if (checkoutMode === "subscription") {
           // Subscription Flow: Use redirect: 'if_required' and manual PATCH synchronization
           const { error, paymentIntent } = await stripe.confirmPayment({
