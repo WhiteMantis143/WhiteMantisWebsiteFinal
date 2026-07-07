@@ -392,6 +392,10 @@ function CheckoutContent() {
     mode: checkoutMode === "subscription" ? "subscription" : "payment",
     amount: stripeAmount, // Pass in fils
     currency: "aed",
+    // Match backend: one-time PIs for authenticated users are created with setup_future_usage: off_session
+    ...(status === "authenticated" && checkoutMode !== "subscription" && {
+      setup_future_usage: "off_session",
+    }),
   };
 
   console.log("stripeOptions", stripeOptions);
