@@ -273,6 +273,7 @@ const StickyBar = ({ product }) => {
             {!isOutOfStock && <p className={styles.type}>Purchase type :</p>}
 
             <div className={styles.Cta}>
+              {/* Subscription CTA temporarily disabled — recurring billing not yet confirmed end-to-end.
               {!isOutOfStock &&
                 (selectedWeight?.hasVariantSub || product?.hasSimpleSub) && (
                   <button
@@ -304,6 +305,7 @@ const StickyBar = ({ product }) => {
                     </svg>
                   </button>
                 )}
+              */}
 
               {isOutOfStock ? (
                 <button
