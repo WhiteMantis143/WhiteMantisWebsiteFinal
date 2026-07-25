@@ -339,10 +339,6 @@ function CheckoutContent() {
       currentShipping = rates[currentEmirate] || 50;
     }
 
-    if (checkoutMode === "subscription") {
-      currentShipping = 0;
-    }
-
     // Tax calculation (Default to 5% if API returns 0 or null)
     const activeTaxPercent =
       shippingTax.taxPercent > 0 ? shippingTax.taxPercent : 5;
