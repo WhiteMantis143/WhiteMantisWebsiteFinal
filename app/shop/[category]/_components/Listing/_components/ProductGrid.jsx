@@ -270,7 +270,6 @@ const ProductGrid = ({
                               >
                                 Add to Cart
                               </button>
-                              {/* Subscription CTA temporarily disabled — recurring billing not yet confirmed end-to-end.
                               {(product.hasSimpleSub ||
                                 (product.hasVariantOptions &&
                                   product.variants?.some((v) => v.hasVariantSub))) && (
@@ -281,7 +280,6 @@ const ProductGrid = ({
                                     Subscribe
                                   </button>
                                 )}
-                              */}
                             </div>
 
                             <div className={styles.MobileActions}>
@@ -302,7 +300,7 @@ const ProductGrid = ({
                                     onClick={() => setActiveMobileCard(null)}
                                   />
 
-                                  {/* Subscribe rises up behind Add to Cart — temporarily disabled, see note above.
+                                  {/* Subscribe rises up behind Add to Cart */}
                                   {(product.hasSimpleSub ||
                                     (product.hasVariantOptions &&
                                       product.variants?.some((v) => v.hasVariantSub))) && (
@@ -316,7 +314,6 @@ const ProductGrid = ({
                                         Subscribe
                                       </button>
                                     )}
-                                  */}
 
                                   {/* Primary button — morphs Buy Now → Add to Cart */}
                                   <button

@@ -218,7 +218,6 @@ const Recommendation = ({ product }) => {
                             >
                               Add to Cart
                             </button>
-                            {/* Subscription CTA temporarily disabled — recurring billing not yet confirmed end-to-end.
                             {(item.hasSimpleSub ||
                               (item.hasVariantOptions &&
                                 item.variants?.some(
@@ -231,7 +230,6 @@ const Recommendation = ({ product }) => {
                                   Subscribe
                                 </button>
                               )}
-                            */}
                           </div>
                         )}
                       </div>
