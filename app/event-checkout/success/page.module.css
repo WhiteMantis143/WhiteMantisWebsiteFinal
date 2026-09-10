@@ -1,0 +1,161 @@
+.Main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  background-color: #ffffff;
+  padding-left: clamp(
+    24px,
+    calc(24px + (386 * ((100vw - 320px) / 1120))),
+    410px
+  );
+  padding-right: clamp(
+    24px,
+    calc(24px + (386 * ((100vw - 320px) / 1120))),
+    410px
+  );
+  padding-top: 150px;
+  padding-bottom: clamp(
+    80px,
+    calc(80px + (120 * ((100vw - 320px) / 1120))),
+    200px
+  );
+}
+
+.Box {
+  max-width: 480px;
+  width: 100%;
+  border: 1px solid #2f362a4d;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.CheckIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #ffffff;
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.Box h2 {
+  font-family: var(--lexend);
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #2f362a;
+  margin: 0 0 8px;
+}
+
+.SubText {
+  font-family: var(--lato);
+  color: #6e736a;
+  font-size: 14px;
+  margin: 0 0 24px;
+}
+
+.EventCard {
+  background: #faf9f6;
+  padding: 16px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.EventCard h3 {
+  font-family: var(--lato);
+  font-weight: 700;
+  color: #2f362a;
+  font-size: 15px;
+  margin: 0 0 6px;
+}
+
+.EventCard p {
+  font-family: var(--lato);
+  color: #6e736a;
+  font-size: 13px;
+  margin: 0;
+}
+
+.DetailsRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid #2f362a4d;
+  font-family: var(--lato);
+  color: #2f362a;
+  font-size: 14px;
+}
+
+.EmailNote {
+  font-family: var(--lato);
+  font-size: 13px;
+  color: #6e736a;
+  margin: 20px 0;
+}
+
+.ErrorMessage {
+  font-family: var(--lato);
+  color: #dc2626;
+  font-size: 13px;
+}
+
+.CalendarButton,
+.SecondaryButton {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 12px;
+  border: none;
+}
+
+.CalendarButton {
+  background-color: #6c7a5f;
+  color: #ffffff;
+}
+
+.SecondaryButton {
+  background: #ffffff;
+  color: #2f362a;
+  border: 1px solid #d9d9d9;
+}
+
+@media (max-width: 640px) {
+  .Main {
+    padding-top: 80px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .Main {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1480px) {
+  .Main {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+@media (min-width: 1481px) and (max-width: 1820px) {
+  .Main {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}

@@ -163,15 +163,14 @@ const UpComing = () => {
       "";
     const title = item?.title || "";
     const fullExcerpt =
-      stripHtml(item?.excerpt || item?.content) ||
+      stripHtml(item?.workshopDescription || item?.excerpt || item?.content) ||
       "Discover the complete journey of coffee — from the farm to your cup.";
     const excerpt = full ? fullExcerpt : truncate(fullExcerpt, 100);
-    const bookLink =
-      item?.calendyLink ||
-      item?.workshopLink ||
-      item?.acf?.workshop_redirect ||
-      item?.link ||
-      null;
+
+    const price = Number(item?.price) || 0;
+    const capacity = Number(item?.capacity) || 0;
+    const bookedCount = Number(item?.bookedCount) || 0;
+    const isSoldOut = capacity > 0 && bookedCount >= capacity;
 
     return (
       <div className={styles.WorkShopCard} key={key}>
@@ -220,17 +219,29 @@ const UpComing = () => {
         <div className={styles.WorkShopCardBottom}>
           <div className={styles.WorkShopCardBottomTop}>
             <h2>{title}</h2>
-            {bookLink ? (
+            {isSoldOut ? (
+              <button className={styles.Button} disabled style={{ opacity: 0.5, cursor: "not-allowed" }}>
+                Sold Out
+              </button>
+            ) : (
               <button
                 className={styles.Button}
-                onClick={() => window.open(bookLink, "_blank")}
+                onClick={() => router.push(`/event-checkout?id=${item.id}`)}
               >
                 Book Now
               </button>
-            ) : (
-              <button className={styles.Button}>Book Now</button>
             )}
           </div>
+          {price > 0 && (
+            <p className={styles.WorkShopPrice} style={{ margin: "8px 0 0", fontWeight: 700 }}>
+              AED {price.toFixed(2)}
+              {capacity > 0 && !isSoldOut && (
+                <span style={{ fontWeight: 400, color: "#888", marginLeft: 8, fontSize: "0.85em" }}>
+                  {Math.max(0, capacity - bookedCount)} seat(s) left
+                </span>
+              )}
+            </p>
+          )}
           <div className={styles.WorkShopCardBottomBottom}>
             <p>{excerpt}</p>
             {!full && fullExcerpt && fullExcerpt.length > 100 ? (

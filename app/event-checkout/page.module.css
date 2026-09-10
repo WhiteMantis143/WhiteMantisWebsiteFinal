@@ -1,0 +1,342 @@
+.Main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  padding-left: clamp(
+    24px,
+    calc(24px + (386 * ((100vw - 320px) / 1120))),
+    410px
+  );
+  padding-right: clamp(
+    24px,
+    calc(24px + (386 * ((100vw - 320px) / 1120))),
+    410px
+  );
+  padding-bottom: clamp(
+    80px,
+    calc(80px + (120 * ((100vw - 320px) / 1120))),
+    200px
+  );
+}
+
+.MainConatiner {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  height: 100%;
+  gap: clamp(16px, calc(16px + (34 * ((100vw - 320px) / 1120))), 50px);
+  padding-top: 150px;
+  flex-direction: row;
+}
+
+.Left {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+/* --- Express checkout --- */
+.One {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+}
+
+.One p {
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #6e736a;
+  font-weight: 400;
+}
+
+/* --- Contact (guest) section — matches Store checkout's ContactSection exactly --- */
+.Two {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.TwoOne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.TwoOne h3,
+.Five h3 {
+  font-family: var(--lexend);
+  font-size: 16px;
+  font-weight: 500;
+  color: #2f362a;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.TwoOne p {
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #6e736a;
+  cursor: pointer;
+  text-decoration: underline;
+  margin: 0;
+}
+
+.Five {
+  display: flex;
+  flex-direction: column;
+}
+
+.Five p {
+  font-family: var(--lato);
+  font-size: 13px;
+  color: #6e736a;
+  margin-bottom: 10px;
+}
+
+.TwoTwo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d9d9d9;
+  font-family: var(--lato);
+  font-size: 15px;
+  outline: none;
+  color: #2f362a;
+  box-sizing: border-box;
+}
+
+.HelperText {
+  font-family: var(--lato);
+  font-size: 13px;
+  color: #6e736a;
+  margin: 0;
+}
+
+.HelperText a {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.PaymentContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.PaymentBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.StripeInput {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+}
+
+.ErrorMessage {
+  font-family: var(--lato);
+  font-size: 13px;
+  color: #dc2626;
+  margin-top: 4px;
+  display: block;
+}
+
+.Six {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.Pay {
+  padding: 13px 13px;
+  background-color: #6c7a5f;
+  color: #ffffff;
+  font-family: var(--lato);
+  font-size: 15px;
+  width: 100%;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.Pay:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- Right column: order summary --- */
+.Right {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  position: sticky;
+  top: 150px;
+  height: fit-content;
+}
+
+.RightOne {
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+  gap: 13px;
+}
+
+.RightOne h3 {
+  font-family: var(--lexend);
+  font-size: 16px;
+  font-weight: 400;
+  color: #2f362a;
+  text-transform: uppercase;
+}
+
+.RightTwo {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.SummaryItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  padding: 4px 0;
+  gap: 12px;
+}
+
+.ItemImage {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.ItemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ItemInfo {
+  flex: 3;
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: 400;
+  color: #2f362a;
+}
+
+.ItemName {
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: 400;
+  color: #2f362a;
+  line-height: 1.4;
+}
+
+.ItemSubRow {
+  font-family: var(--lato);
+  font-size: 12px;
+  color: #6e736a;
+  margin-top: 4px;
+}
+
+.ItemPrice {
+  flex: 1.5;
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: 400;
+  color: #2f362a;
+  text-align: right;
+}
+
+.RightThree {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Total {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 10px 0;
+  border-top: 1px solid #2f362a4d;
+}
+
+.Total p,
+.Total h4 {
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: 700;
+  color: #2f362a;
+}
+
+@media (max-width: 640px) {
+  .Main {
+    padding: 80px 24px;
+  }
+
+  .MainConatiner {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+  }
+
+  .Left,
+  .Right {
+    width: 100%;
+    padding-top: 0px;
+  }
+
+  .Right {
+    align-items: baseline;
+    position: static;
+  }
+
+  .ThreeOne h3,
+  .Five h3 {
+    font-size: 15px;
+  }
+
+  .RightOne h3 {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .Main {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1480px) {
+  .Main {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+@media (min-width: 1481px) and (max-width: 1820px) {
+  .Main {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}
