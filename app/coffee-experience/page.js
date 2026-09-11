@@ -22,12 +22,14 @@ export const metadata = {
 
 import Landing from "./_components/Landing/Landing";
 import SessionBooking from "./_components/SessionBooking/SessionBooking";
+import WhoIsItFor from "./_components/WhoIsItFor/WhoIsItFor";
 
 export default function CoffeeExperience() {
   return (
     <>
       <Landing />
       <SessionBooking />
+      <WhoIsItFor />
     </>
   );
 }
