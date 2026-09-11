@@ -2,13 +2,19 @@
 import React, { useEffect, useState } from "react";
 import styles from "./WhoIsItFor.module.css";
 import axiosClient from "@/lib/axios";
+import Image from "next/image";
+import cupIcon from "./cup.png";
+import beansIcon from "./beans.png";
+import peopleIcon from "./people.png";
+import giftIcon from "./gift.png";
+import sparkIcon from "./spark.png";
 
 const ICON_SRC = {
-  coffee: "/coffee-experience-icons/coffee.svg",
-  leaf: "/coffee-experience-icons/leaf.svg",
-  people: "/coffee-experience-icons/people.svg",
-  gift: "/coffee-experience-icons/gift.svg",
-  sparkle: "/coffee-experience-icons/sparkle.svg",
+  coffee: cupIcon,
+  leaf: beansIcon,
+  people: peopleIcon,
+  gift: giftIcon,
+  sparkle: sparkIcon,
 };
 
 const WhoIsItFor = () => {
@@ -42,7 +48,7 @@ const WhoIsItFor = () => {
           {items.map((item, i) => (
             <div className={styles.GridItem} key={item.id || i}>
               {ICON_SRC[item.icon] && (
-                <img className={styles.Icon} src={ICON_SRC[item.icon]} alt="" />
+                <Image className={styles.Icon} src={ICON_SRC[item.icon]} alt="" />
               )}
               <p className={styles.ItemText}>{item.title}</p>
             </div>
