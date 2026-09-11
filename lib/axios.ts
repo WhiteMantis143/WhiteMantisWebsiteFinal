@@ -30,6 +30,7 @@ axiosClient.interceptors.request.use((config) => {
       "web-subscription",
       "web-cart",
       "website/", // custom /api/website/* routes don't use Payload's _status filter
+      "coffee-experience", // no drafts/versions config — has no _status field at all
     ];
     const shouldSkip = collectionsToSkip.some((c) => url.includes(c));
 

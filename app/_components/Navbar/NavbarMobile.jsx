@@ -25,6 +25,7 @@ const NavbarMobile = ({ categories: initialCategories }) => {
     }
   }, []);
   const [shopOpen, setShopOpen] = useState(true);
+  const [learnOpen, setLearnOpen] = useState(true);
   const [accountOpen, setAccountOpen] = useState(true);
   const [showLogout, setShowLogout] = useState(false);
   const { isCartOpen, openCart, closeCart, items } = useCart();
@@ -223,9 +224,51 @@ const NavbarMobile = ({ categories: initialCategories }) => {
                 About Us
               </Link>
               <div className={styles.Line}></div>
-              <Link className={styles.SectionHeader} href="/academy" onClick={() => setOpen(false)}>
-                Academy
-              </Link>
+              <div className={styles.Section}>
+                <button
+                  className={styles.SectionHeader}
+                  onClick={() => setLearnOpen(!learnOpen)}
+                >
+                  Learn &amp; Taste
+                  <svg
+                    className={learnOpen ? styles.Rotate : ""}
+                    width="13"
+                    height="7"
+                    viewBox="0 0 13 7"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6.0625 6.75L12.1247 0H0.000322342L6.0625 6.75Z"
+                      fill="#2F362A"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  className={`${styles.DropdownWrapper} ${learnOpen ? styles.DropdownWrapperOpen : ""}`}
+                >
+                  <div className={styles.DropdownInner}>
+                    <div className={styles.Line}></div>
+                    <div className={styles.Column}>
+                      <Link
+                        href="/academy"
+                        onClick={() => setOpen(false)}
+                        className={styles.subLinks}
+                      >
+                        Academy
+                      </Link>
+                      <Link
+                        href="/coffee-experience"
+                        onClick={() => setOpen(false)}
+                        className={styles.subLinks}
+                      >
+                        Coffee Experience
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className={styles.Line}></div>
               <Link
                 className={styles.SectionHeader}

@@ -1,0 +1,325 @@
+.main {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 120px clamp(24px, calc(24px + (101 * ((100vw - 320px) / 1120))), 125px) 120px;
+}
+
+.MainContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: clamp(24px, calc(24px + (326 * ((100vw - 320px) / 1120))), 350px);
+  row-gap: 24px;
+}
+
+.SectionHeading {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+  text-transform: uppercase;
+}
+
+/* --- About the Session (left) --- */
+
+.AboutSide {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1 1 480px;
+  max-width: 576px;
+}
+
+.AboutBody {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+}
+
+.AboutImage {
+  display: flex;
+  max-width: 244px;
+  min-width: 244px;
+}
+
+.AboutImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.AboutInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.InfoRow {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px 24px 20px 35px;
+  border: 1px solid #2f362a4d;
+}
+
+.InfoRow h4 {
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: 400;
+  color: #6e736a;
+}
+
+.InfoRow p {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #2f362a;
+}
+
+/* --- Reserve Your Spot (right) --- */
+
+.ReserveSide {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1 1 400px;
+}
+
+.CalendarBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid #2f362a4d;
+  padding: 28px;
+  max-width: 460px;
+}
+
+.CalendarHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.CalendarHeader h4 {
+  font-family: var(--lexend);
+  font-size: 18px;
+  font-weight: 500;
+  color: #2f362a;
+  text-transform: uppercase;
+}
+
+.NavButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  color: #2f362a;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.NavButton:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.WeekRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.WeekRow div {
+  text-align: center;
+  font-family: var(--lato);
+  font-size: 13px;
+  color: #6e736a;
+}
+
+.DayGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.DayCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  background: none;
+  border: none;
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #2f362a4d;
+  cursor: default;
+  outline: none;
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.DayCellOutside {
+  color: #2f362a26;
+}
+
+.DayCellBookable {
+  color: #2f362a;
+  cursor: pointer;
+}
+
+.DayCellBookable:hover,
+.DayCellBookable:focus-visible {
+  background-color: #6c7a5f1a;
+}
+
+.DayCellBookable:active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.DaySoldOut {
+  color: #2f362a4d;
+  text-decoration: line-through;
+}
+
+.DaySelected,
+.DaySelected:hover,
+.DaySelected:active {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.CalendarFooterRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 460px;
+  gap: 24px;
+}
+
+.PriceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.PriceLabel {
+  font-family: var(--lato);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #6e736a;
+}
+
+.PriceValue {
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: 500;
+  color: #2f362a;
+}
+
+.NextButton {
+  padding: 10px 28px;
+  background-color: #6c7a5f;
+  color: #ffffff;
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.NextButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.StepFooterRow {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.StepFooterRow .NextButton {
+  flex: 1;
+  padding: 13px;
+}
+
+.BackButton {
+  flex: 1;
+  padding: 13px;
+  background: transparent;
+  color: #2f362a;
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid #2f362a4d;
+  cursor: pointer;
+}
+
+.SelectedDateLabel {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 500;
+  color: #2f362a;
+}
+
+.SlotSectionLabel {
+  font-family: var(--lato);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #6e736a;
+}
+
+.SlotsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.SlotButton {
+  padding: 16px;
+  text-align: center;
+  border: 1px solid #2f362a4d;
+  background: #ffffff;
+  font-family: var(--lato);
+  font-size: 15px;
+  color: #2f362a;
+  cursor: pointer;
+}
+
+.SlotButtonSelected {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.EmptyCalendarState {
+  font-family: var(--lato);
+  font-size: 14px;
+  color: #6e736a;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 60px 24px 60px;
+  }
+
+  .AboutBody {
+    flex-direction: column;
+  }
+
+  .AboutImage {
+    max-width: 100%;
+    min-width: 100%;
+    height: 220px;
+  }
+}

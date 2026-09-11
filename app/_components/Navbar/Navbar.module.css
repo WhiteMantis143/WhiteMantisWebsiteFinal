@@ -65,6 +65,7 @@
 .AboutUspg p,
 .Workshopspg p,
 .Subscriptionpg p,
+.LearnToggle p,
 .Right p {
   font-family: var(--lexend);
   font-size: var(--fs-16);
@@ -112,6 +113,59 @@
 
 .OurShopWrapper {
   position: static;
+}
+
+.LearnWrapper {
+  position: relative;
+}
+
+.LearnToggle {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 4px;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.LearnDummy {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 190px;
+  background-color: #ffffff;
+  border: 1px solid #2f362a30;
+  z-index: 99;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px 20px;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.LearnDummy a {
+  text-decoration: none;
+}
+
+.LearnDummy p {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  font-weight: 400;
+  color: var(--body-color);
+  cursor: pointer;
+}
+
+.LearnDummyOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .active p {

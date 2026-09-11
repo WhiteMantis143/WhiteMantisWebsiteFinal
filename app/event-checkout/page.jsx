@@ -19,9 +19,7 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
 );
 
-// Academy events are always single-seat bookings — multi-seat is a
-// Coffee-Experience-only option the admin will be able to opt into later.
-const SEATS = 1;
+const DUBAI_TZ = "Asia/Dubai";
 
 function formatDateStr(val) {
   if (!val) return "";
@@ -40,6 +38,34 @@ function formatTimeStr(val) {
   const d = new Date(val);
   if (isNaN(d.getTime())) return "";
   return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+}
+
+// Coffee Experience dates/times are read the same way the booking calendar
+// and the backend (event-checkout/route.ts) do: the day comes from the UTC
+// components of `date`, the time-of-day is shown in the venue's own
+// timezone (Dubai) regardless of the visitor's browser timezone.
+function formatExperienceDateStr(dateIso) {
+  if (!dateIso) return "";
+  const d = new Date(dateIso);
+  const dayOnly = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  return dayOnly.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+function formatExperienceTimeStr(timeIso) {
+  if (!timeIso) return "";
+  const d = new Date(timeIso);
+  return d.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: DUBAI_TZ,
+  });
 }
 
 function ExpressCheckoutSection({ onExpressConfirm, isAvailable, setIsAvailable }) {
@@ -66,7 +92,7 @@ function ExpressCheckoutSection({ onExpressConfirm, isAvailable, setIsAvailable 
   );
 }
 
-function PaymentForm({ event, isGuest }) {
+function PaymentForm({ eventId, eventType, dateId, timeSlotId, seats, seatsRemaining, isGuest }) {
   const stripe = useStripe();
   const elements = useElements();
   const router = useRouter();
@@ -77,10 +103,6 @@ function PaymentForm({ event, isGuest }) {
   const [guestEmail, setGuestEmail] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState("");
-
-  const capacity = Number(event.capacity) || 0;
-  const bookedCount = Number(event.bookedCount) || 0;
-  const seatsRemaining = Math.max(0, capacity - bookedCount);
 
   const runCheckout = async () => {
     setError("");
@@ -100,14 +122,20 @@ function PaymentForm({ event, isGuest }) {
         return false;
       }
 
-      const res = await axiosClient.post("/api/checkout/event-checkout", {
-        eventId: event.id,
-        eventType: "workshop",
-        seats: SEATS,
+      const body = {
+        eventId,
+        eventType,
+        seats,
         guestName: isGuest ? guestName.trim() : undefined,
         guestPhone: isGuest ? guestPhone.trim() : undefined,
         guestEmail: isGuest ? guestEmail.trim() : undefined,
-      });
+      };
+      if (eventType === "coffee-experience") {
+        body.dateId = dateId;
+        body.timeSlotId = timeSlotId;
+      }
+
+      const res = await axiosClient.post("/api/checkout/event-checkout", body);
 
       const data = res.data;
       if (!data?.success || !data?.clientSecret) {
@@ -223,26 +251,63 @@ function PaymentForm({ event, isGuest }) {
   );
 }
 
+function SeatStepper({ seats, setSeats, max }) {
+  return (
+    <div className={styles.SeatStepper}>
+      <button
+        type="button"
+        className={styles.SeatStepperBtn}
+        onClick={() => setSeats((s) => Math.max(1, s - 1))}
+        disabled={seats <= 1}
+        aria-label="Decrease seats"
+      >
+        −
+      </button>
+      <span className={styles.SeatStepperCount}>{seats}</span>
+      <button
+        type="button"
+        className={styles.SeatStepperBtn}
+        onClick={() => setSeats((s) => Math.min(max, s + 1))}
+        disabled={seats >= max}
+        aria-label="Increase seats"
+      >
+        +
+      </button>
+    </div>
+  );
+}
+
 function EventCheckoutContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { status } = useSession();
   const eventId = searchParams.get("id");
+  const eventType = searchParams.get("type") === "coffee-experience" ? "coffee-experience" : "workshop";
+  const dateId = searchParams.get("dateId");
+  const timeSlotId = searchParams.get("timeSlotId");
+  const backHref = eventType === "coffee-experience" ? "/coffee-experience" : "/academy";
+  const backLabel = eventType === "coffee-experience" ? "Back to Coffee Experience" : "Back to Academy";
 
-  const [event, setEvent] = useState(null);
+  const [rawDoc, setRawDoc] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
+  const [seats, setSeats] = useState(1);
 
   useEffect(() => {
     if (!eventId) {
-      router.push("/academy");
+      router.push(backHref);
       return;
     }
     let cancelled = false;
+    const url =
+      eventType === "coffee-experience"
+        ? `/api/coffee-experience/${eventId}`
+        : `/api/workshop/${eventId}`;
+
     axiosClient
-      .get(`/api/workshop/${eventId}`)
+      .get(url)
       .then((res) => {
-        if (!cancelled) setEvent(res.data);
+        if (!cancelled) setRawDoc(res.data);
       })
       .catch(() => {
         if (!cancelled) setLoadError("This event could not be found.");
@@ -253,7 +318,8 @@ function EventCheckoutContent() {
     return () => {
       cancelled = true;
     };
-  }, [eventId, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [eventId, eventType]);
 
   if (loading || status === "loading") {
     return (
@@ -265,31 +331,72 @@ function EventCheckoutContent() {
     );
   }
 
-  if (loadError || !event) {
+  // --- Normalize a workshop doc or a coffee-experience doc + selected
+  // date/time slot into one shared shape the rest of this page renders. ---
+  let booking = null;
+  let normalizeError = "";
+
+  if (rawDoc) {
+    if (eventType === "workshop") {
+      booking = {
+        title: rawDoc.title,
+        imageUrl: formatImageUrl(rawDoc.workshopImage) || placeholderImage.src,
+        dateLabel: formatDateStr(rawDoc.eventDate),
+        timeLabel: formatTimeStr(rawDoc.eventTime),
+        pricePerSeat: Number(rawDoc.price) || 0,
+        seatsRemaining: Math.max(0, (Number(rawDoc.capacity) || 0) - (Number(rawDoc.bookedCount) || 0)),
+        allowMultipleSeats: false,
+        maxSeatsPerBooking: 1,
+      };
+    } else {
+      const dateEntry = (rawDoc.availableDates || []).find((d) => String(d.id) === String(dateId));
+      const slot = dateEntry?.timeSlots?.find((s) => String(s.id) === String(timeSlotId));
+      if (!dateEntry || !slot) {
+        normalizeError = "This time slot could not be found — please pick a date and time again.";
+      } else {
+        booking = {
+          title: rawDoc.title,
+          imageUrl: formatImageUrl(rawDoc.heroImage) || placeholderImage.src,
+          dateLabel: formatExperienceDateStr(dateEntry.date),
+          timeLabel: formatExperienceTimeStr(slot.time),
+          pricePerSeat: Number(rawDoc.price) || 0,
+          seatsRemaining: Math.max(0, (Number(slot.capacity) || 0) - (Number(slot.bookedCount) || 0)),
+          allowMultipleSeats: !!rawDoc.allowMultipleSeats,
+          maxSeatsPerBooking: Number(rawDoc.maxSeatsPerBooking) || 6,
+        };
+      }
+    }
+  }
+
+  const errorMessage = loadError || normalizeError;
+
+  if (errorMessage || !booking) {
     return (
       <div className={styles.Main}>
         <div style={{ textAlign: "center", padding: "150px 0 80px" }}>
-          <p>{loadError || "Event not found."}</p>
+          <p>{errorMessage || "Event not found."}</p>
         </div>
       </div>
     );
   }
 
-  const capacity = Number(event.capacity) || 0;
-  const bookedCount = Number(event.bookedCount) || 0;
-  const seatsRemaining = Math.max(0, capacity - bookedCount);
-  const price = Number(event.price) || 0;
-  const amount = price * SEATS;
+  const maxSeats = Math.max(1, Math.min(booking.maxSeatsPerBooking, booking.seatsRemaining));
+  const effectiveSeats = booking.allowMultipleSeats ? Math.min(seats, maxSeats) : 1;
   const isGuest = status !== "authenticated";
+  const amount = booking.pricePerSeat * effectiveSeats;
 
-  if (seatsRemaining === 0) {
+  if (booking.seatsRemaining === 0) {
     return (
       <div className={styles.Main}>
         <div style={{ textAlign: "center", padding: "150px 0 80px" }}>
           <h3>Sorry, this event is fully booked</h3>
-          <p>All seats for {event.title} have been taken.</p>
-          <button onClick={() => router.push("/academy")} className={styles.Pay} style={{ maxWidth: 240, margin: "20px auto 0" }}>
-            Back to Academy
+          <p>All seats for {booking.title} have been taken.</p>
+          <button
+            onClick={() => router.push(backHref)}
+            className={styles.Pay}
+            style={{ maxWidth: 240, margin: "20px auto 0" }}
+          >
+            {backLabel}
           </button>
         </div>
       </div>
@@ -306,8 +413,20 @@ function EventCheckoutContent() {
   return (
     <div className={styles.Main}>
       <div className={styles.MainConatiner}>
-        <Elements stripe={stripePromise} options={stripeOptions} key={eventId}>
-          <PaymentForm event={event} isGuest={isGuest} />
+        <Elements
+          stripe={stripePromise}
+          options={stripeOptions}
+          key={`${eventId}-${dateId || ""}-${timeSlotId || ""}-${effectiveSeats}`}
+        >
+          <PaymentForm
+            eventId={eventId}
+            eventType={eventType}
+            dateId={dateId}
+            timeSlotId={timeSlotId}
+            seats={effectiveSeats}
+            seatsRemaining={booking.seatsRemaining}
+            isGuest={isGuest}
+          />
         </Elements>
 
         <div className={styles.Right}>
@@ -318,25 +437,27 @@ function EventCheckoutContent() {
           <div className={styles.RightTwo}>
             <div className={styles.SummaryItem}>
               <div className={styles.ItemImage}>
-                <img
-                  src={formatImageUrl(event.workshopImage) || placeholderImage.src}
-                  alt={event.title}
-                />
+                <img src={booking.imageUrl} alt={booking.title} />
               </div>
               <div className={styles.ItemInfo}>
-                <div className={styles.ItemName}>{event.title}</div>
+                <div className={styles.ItemName}>{booking.title}</div>
                 <div className={styles.ItemSubRow}>
-                  {formatDateStr(event.eventDate)} &middot;{" "}
-                  {formatTimeStr(event.eventTime)}
+                  {booking.dateLabel} &middot; {booking.timeLabel}
                 </div>
+                {booking.allowMultipleSeats && (
+                  <div className={styles.ItemSeats}>
+                    <span>Seats</span>
+                    <SeatStepper seats={seats} setSeats={setSeats} max={maxSeats} />
+                  </div>
+                )}
               </div>
-              <div className={styles.ItemPrice}>AED {price.toFixed(2)}</div>
+              <div className={styles.ItemPrice}>AED {booking.pricePerSeat.toFixed(2)}</div>
             </div>
           </div>
 
           <div className={styles.RightThree}>
             <div className={styles.Total}>
-              <p>Total</p>
+              <p>Total{effectiveSeats > 1 ? ` (${effectiveSeats} seats)` : ""}</p>
               <h4>AED {amount.toFixed(2)}</h4>
             </div>
           </div>

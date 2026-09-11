@@ -1,0 +1,131 @@
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.MainContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  height: 100vh;
+}
+
+.ImageSide {
+  width: 40%;
+  height: 100%;
+}
+
+.ImageSide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.ContentSide {
+  width: 60%;
+  height: 100%;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: clamp(24px, calc(24px + (112 * ((100vw - 320px) / 1120))), 136px);
+  padding-right: clamp(24px, calc(24px + (101 * ((100vw - 320px) / 1120))), 125px);
+}
+
+.ContentInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 95px;
+}
+
+.Eyebrow {
+  font-family: var(--lato);
+  font-size: var(--fs-15);
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  color: var(--white-color);
+}
+
+.HeadingGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8.5px;
+}
+
+.Heading {
+  font-family: var(--lexend);
+  font-size: var(--fs-60);
+  font-weight: 500;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--white-color);
+}
+
+.DividerGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.DividerLine {
+  width: clamp(280px, calc(280px + (237 * ((100vw - 320px) / 1120))), 517px);
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.Title {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--white-color);
+}
+
+.EmptyState {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  padding: 24px;
+  text-align: center;
+}
+
+.EmptyState p {
+  font-family: var(--lato);
+  font-size: var(--fs-18);
+  color: var(--white-color);
+}
+
+@media (max-width: 768px) {
+  .MainContainer {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .ImageSide {
+    width: 100%;
+    height: 45vh;
+  }
+
+  .ContentSide {
+    width: 100%;
+    height: auto;
+    padding: 40px 24px 48px;
+  }
+
+  .ContentInner {
+    gap: 40px;
+  }
+
+  .DividerLine {
+    width: min(280px, 100%);
+  }
+}

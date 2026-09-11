@@ -4,6 +4,8 @@ import { useSearchParams, useRouter } from "next/navigation";
 import axiosClient from "@/lib/axios";
 import styles from "./page.module.css";
 
+const DUBAI_TZ = "Asia/Dubai";
+
 function formatDateStr(val) {
   if (!val) return "";
   const d = new Date(val);
@@ -23,9 +25,36 @@ function formatTimeStr(val) {
   return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 }
 
+// Coffee Experience dates/times: day from the UTC components of `date`,
+// time-of-day shown in the venue's own timezone — same convention used by
+// the booking calendar and the checkout page.
+function formatExperienceDateStr(dateIso) {
+  if (!dateIso) return "";
+  const d = new Date(dateIso);
+  const dayOnly = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+  return dayOnly.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+function formatExperienceTimeStr(timeIso) {
+  if (!timeIso) return "";
+  const d = new Date(timeIso);
+  return d.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: DUBAI_TZ,
+  });
+}
+
 // Same date-combining logic used server-side — builds the actual start
-// instant from the event's separate date + time fields.
-function buildEventStart(event) {
+// instant from the workshop's separate date + time fields.
+function buildWorkshopStart(event) {
   if (!event?.eventDate) return null;
   const start = new Date(event.eventDate);
   if (event.eventTime) {
@@ -35,14 +64,60 @@ function buildEventStart(event) {
   return start;
 }
 
-function buildGoogleCalendarLink(event) {
-  const start = buildEventStart(event);
+// Normalizes a workshop booking or a coffee-experience booking (which needs
+// its specific selected date/time slot looked up) into one shared shape.
+function resolveEventDisplay(booking) {
+  const relationTo =
+    booking?.event && typeof booking.event === "object" ? booking.event.relationTo : null;
+  const event =
+    booking?.event && typeof booking.event === "object" ? booking.event.value : null;
+  if (!event) return null;
+
+  if (relationTo === "coffee-experience") {
+    const dateEntry = (event.availableDates || []).find(
+      (d) => String(d.id) === String(booking.selectedDateId),
+    );
+    const slot = dateEntry?.timeSlots?.find(
+      (s) => String(s.id) === String(booking.selectedTimeSlotId),
+    );
+
+    let start = null;
+    if (dateEntry?.date) {
+      const d = new Date(dateEntry.date);
+      start = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+      if (slot?.time) {
+        const t = new Date(slot.time);
+        start.setUTCHours(t.getUTCHours(), t.getUTCMinutes(), 0, 0);
+      }
+    }
+
+    return {
+      title: event.title,
+      dateLabel: dateEntry ? formatExperienceDateStr(dateEntry.date) : "",
+      timeLabel: slot ? formatExperienceTimeStr(slot.time) : "",
+      start,
+      backHref: "/coffee-experience",
+      backLabel: "Back to Coffee Experience",
+    };
+  }
+
+  return {
+    title: event.title,
+    dateLabel: formatDateStr(event.eventDate),
+    timeLabel: formatTimeStr(event.eventTime),
+    start: buildWorkshopStart(event),
+    backHref: "/academy",
+    backLabel: "Back to Academy",
+  };
+}
+
+function buildGoogleCalendarLink(title, start) {
   if (!start) return null;
   const end = new Date(start.getTime() + 60 * 60 * 1000);
   const fmt = (d) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
   const params = new URLSearchParams({
     action: "TEMPLATE",
-    text: event.title || "White Mantis Academy Session",
+    text: title || "White Mantis Session",
     dates: `${fmt(start)}/${fmt(end)}`,
     location: "White Mantis Roastery, Dubai",
   });
@@ -67,7 +142,7 @@ function SuccessContent() {
       sessionStorage.getItem("event_checkout_success") === "1";
     const fromUrl = searchParams.get("cs") === "1";
     if (!fromSessionStorage && !fromUrl) {
-      router.replace("/academy");
+      router.replace("/");
     } else {
       setIsAllowed(true);
     }
@@ -121,11 +196,8 @@ function SuccessContent() {
     );
   }
 
-  const event =
-    booking.event && typeof booking.event === "object"
-      ? booking.event.value
-      : null;
-  const googleCalLink = event ? buildGoogleCalendarLink(event) : null;
+  const display = resolveEventDisplay(booking);
+  const googleCalLink = display ? buildGoogleCalendarLink(display.title, display.start) : null;
 
   return (
     <div className={styles.Main}>
@@ -136,12 +208,11 @@ function SuccessContent() {
           Booking #{booking.id} &mdash; see you there.
         </p>
 
-        {event && (
+        {display && (
           <div className={styles.EventCard}>
-            <h3>{event.title}</h3>
+            <h3>{display.title}</h3>
             <p>
-              {formatDateStr(event.eventDate)} &middot;{" "}
-              {formatTimeStr(event.eventTime)}
+              {display.dateLabel} &middot; {display.timeLabel}
             </p>
           </div>
         )}
@@ -172,10 +243,10 @@ function SuccessContent() {
         )}
 
         <button
-          onClick={() => router.push("/academy")}
+          onClick={() => router.push(display?.backHref || "/academy")}
           className={styles.SecondaryButton}
         >
-          Back to Academy
+          {display?.backLabel || "Back to Academy"}
         </button>
       </div>
     </div>
