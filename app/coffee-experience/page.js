@@ -23,13 +23,22 @@ export const metadata = {
 import Landing from "./_components/Landing/Landing";
 import SessionBooking from "./_components/SessionBooking/SessionBooking";
 import WhoIsItFor from "./_components/WhoIsItFor/WhoIsItFor";
+import ExperienceHighlights from "./_components/ExperienceHighlights/ExperienceHighlights";
+import RoasteryGallery from "./_components/RoasteryGallery/RoasteryGallery";
+import FaqSection from "./_components/FaqSection/FaqSection";
+import CoffeeExperienceGate from "./_components/CoffeeExperienceGate";
+import spacerStyles from "./_components/FooterSpacer/FooterSpacer.module.css";
 
 export default function CoffeeExperience() {
   return (
-    <>
+    <CoffeeExperienceGate>
       <Landing />
       <SessionBooking />
       <WhoIsItFor />
-    </>
+      <ExperienceHighlights />
+      <RoasteryGallery />
+      <FaqSection />
+      <div className={spacerStyles.spacer}></div>
+    </CoffeeExperienceGate>
   );
 }

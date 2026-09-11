@@ -1,0 +1,112 @@
+.main {
+  width: 100%;
+  background-color: #ffffff;
+  padding: clamp(80px, calc(80px + (48 * ((100vw - 320px) / 1120))), 128px)
+    clamp(24px, calc(24px + (101 * ((100vw - 320px) / 1120))), 125px)
+    clamp(60px, calc(60px + (68 * ((100vw - 320px) / 1120))), 128px);
+}
+
+.MainContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: clamp(27px, calc(27px + (173 * ((100vw - 320px) / 1120))), 200px);
+}
+
+.Left,
+.Right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.TextBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.Heading {
+  font-family: var(--lexend);
+  font-size: var(--fs-22);
+  font-weight: 500;
+  color: #2f362a;
+  text-transform: uppercase;
+}
+
+.Description {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #6e736a;
+  max-width: 467px;
+}
+
+/* --- Left: points card --- */
+
+.PointsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--primary-color);
+  padding: 24px 15px 24px 30px;
+  flex: 1;
+}
+
+.PointBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 85%;
+}
+
+.PointTitle {
+  font-family: var(--lexend);
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.PointDescription {
+  font-family: var(--lato);
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+
+}
+
+.PointDivider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Right: image --- */
+
+.ImageWrap {
+  display: flex;
+  flex: 1;
+}
+
+.ImageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .MainContainer {
+    flex-direction: column;
+  }
+
+  .Left,
+  .Right {
+    flex: none;
+  }
+
+
+}

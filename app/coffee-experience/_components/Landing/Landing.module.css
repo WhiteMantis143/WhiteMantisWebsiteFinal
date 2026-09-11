@@ -46,7 +46,6 @@
   font-family: var(--lato);
   font-size: var(--fs-15);
   font-weight: 400;
-  letter-spacing: 1.5px;
   color: var(--white-color);
 }
 
@@ -54,7 +53,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8.5px;
+  gap: 10px;
 }
 
 .Heading {
@@ -66,25 +65,12 @@
   color: var(--white-color);
 }
 
-.DividerGroup {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
-}
-
-.DividerLine {
-  width: clamp(280px, calc(280px + (237 * ((100vw - 320px) / 1120))), 517px);
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-.Title {
-  font-family: var(--lexend);
-  font-size: var(--fs-22);
-  font-weight: 500;
-  text-transform: uppercase;
+.ShortDescription {
+  font-family: var(--lato);
+  font-size: 14px;
+  font-weight: 400;
   color: var(--white-color);
+  max-width: 560px;
 }
 
 .EmptyState {
@@ -123,9 +109,5 @@
 
   .ContentInner {
     gap: 40px;
-  }
-
-  .DividerLine {
-    width: min(280px, 100%);
   }
 }

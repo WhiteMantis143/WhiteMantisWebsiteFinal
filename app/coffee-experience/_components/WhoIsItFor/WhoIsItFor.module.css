@@ -2,7 +2,7 @@
   width: 100%;
 
   padding-top: 0;
-  padding-bottom: clamp(60px, calc(60px + (60 * ((100vw - 320px) / 1120))), 120px);
+
 }
 
 .MainContainer {
@@ -71,5 +71,8 @@
   .GridItem:nth-child(3n + 1) {
     border-left: none;
     padding-left: 0;
+  }
+  .main{
+    padding-bottom: 0px;
   }
 }

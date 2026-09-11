@@ -1,0 +1,4 @@
+.spacer {
+  width: 100%;
+  height: clamp(60px, calc(60px + (60 * ((100vw - 320px) / 1120))), 120px);
+}

@@ -60,13 +60,10 @@ const Landing = () => {
           <div className={styles.ContentInner}>
             <p className={styles.Eyebrow}>Monthly Experience - White Mantis Roastery</p>
             <div className={styles.HeadingGroup}>
-              <h1 className={styles.Heading}>The Coffee Tasting Experience</h1>
-              <div className={styles.DividerGroup}>
-                <div className={styles.DividerLine}></div>
-                {experience?.title && (
-                  <h2 className={styles.Title}>{experience.title}</h2>
-                )}
-              </div>
+              {experience?.title && <h1 className={styles.Heading}>{experience.title}</h1>}
+              {experience?.shortDescription && (
+                <p className={styles.ShortDescription}>{experience.shortDescription}</p>
+              )}
             </div>
           </div>
         </div>

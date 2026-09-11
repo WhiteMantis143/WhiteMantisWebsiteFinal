@@ -1,0 +1,49 @@
+.main {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(60px, calc(60px + (60 * ((100vw - 320px) / 1120))), 120px)
+    clamp(24px, calc(24px + (101 * ((100vw - 320px) / 1120))), 125px);
+}
+
+.Box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 460px;
+  text-align: center;
+}
+
+.Heading {
+  font-family: var(--lexend);
+  font-size: var(--fs-24);
+  font-weight: 500;
+  color: var(--heads-color);
+  text-transform: uppercase;
+}
+
+.SubText {
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  font-weight: var(--lato-font-weight);
+  color: var(--body-color);
+}
+
+.Button {
+  padding: 13.5px 33.5px;
+  color: var(--primary-color);
+  font-family: var(--lato);
+  font-size: var(--lato-font-size);
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.Button:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
