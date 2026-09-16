@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useCart } from "../../_context/CartContext";
 import axiosClient from "@/lib/axios";
+import SearchOverlay, { SearchIcon } from "./SearchOverlay/SearchOverlay";
+import searchStyles from "./SearchOverlay/SearchOverlay.module.css";
 
 const Logo = "/White-mantis-animated-logo.gif";
 
@@ -21,6 +23,7 @@ const Navbar = ({ categories: initialCategories }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { data: session, status } = useSession();
   const dropdownRef = useRef(null);
   const { isCartOpen, openCart, closeCart, items } = useCart();
@@ -53,6 +56,7 @@ const Navbar = ({ categories: initialCategories }) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
+    setIsSearchOpen(false);
     setShopOpen(true);
   };
 
@@ -61,6 +65,15 @@ const Navbar = ({ categories: initialCategories }) => {
       setShopOpen(false);
     }, 200);
   };
+
+  const toggleSearch = () => {
+    setShopOpen(false);
+    setIsSearchOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    setIsSearchOpen(false);
+  }, [pathname]);
 
   return (
     <div className={`${styles.Main} ${isScrollingDown ? styles.hide : ""}`}>
@@ -252,6 +265,15 @@ const Navbar = ({ categories: initialCategories }) => {
             <p className={styles.underlineCenter}>Blogs</p>
           </Link>
 
+          <button
+            type="button"
+            className={searchStyles.trigger}
+            onClick={toggleSearch}
+            aria-label="Search"
+          >
+            <SearchIcon />
+          </button>
+
           <Link
             href=""
             onClick={() => (isCartOpen ? closeCart() : openCart())}
@@ -314,6 +336,8 @@ const Navbar = ({ categories: initialCategories }) => {
           )}
         </div>
       </div>
+
+      <SearchOverlay isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </div>
   );
 };
