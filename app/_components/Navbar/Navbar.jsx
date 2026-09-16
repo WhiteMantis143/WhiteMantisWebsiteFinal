@@ -16,16 +16,11 @@ const Navbar = ({ categories: initialCategories }) => {
     setShopOpen(false);
   };
 
-  const closeLearnDropdown = () => {
-    setLearnOpen(false);
-  };
-
   const pathname = usePathname();
 
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
-  const [learnOpen, setLearnOpen] = useState(false);
   const { data: session, status } = useSession();
   const dropdownRef = useRef(null);
   const { isCartOpen, openCart, closeCart, items } = useCart();
@@ -64,21 +59,6 @@ const Navbar = ({ categories: initialCategories }) => {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setShopOpen(false);
-    }, 200);
-  };
-
-  const learnTimeoutRef = useRef(null);
-
-  const handleLearnMouseEnter = () => {
-    if (learnTimeoutRef.current) {
-      clearTimeout(learnTimeoutRef.current);
-    }
-    setLearnOpen(true);
-  };
-
-  const handleLearnMouseLeave = () => {
-    learnTimeoutRef.current = setTimeout(() => {
-      setLearnOpen(false);
     }, 200);
   };
 
@@ -218,52 +198,23 @@ const Navbar = ({ categories: initialCategories }) => {
               </div>
             </Link>
 
-            <div
-              className={styles.LearnWrapper}
-              onMouseEnter={handleLearnMouseEnter}
-              onMouseLeave={handleLearnMouseLeave}
+            <Link
+              href="/academy"
+              className={pathname === "/academy" ? styles.active : ""}
             >
-              <div
-                className={`${styles.LearnToggle} ${(pathname === "/academy" || pathname === "/coffee-experience") ? styles.active : ""
-                  }`}
-                onClick={() => setLearnOpen((prev) => !prev)}
-              >
-                <p className={styles.underlineCenter}>Learn &amp; Taste</p>
-                <svg
-                  className={`${styles.Arrow} ${learnOpen ? styles.ArrowOpen : ""
-                    }`}
-                  width="8"
-                  height="5"
-                  viewBox="0 0 8 5"
-                  fill="none"
-                >
-                  <path
-                    d="M3.89844 0L7.79555 4.5H0.00132322L3.89844 0Z"
-                    fill="#6E736A"
-                  />
-                </svg>
+              <div className={styles.AboutUspg}>
+                <p className={styles.underlineCenter}>Academy</p>
               </div>
+            </Link>
 
-              <div
-                className={`${styles.LearnDummy} ${learnOpen ? styles.LearnDummyOpen : ""
-                  }`}
-              >
-                <Link
-                  href="/academy"
-                  onClick={closeLearnDropdown}
-                  className={pathname === "/academy" ? styles.active : ""}
-                >
-                  <p className={styles.underlineCenter}>Academy</p>
-                </Link>
-                <Link
-                  href="/coffee-experience"
-                  onClick={closeLearnDropdown}
-                  className={pathname === "/coffee-experience" ? styles.active : ""}
-                >
-                  <p className={styles.underlineCenter}>Coffee Experience</p>
-                </Link>
+            <Link
+              href="/coffee-experience"
+              className={pathname === "/coffee-experience" ? styles.active : ""}
+            >
+              <div className={styles.AboutUspg}>
+                <p className={styles.underlineCenter}>Coffee Experience</p>
               </div>
-            </div>
+            </Link>
 
             <Link
               href="/subscription"
