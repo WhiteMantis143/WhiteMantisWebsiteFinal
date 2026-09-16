@@ -1,16 +1,4 @@
-/* ============================================================
-   Footer.module.css
 
-   QUICK REFERENCE:
-   - Background color        → .Main (background-color)
-   - Page side padding       → --fp (custom property, change once)
-   - Gap between top columns → .NavColumns (gap)
-   - Middle section gap      → .MidRow (gap)
-   - Nav link size           → .NavCol p (font-size)
-   - Mid heading size        → .MidHeading (font-size)
-   ============================================================ */
-
-/* ── shared side padding ── */
 .Main {
   /* 1. DEFINE FLUID VARIABLES 
      Top: 128px | Sides: 126px | Bottom: 42px
@@ -57,9 +45,7 @@
 }
 
 
-/* ─────────────────────────────────────────
-   TOP ROW  —  brand info left, nav right
-───────────────────────────────────────── */
+
 .TopRow {
   display: flex;
   flex-direction: row;
@@ -233,10 +219,7 @@
 }
 
 
-/* ─────────────────────────────────────────
-   MIDDLE ROW  —  3 equal columns
-   ↓ Change gap to adjust spacing between panels
-───────────────────────────────────────── */
+
 .MidRow {
   display: flex;
   flex-direction: row;
@@ -257,9 +240,7 @@
   overflow: hidden;
 }
 
-/* ─────────────────────────────────────────
-   COLUMN LOGIC
-───────────────────────────────────────── */
+
 .MidCol {
   display: flex;
   flex-direction: column;
@@ -271,9 +252,7 @@
   min-width: 0;
 }
 
-/* ─────────────────────────────────────────
-   TYPOGRAPHY
-───────────────────────────────────────── */
+
 .MidHeading {
   font-family: var(--lexend);
   font-size: clamp(16px, 1.5vw, 20px);
@@ -431,9 +410,7 @@
 }
 
 
-/* ─────────────────────────────────────────
-   BOTTOM BAR
-───────────────────────────────────────── */
+
 .BottomBar {
   display: flex;
   flex-direction: column;
@@ -496,9 +473,7 @@
   transform: scaleX(1);
 }
 
-/* ═══════════════════════════════════════════════════════
-   MOBILE  (≤ 768px)
-═══════════════════════════════════════════════════════ */
+
 @media (max-width: 768px) {
 
   .Main {

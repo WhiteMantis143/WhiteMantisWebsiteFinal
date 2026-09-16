@@ -17,7 +17,7 @@ const Landing = () => {
           </div>
           <div className={styles.Content}>
             <div className={styles.BottomText}>
-              <h4>WHITE MANTIS COFFEE ROASTERS</h4>
+              <h4>WHITE MANTIS COFFEE ROASTERY</h4>
               <p>
                 Born in Dubai. Roasting since 2016. White Mantis is an
                 Emirati-owned specialty roastery that sources rare beans direct
@@ -25,9 +25,9 @@ const Landing = () => {
                 coffee that's genuinely worth drinking — every single morning.
               </p>
             </div>
-            <div className={styles.RightBottomText}>
+            {/* <div className={styles.RightBottomText}>
               <p style={{ textAlign: "right" }}>Since 2020 Dubai</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

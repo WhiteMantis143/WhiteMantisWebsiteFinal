@@ -88,7 +88,7 @@ const Footer = ({ categories }) => {
             <Link href="/account/orders"><p>Orders</p></Link>
             <Link href="/account/wishlist"><p>Wishlist</p></Link>
             <Link href="/account/subscription"><p>Manage Subscription</p></Link>
-            <Link href="/account/whitemantis-beans"><p>White Mantis Subscription</p></Link>
+            <Link href="/account/whitemantis-beans"><p>White Mantis Beans</p></Link>
           </div>
 
           <div className={styles.NavCol}>
